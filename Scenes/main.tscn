@@ -1,0 +1,61 @@
+[gd_scene load_steps=6 format=3 uid="uid://dxt1ttcllxx1g"]
+
+[ext_resource type="Script" path="res://Scripts/enemy_spawn.gd" id="2_ibv0h"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6m1b0"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_uky64"]
+sky_material = SubResource("ProceduralSkyMaterial_6m1b0")
+
+[sub_resource type="Environment" id="Environment_ivsp5"]
+background_mode = 2
+sky = SubResource("Sky_uky64")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_it7di"]
+albedo_color = Color(0.169938, 0.367082, 0.424608, 1)
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ivsp5")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, -0.0329628, 14.4684, 0.0471611)
+shadow_enabled = true
+
+[node name="Ground" type="CSGBox3D" parent="."]
+transform = Transform3D(30, 0, 0, 0, 1, 0, 0, 0, 30, 0.00119424, -0.133499, -0.000859916)
+use_collision = true
+
+[node name="Path" type="Node" parent="."]
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Path"]
+transform = Transform3D(10.1717, 0, 0, 0, 1, 0, 0, 0, 2.5, -10, 0.635, -0.001)
+material = SubResource("StandardMaterial3D_it7di")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Path"]
+transform = Transform3D(-3.93403e-07, 0, 2.5, 0, 1, 0, -9, 0, -1.09278e-07, -4.21496, 0.635, -3.19712)
+material = SubResource("StandardMaterial3D_it7di")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Path"]
+transform = Transform3D(-3.93403e-07, 0, 2.5, 0, 1, 0, -9, 0, -1.09278e-07, 5.28162, 0.635, -3.2369)
+material = SubResource("StandardMaterial3D_it7di")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Path"]
+transform = Transform3D(7.26723, 0, 0, 0, 1, 0, 0, 0, 2.5, 0.424539, 0.676668, -6.4472)
+material = SubResource("StandardMaterial3D_it7di")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Path"]
+transform = Transform3D(9.69521, 0, 0, 0, 1, 0, 0, 0, 2.5, 10.0574, 0.676668, 0.051487)
+material = SubResource("StandardMaterial3D_it7di")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, -0.183032, 14.2846, 12.0385)
+
+[node name="enemy spawn" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.5, 2, 0)
+script = ExtResource("2_ibv0h")

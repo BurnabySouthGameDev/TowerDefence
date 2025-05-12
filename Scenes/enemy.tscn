@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddsf3d0xoy5g6"]
+
+[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_bbien"]
+
+[node name="enemy" type="Node3D"]
+script = ExtResource("1_bbien")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+use_collision = true
