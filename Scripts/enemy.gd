@@ -1,7 +1,7 @@
-extends CharacterBody3D
+extends PathFollow3D
 
 var path: Array[Vector3i]
-
+@export var speed = 0.5
 func _ready() -> void:
 	#Enemy will move to each of these points from top to bottom
 	path.append(Vector3i(-4.35, 2, 0))
@@ -12,12 +12,19 @@ func _ready() -> void:
 	print(path)
 
 func _process(delta: float) -> void:
+	if $".".get_parent() is Path3D and progress_ratio != 1:
+		$".".progress += speed/10
+	else:
+		get_tree().quit()
+	
+	# Unused for now
+		
 	#Makes the enemy move to each point
 	#Speed can be adjusted with the float in the move_toward method
-	if path.is_empty():
-		return
-	else:
-		var target_position = path.front()
-		global_position = global_position.move_toward(target_position, 0.05)
-		if global_position.is_equal_approx(target_position):
-			path.pop_front()
+	#if path.is_empty():
+	#	return
+	#else:
+	#	var target_position = path.front()
+	#	global_position = global_position.move_toward(target_position, 0.05)
+	#	if global_position.is_equal_approx(target_position):
+	#		path.pop_front()
