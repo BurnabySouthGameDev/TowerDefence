@@ -1,4 +1,4 @@
-extends Node3D
+extends CharacterBody3D
 
 var path: Array[Vector3i]
 

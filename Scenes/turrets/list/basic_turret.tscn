@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://ld73oby6g67"]
+
+[ext_resource type="PackedScene" uid="uid://cw7yg6e0jmot0" path="res://Scenes/turrets/radar.tscn" id="1_mduyx"]
+[ext_resource type="Script" uid="uid://ghb85u66ywux" path="res://Scripts/turrets/basic_turret.gd" id="1_ulw1s"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_txjsu"]
+albedo_color = Color(0.0862745, 0.541176, 1, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ulw1s"]
+radius = 10.0
+
+[node name="BasicTurret" type="Node3D"]
+script = ExtResource("1_ulw1s")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+material = SubResource("StandardMaterial3D_txjsu")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGBox3D"]
+transform = Transform3D(0.52, 0, 0, 0, 0.52, 0, 0, 0, 0.52, 0, 0.0773596, -0.767816)
+size = Vector3(1, 0.505981, 1)
+material = SubResource("StandardMaterial3D_txjsu")
+
+[node name="Radar" parent="." instance=ExtResource("1_mduyx")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Radar"]
+shape = SubResource("SphereShape3D_ulw1s")
+debug_color = Color(0.564706, 0.552941, 0.0705882, 1)
+
+[node name="ReloadTimer" type="Timer" parent="."]
+wait_time = 0.45
+
+[connection signal="new_target" from="Radar" to="." method="_on_radar_new_target"]
+[connection signal="timeout" from="ReloadTimer" to="." method="fire"]
