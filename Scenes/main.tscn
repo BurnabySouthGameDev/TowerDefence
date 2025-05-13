@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dxt1ttcllxx1g"]
+[gd_scene load_steps=8 format=3 uid="uid://dxt1ttcllxx1g"]
 
 [ext_resource type="PackedScene" uid="uid://ld73oby6g67" path="res://Scenes/turrets/list/basic_turret.tscn" id="2_bo1nx"]
 [ext_resource type="Script" uid="uid://ns7g5warqqu5" path="res://Scripts/enemy_spawn.gd" id="2_ibv0h"]
@@ -18,6 +18,13 @@ glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_it7di"]
 albedo_color = Color(0.169938, 0.367082, 0.424608, 1)
+
+[sub_resource type="Curve3D" id="Curve3D_bo1nx"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -14.672, 1.7, 0, 0, 0, 0, 0, 0, 0, -4.117, 1.7, 0, 0, 0, 0, 0, 0, 0, -4.117, 1.7, -6.24, 0, 0, 0, 0, 0, 0, 5.438, 1.7, -6.24, 0, 0, 0, 0, 0, 0, 5.43752, 1.7, 0, 0, 0, 0, 0, 0, 0, 14, 1.7, 0.04),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0)
+}
+point_count = 6
 
 [node name="Main" type="Node3D"]
 
@@ -54,12 +61,19 @@ material = SubResource("StandardMaterial3D_it7di")
 transform = Transform3D(9.69521, 0, 0, 0, 1, 0, 0, 0, 2.5, 10.0574, 0.676668, 0.051487)
 material = SubResource("StandardMaterial3D_it7di")
 
+[node name="Path3D" type="Path3D" parent="Path"]
+curve = SubResource("Curve3D_bo1nx")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path/Path3D"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -14.672, 1.7, 0)
+
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, -0.183032, 14.2846, 12.0385)
 
-[node name="enemy spawn" type="Marker3D" parent="."]
+[node name="enemy spawn" type="Marker3D" parent="." node_paths=PackedStringArray("Path")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.5, 2, 0)
 script = ExtResource("2_ibv0h")
+Path = NodePath("../Path/Path3D")
 
 [node name="BasicTurret" parent="." instance=ExtResource("2_bo1nx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.737682, 1.64068, 5.59339)
