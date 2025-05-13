@@ -18,3 +18,8 @@ config/icon="res://icon.svg"
 [dotnet]
 
 project/assembly_name="BSGD Tower Defence"
+
+[layer_names]
+
+3d_physics/layer_1="Environment"
+3d_physics/layer_2="Enemies"

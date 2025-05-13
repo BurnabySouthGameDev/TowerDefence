@@ -1,6 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dxt1ttcllxx1g"]
+[gd_scene load_steps=9 format=3 uid="uid://dxt1ttcllxx1g"]
 
+[ext_resource type="PackedScene" uid="uid://ld73oby6g67" path="res://Scenes/turrets/list/basic_turret.tscn" id="2_bo1nx"]
 [ext_resource type="Script" uid="uid://ns7g5warqqu5" path="res://Scripts/enemy_spawn.gd" id="2_ibv0h"]
+[ext_resource type="Script" uid="uid://55x8gsic2vhr" path="res://Scenes/character_body_3d.gd" id="3_8gbba"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6m1b0"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -17,6 +19,8 @@ glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_it7di"]
 albedo_color = Color(0.169938, 0.367082, 0.424608, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jjvhh"]
 
 [node name="Main" type="Node3D"]
 
@@ -59,3 +63,17 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 [node name="enemy spawn" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.5, 2, 0)
 script = ExtResource("2_ibv0h")
+
+[node name="BasicTurret" parent="." instance=ExtResource("2_bo1nx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.737682, 1.64068, -0.645817)
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+process_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.8449, 3.97338, 0)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("3_8gbba")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+shape = SubResource("CapsuleShape3D_jjvhh")
+debug_color = Color(0, 1, 0, 1)

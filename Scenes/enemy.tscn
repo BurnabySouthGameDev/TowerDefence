@@ -7,3 +7,5 @@ script = ExtResource("1_bbien")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 use_collision = true
+collision_layer = 2
+collision_mask = 2
