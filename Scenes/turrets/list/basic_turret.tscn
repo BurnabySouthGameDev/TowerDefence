@@ -27,7 +27,7 @@ shape = SubResource("SphereShape3D_ulw1s")
 debug_color = Color(0.564706, 0.552941, 0.0705882, 1)
 
 [node name="ReloadTimer" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 0.45
 
 [connection signal="new_target" from="Radar" to="." method="_on_radar_new_target"]
 [connection signal="timeout" from="ReloadTimer" to="." method="fire"]

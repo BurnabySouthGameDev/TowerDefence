@@ -13,6 +13,7 @@ func _on_radar_new_target(target: Node3D) -> void:
 		return
 
 	if reload_timer.is_stopped():
+		fire()
 		reload_timer.start()
 
 func fire() -> void:
@@ -23,5 +24,5 @@ func fire() -> void:
 func _fire_at(target: Node3D) -> void:
 	var face := global_position.direction_to(target.global_position)
 	quaternion = Quaternion(Vector3.FORWARD, face)
-	if randf() < 0.0:
+	if randf() < (1.0 / 5.0):
 		target.queue_free()
