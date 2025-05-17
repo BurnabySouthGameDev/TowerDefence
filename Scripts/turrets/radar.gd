@@ -33,10 +33,12 @@ func _on_body_exited(body: Node3D) -> void:
 		recalculate_target()
 
 func recalculate_target() -> void:
-	# temp solution for now.
-	if (current_target == null and body_count == 0 or
-		is_valid_target(current_target)):
+	if current_target == null and body_count == 0:
 		return
+
+	if current_target != null and is_instance_valid(current_target):
+		if is_valid_target(current_target):
+			return
 
 	for body in get_overlapping_bodies():
 		if is_valid_target(body):
