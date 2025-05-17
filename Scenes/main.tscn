@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dxt1ttcllxx1g"]
+[gd_scene load_steps=10 format=3 uid="uid://dxt1ttcllxx1g"]
 
 [ext_resource type="PackedScene" uid="uid://ld73oby6g67" path="res://Scenes/turrets/list/basic_turret.tscn" id="2_bo1nx"]
 [ext_resource type="Script" uid="uid://ns7g5warqqu5" path="res://Scripts/enemy_spawn.gd" id="2_ibv0h"]
+[ext_resource type="Script" uid="uid://bh40hhbshvymn" path="res://Scripts/ui/currency_display.gd" id="3_8gbba"]
+[ext_resource type="Script" uid="uid://dq8n1fjdqpre3" path="res://Scripts/ui/spawn_button.gd" id="4_jjvhh"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6m1b0"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -70,10 +72,42 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -14.67
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, -0.183032, 14.2846, 12.0385)
 
-[node name="enemy spawn" type="Marker3D" parent="." node_paths=PackedStringArray("Path")]
+[node name="enemy spawn" type="Marker3D" parent="." node_paths=PackedStringArray("path")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.5, 2, 0)
 script = ExtResource("2_ibv0h")
-Path = NodePath("../Path/Path3D")
+path = NodePath("../Path/Path3D")
 
 [node name="BasicTurret" parent="." instance=ExtResource("2_bo1nx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.737682, 1.64068, 5.59339)
+visible = false
+
+[node name="GameUI" type="CanvasLayer" parent="."]
+
+[node name="CurrencyDisplay" type="Control" parent="GameUI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CurrencyLabel" type="Label" parent="GameUI/CurrencyDisplay"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("3_8gbba")
+
+[node name="SpawnButton" type="Button" parent="GameUI" node_paths=PackedStringArray("path_node")]
+offset_left = 992.0
+offset_top = 496.0
+offset_right = 1090.0
+offset_bottom = 545.0
+text = "Spawn"
+script = ExtResource("4_jjvhh")
+min_distance_path = 3.0
+path_node = NodePath("../../Path/Path3D")
+
+[node name="CancelButton" type="Button" parent="GameUI"]
+offset_left = 992.0
+offset_top = 557.0
+offset_right = 1090.0
+offset_bottom = 601.0
+text = "Cancal"
