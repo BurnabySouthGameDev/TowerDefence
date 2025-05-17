@@ -13,6 +13,7 @@ radius = 10.0
 script = ExtResource("1_ulw1s")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.600042, 0)
 material = SubResource("StandardMaterial3D_txjsu")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="CSGBox3D"]
