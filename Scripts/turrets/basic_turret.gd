@@ -2,6 +2,7 @@ extends Node3D
 
 @onready var radar: Radar = $"Radar"
 @onready var reload_timer: Timer = $"ReloadTimer"
+@onready var csg_box_3d: CSGBox3D = $CSGBox3D
 
 func _ready() -> void:
 	radar.monitoring = false
@@ -32,3 +33,10 @@ func _fire_at(target: Node3D) -> void:
 		var currency_label = get_tree().root.get_node("Main/GameUI/CurrencyDisplay/CurrencyLabel")
 		currency_label.add(5)
 		target.queue_free()
+
+func change_color(color:Color) -> void:
+	if csg_box_3d.material == null:
+		return
+
+	csg_box_3d.material = csg_box_3d.material.duplicate()
+	csg_box_3d.material.albedo_color = color

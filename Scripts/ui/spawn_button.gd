@@ -8,6 +8,21 @@ var turret_scene: PackedScene = preload("res://Scenes/turrets/list/basic_turret.
 var placing_turret: Node3D = null
 var placed_turrets: Array[Node3D] = []
 
+var can_place: bool = false: #temp
+	set(value):
+		if placing_turret == null:
+			return
+
+		if can_place == value:
+			return
+
+		can_place = value
+
+		if can_place:
+			placing_turret.change_color(Color(0.0863, 0.5411, 1.0))
+		else:
+			placing_turret.change_color(Color(0.7176, 0.2117, 0.1686))
+
 @export var path_node: Path3D
 
 @onready var cancel_button: Button = get_parent().get_node("CancelButton")
@@ -56,6 +71,8 @@ func _process(_delta):
 		placing_turret.visible = true
 	else:
 		placing_turret.visible = false
+
+	can_place = _can_place_turret_at(placing_turret.global_position)
 
 func _unhandled_input(event):
 	if placing_turret == null:
