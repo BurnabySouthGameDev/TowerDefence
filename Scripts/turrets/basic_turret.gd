@@ -1,5 +1,25 @@
 extends Node3D
 
+const OUTLINE = preload("res://Shaders/outline.gdshader")
+
+var selectable: bool = false
+var selected: bool = false:
+	set(value):
+		if selectable == false:
+			return
+
+		if selected == value:
+			return
+
+		selected = value
+
+		if selected:
+			csg_box_3d.material.next_pass.shader = OUTLINE
+			Global.selected_turret = self
+		else:
+			csg_box_3d.material.next_pass.shader = null
+			Global.selected_turret = null
+
 @onready var radar: Radar = $"Radar"
 @onready var reload_timer: Timer = $"ReloadTimer"
 @onready var csg_box_3d: CSGBox3D = %CSGBox3D
@@ -7,6 +27,8 @@ extends Node3D
 func _ready() -> void:
 	radar.monitoring = false
 	csg_box_3d.material = csg_box_3d.material.duplicate(true)
+
+
 
 func _on_radar_new_target(target: Node3D) -> void:
 	if not radar.monitoring:
