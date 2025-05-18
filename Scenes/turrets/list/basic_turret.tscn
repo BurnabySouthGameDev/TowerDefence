@@ -1,18 +1,26 @@
-[gd_scene load_steps=5 format=3 uid="uid://ld73oby6g67"]
+[gd_scene load_steps=8 format=3 uid="uid://ld73oby6g67"]
 
 [ext_resource type="PackedScene" uid="uid://cw7yg6e0jmot0" path="res://Scenes/turrets/radar.tscn" id="1_mduyx"]
 [ext_resource type="Script" uid="uid://ghb85u66ywux" path="res://Scripts/turrets/basic_turret.gd" id="1_ulw1s"]
+[ext_resource type="Script" uid="uid://c05b2u3qourdf" path="res://Scripts/turrets/select.gd" id="4_jrgm0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_slgpk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_txjsu"]
+next_pass = SubResource("ShaderMaterial_slgpk")
 albedo_color = Color(0.0862745, 0.541176, 1, 1)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ulw1s"]
 radius = 10.0
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_slgpk"]
+radius = 1.0
+
 [node name="BasicTurret" type="Node3D"]
 script = ExtResource("1_ulw1s")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.600042, 0)
 material = SubResource("StandardMaterial3D_txjsu")
 
@@ -22,6 +30,7 @@ size = Vector3(1, 0.505981, 1)
 material = SubResource("StandardMaterial3D_txjsu")
 
 [node name="Radar" parent="." instance=ExtResource("1_mduyx")]
+input_ray_pickable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Radar"]
 shape = SubResource("SphereShape3D_ulw1s")
@@ -29,6 +38,14 @@ debug_color = Color(0.564706, 0.552941, 0.0705882, 1)
 
 [node name="ReloadTimer" type="Timer" parent="."]
 wait_time = 0.45
+
+[node name="Select" type="Area3D" parent="."]
+script = ExtResource("4_jrgm0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Select"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0225831, 0.573584, 0)
+shape = SubResource("SphereShape3D_slgpk")
+debug_color = Color(0.576045, 0.397559, 0.974967, 0.42)
 
 [connection signal="new_target" from="Radar" to="." method="_on_radar_new_target"]
 [connection signal="timeout" from="ReloadTimer" to="." method="fire"]

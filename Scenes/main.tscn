@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dxt1ttcllxx1g"]
+[gd_scene load_steps=11 format=3 uid="uid://dxt1ttcllxx1g"]
 
 [ext_resource type="PackedScene" uid="uid://ld73oby6g67" path="res://Scenes/turrets/list/basic_turret.tscn" id="2_bo1nx"]
 [ext_resource type="Script" uid="uid://ns7g5warqqu5" path="res://Scripts/enemy_spawn.gd" id="2_ibv0h"]
@@ -27,6 +27,8 @@ _data = {
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0)
 }
 point_count = 6
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jjvhh"]
 
 [node name="Main" type="Node3D"]
 
@@ -83,31 +85,28 @@ visible = false
 
 [node name="GameUI" type="CanvasLayer" parent="."]
 
-[node name="CurrencyDisplay" type="Control" parent="GameUI"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="CurrencyLabel" type="Label" parent="GameUI/CurrencyDisplay"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-script = ExtResource("3_8gbba")
-
 [node name="SpawnButton" type="Button" parent="GameUI" node_paths=PackedStringArray("path_node")]
-offset_left = 992.0
-offset_top = 496.0
-offset_right = 1090.0
-offset_bottom = 545.0
+offset_left = 960.0
+offset_top = 448.0
+offset_right = 1058.0
+offset_bottom = 497.0
 text = "Spawn"
 script = ExtResource("4_jjvhh")
 min_distance_path = 3.0
 path_node = NodePath("../../Path/Path3D")
 
 [node name="CancelButton" type="Button" parent="GameUI"]
-offset_left = 992.0
-offset_top = 557.0
-offset_right = 1090.0
-offset_bottom = 601.0
-text = "Cancal"
+offset_left = 960.0
+offset_top = 512.0
+offset_right = 1058.0
+offset_bottom = 556.0
+text = "Cancel"
+
+[node name="CurrencyDisplay" type="PanelContainer" parent="GameUI"]
+offset_right = 192.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_jjvhh")
+
+[node name="CurrencyLabel" type="Label" parent="GameUI/CurrencyDisplay"]
+layout_mode = 2
+script = ExtResource("3_8gbba")

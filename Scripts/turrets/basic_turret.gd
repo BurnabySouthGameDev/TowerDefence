@@ -2,10 +2,11 @@ extends Node3D
 
 @onready var radar: Radar = $"Radar"
 @onready var reload_timer: Timer = $"ReloadTimer"
-@onready var csg_box_3d: CSGBox3D = $CSGBox3D
+@onready var csg_box_3d: CSGBox3D = %CSGBox3D
 
 func _ready() -> void:
 	radar.monitoring = false
+	csg_box_3d.material = csg_box_3d.material.duplicate(true)
 
 func _on_radar_new_target(target: Node3D) -> void:
 	if not radar.monitoring:
