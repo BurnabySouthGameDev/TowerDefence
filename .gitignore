@@ -1,0 +1,11 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# editor stuff
+.vscode/
+.idea/
+
+# mac filing stuff
+.DS_Store
+**/.DS_Store

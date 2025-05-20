@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://ddsf3d0xoy5g6"]
+
+[ext_resource type="Script" uid="uid://bd7vktalilei2" path="res://Scripts/enemy.gd" id="1_bbien"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hghv2"]
+
+[node name="PathFollow3D" type="PathFollow3D"]
+loop = false
+script = ExtResource("1_bbien")
+speed = 5.0
+
+[node name="enemy" type="CharacterBody3D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CSGBox3D" type="CSGBox3D" parent="enemy"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="enemy"]
+shape = SubResource("BoxShape3D_hghv2")
