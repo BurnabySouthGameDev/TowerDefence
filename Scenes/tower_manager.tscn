@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://gvaje4p786yv"]
+
+[ext_resource type="Script" uid="uid://b8y3jep70emw1" path="res://Scripts/tower_manager.gd" id="1_itlxo"]
+
+[node name="TowerManager" type="Node3D"]
+script = ExtResource("1_itlxo")
+
+[connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]

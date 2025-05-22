@@ -3,6 +3,7 @@ extends Button
 # Config
 @export var min_distance: float = 2.5
 @export var min_distance_path: float = 2.5
+@onready var tower_manager: Node3D = %TowerManager
 
 var turret_scene: PackedScene = preload("res://Scenes/turrets/list/basic_turret.tscn")
 var placing_turret: Node3D = null
@@ -35,7 +36,7 @@ func _ready():
 func start_placing_turret():
 	if placing_turret == null:
 		placing_turret = turret_scene.instantiate()
-		get_tree().root.get_node("Main").add_child(placing_turret)
+		tower_manager.add_child(placing_turret)
 		placing_turret.visible = false
 		cancel_button.show()
 		disabled = true

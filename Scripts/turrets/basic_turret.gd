@@ -1,6 +1,7 @@
 extends Node3D
 
 const OUTLINE = preload("res://Shaders/outline.gdshader")
+signal request_tower_menu(tower)
 
 var selectable: bool = false
 var selected: bool = false:
@@ -28,7 +29,6 @@ var selected: bool = false:
 func _ready() -> void:
 	radar.monitoring = false
 	csg_box_3d.material = csg_box_3d.material.duplicate(true)
-
 
 
 func _on_radar_new_target(target: Node3D) -> void:

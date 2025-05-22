@@ -1,9 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://dxt1ttcllxx1g"]
+[gd_scene load_steps=13 format=3 uid="uid://dxt1ttcllxx1g"]
 
 [ext_resource type="PackedScene" uid="uid://ld73oby6g67" path="res://Scenes/Turrets/List/basic_turret.tscn" id="2_bo1nx"]
 [ext_resource type="Script" uid="uid://ns7g5warqqu5" path="res://Scripts/enemy_spawn.gd" id="2_ibv0h"]
 [ext_resource type="Script" uid="uid://bh40hhbshvymn" path="res://Scripts/ui/currency_display.gd" id="3_8gbba"]
 [ext_resource type="Script" uid="uid://dq8n1fjdqpre3" path="res://Scripts/ui/spawn_button.gd" id="4_jjvhh"]
+[ext_resource type="PackedScene" uid="uid://dvdps78t4kco7" path="res://Scenes/UI/menu.tscn" id="5_21xkr"]
+[ext_resource type="PackedScene" uid="uid://gvaje4p786yv" path="res://Scenes/tower_manager.tscn" id="5_kry3j"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6m1b0"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -110,3 +112,13 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_jjvhh")
 [node name="CurrencyLabel" type="Label" parent="GameUI/CurrencyDisplay"]
 layout_mode = 2
 script = ExtResource("3_8gbba")
+
+[node name="Menu" parent="GameUI" instance=ExtResource("5_21xkr")]
+anchor_left = 0.0277778
+anchor_right = 0.25
+anchor_bottom = 0.950617
+
+[node name="TowerManager" parent="." instance=ExtResource("5_kry3j")]
+unique_name_in_owner = true
+
+[connection signal="tower_menu" from="TowerManager" to="GameUI/Menu" method="_on_tower_manager_tower_menu"]

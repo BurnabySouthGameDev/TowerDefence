@@ -1,10 +1,17 @@
-[gd_scene format=3 uid="uid://ccsbyyf4qfq10"]
+[gd_scene load_steps=2 format=3 uid="uid://dvdps78t4kco7"]
+
+[ext_resource type="Script" uid="uid://cyessuqksvsk8" path="res://Scripts/ui/menu.gd" id="1_nhmg3"]
 
 [node name="Menu" type="PanelContainer"]
 anchors_preset = -1
-anchor_left = 0.805556
+anchor_left = 0.75
 anchor_top = 0.345679
 anchor_right = 0.972222
 anchor_bottom = 0.938272
-grow_horizontal = 2
+script = ExtResource("1_nhmg3")
 metadata/_edit_use_anchors_ = true
+
+[node name="TowerName" type="RichTextLabel" parent="."]
+layout_mode = 2
+bbcode_enabled = true
+text = "TowerName"
