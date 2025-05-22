@@ -3,6 +3,7 @@ extends Node3D
 const OUTLINE = preload("res://Shaders/outline.gdshader")
 signal request_tower_menu(tower)
 
+@export var sell_value: int = 5
 var selectable: bool = false
 var selected: bool = false:
 	set(value):

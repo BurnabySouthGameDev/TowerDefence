@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dvdps78t4kco7"]
 
-[ext_resource type="Script" uid="uid://cyessuqksvsk8" path="res://Scripts/ui/menu.gd" id="1_nhmg3"]
+[ext_resource type="Script" uid="uid://cyessuqksvsk8" path="res://Scripts/UI/Menu/menu.gd" id="1_nhmg3"]
 
 [node name="Menu" type="PanelContainer"]
 anchors_preset = -1
@@ -11,7 +11,81 @@ anchor_bottom = 0.938272
 script = ExtResource("1_nhmg3")
 metadata/_edit_use_anchors_ = true
 
-[node name="TowerName" type="RichTextLabel" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="TowerName" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 bbcode_enabled = true
-text = "TowerName"
+text = "[center]TowerName"
+fit_content = true
+
+[node name="Upgrade1" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="U1Label" type="RichTextLabel" parent="MarginContainer/VBoxContainer/Upgrade1"]
+layout_mode = 2
+size_flags_horizontal = 2
+bbcode_enabled = true
+text = "Upgrade 1"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="U1Button" type="Button" parent="MarginContainer/VBoxContainer/Upgrade1"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Upgrade"
+
+[node name="Upgrade2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="U2Label" type="RichTextLabel" parent="MarginContainer/VBoxContainer/Upgrade2"]
+layout_mode = 2
+size_flags_horizontal = 2
+bbcode_enabled = true
+text = "Upgrade 2"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="U2Button" type="Button" parent="MarginContainer/VBoxContainer/Upgrade2"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Upgrade"
+
+[node name="Upgrade3" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="U3Label" type="RichTextLabel" parent="MarginContainer/VBoxContainer/Upgrade3"]
+layout_mode = 2
+size_flags_horizontal = 2
+bbcode_enabled = true
+text = "Upgrade 3"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="U3Button" type="Button" parent="MarginContainer/VBoxContainer/Upgrade3"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Upgrade"
+
+[node name="Sell" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="SellButton" type="Button" parent="MarginContainer/VBoxContainer/Sell"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Sell for $$$"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Sell/SellButton" to="." method="_on_sell_button_pressed"]

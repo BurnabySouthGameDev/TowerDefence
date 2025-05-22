@@ -7,7 +7,6 @@ extends Button
 
 var turret_scene: PackedScene = preload("res://Scenes/turrets/list/basic_turret.tscn")
 var placing_turret: Node3D = null
-var placed_turrets: Array[Node3D] = []
 
 var can_place: bool = false: #temp
 	set(value):
@@ -107,7 +106,7 @@ func _unhandled_input(event):
 				var radar = placing_turret.get_node("Radar") as Radar
 				radar.monitoring = true
 
-				placed_turrets.append(placing_turret)
+				Global.placed_turrets.append(placing_turret)
 
 				placing_turret.selectable = true
 				placing_turret = null
@@ -117,7 +116,7 @@ func _unhandled_input(event):
 				print("No currency...")
 
 func _can_place_turret_at(pos: Vector3) -> bool:
-	for turret in placed_turrets:
+	for turret in Global.placed_turrets:
 		if turret.global_position.distance_to(pos) < min_distance:
 			print("Too close to another turret")
 			return false

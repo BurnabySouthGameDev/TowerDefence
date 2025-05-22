@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://ld73oby6g67" path="res://Scenes/Turrets/List/basic_turret.tscn" id="2_bo1nx"]
 [ext_resource type="Script" uid="uid://ns7g5warqqu5" path="res://Scripts/enemy_spawn.gd" id="2_ibv0h"]
-[ext_resource type="Script" uid="uid://bh40hhbshvymn" path="res://Scripts/ui/currency_display.gd" id="3_8gbba"]
-[ext_resource type="Script" uid="uid://dq8n1fjdqpre3" path="res://Scripts/ui/spawn_button.gd" id="4_jjvhh"]
+[ext_resource type="Script" uid="uid://bh40hhbshvymn" path="res://Scripts/UI/currency_display.gd" id="3_8gbba"]
+[ext_resource type="Script" uid="uid://dq8n1fjdqpre3" path="res://Scripts/UI/spawn_button.gd" id="4_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://dvdps78t4kco7" path="res://Scenes/UI/menu.tscn" id="5_21xkr"]
 [ext_resource type="PackedScene" uid="uid://gvaje4p786yv" path="res://Scenes/tower_manager.tscn" id="5_kry3j"]
 
