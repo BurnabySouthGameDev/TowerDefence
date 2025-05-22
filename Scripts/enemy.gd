@@ -1,9 +1,22 @@
 extends PathFollow3D
 
 var path: Array[Vector3i]
+@onready var progress_bar: ProgressBar = $enemy/HealthBar/ProgressBar
+
 
 @export var speed: float = 0.5
-@export var health: int = 20
+@export var health: int = 20:
+	set(value):
+		if health == value:
+			return
+
+		health = value
+
+		if health <= 0:
+			queue_free()
+			return
+
+		progress_bar.value = health
 
 func _ready() -> void:
 	#Enemy will move to each of these points from top to bottom
@@ -23,3 +36,6 @@ func _process(delta: float) -> void:
 		currency_label.subtract(50)
 		print("ememy reach the end of the path")
 		queue_free()
+
+func take_damage(amount: int) -> void:
+	health -= amount

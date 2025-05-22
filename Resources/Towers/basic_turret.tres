@@ -8,6 +8,7 @@ script = ExtResource("2_f7vgk")
 damage = 5
 attack_speed = 0
 radius = 5
+sell_value = 0
 upgrade_cost = 30
 metadata/_custom_type_script = "uid://dapii7i1tjwtr"
 
@@ -16,13 +17,17 @@ script = ExtResource("2_f7vgk")
 damage = 10
 attack_speed = 0
 radius = 10
+sell_value = 0
 upgrade_cost = 100
 metadata/_custom_type_script = "uid://dapii7i1tjwtr"
 
 [resource]
 script = ExtResource("1_ej7is")
+tower_name = "Basic Turret"
 base_damage = 5
 base_attack_speed = 5
 base_radius = 10
+base_sell_value = 0
+number_of_upgrades = 0
 upgrades = Array[ExtResource("2_f7vgk")]([SubResource("Resource_tkl0h"), SubResource("Resource_f7vgk")])
 metadata/_custom_type_script = "uid://nf31t0owinb2"

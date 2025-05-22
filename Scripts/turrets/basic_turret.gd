@@ -22,6 +22,7 @@ var selected: bool = false:
 		else:
 			csg_box_3d.material.next_pass.shader = null
 			Global.selected_tower = null
+@export var resource: TowerResource
 
 @onready var radar: Radar = $"Radar"
 @onready var reload_timer: Timer = $"ReloadTimer"
@@ -54,10 +55,12 @@ func _fire_at(target: Node3D) -> void:
 	target_pos.y = global_position.y  # Flatten Y to prevent pitch/roll
 	look_at(target_pos, Vector3.UP)
 
-	if randf() < (1.0 / 5.0):
-		var currency_label = get_tree().root.get_node("Main/GameUI/CurrencyDisplay/CurrencyLabel")
-		currency_label.add(5)
-		target.queue_free()
+	#if randf() < (1.0 / 5.0):
+		#var currency_label = get_tree().root.get_node("Main/GameUI/CurrencyDisplay/CurrencyLabel")
+		#currency_label.add(5)
+		#target.queue_free()
+	
+	target.get_parent().take_damage(resource.base_damage) #temp solution
 
 func change_color(color:Color) -> void:
 	if csg_box_3d.material == null:
