@@ -4,6 +4,7 @@ var menu_sell_value: int:
 	set(value):
 		if menu_sell_value == value:
 			return
+
 		menu_sell_value = value
 		sell_button.text = "Sell for " + str(value)
 
@@ -19,6 +20,7 @@ func _ready() -> void:
 func _on_tower_manager_tower_menu(tower: Node3D) -> void:
 	if Global.selected_tower == tower:
 		hide()
+
 	else:
 		show()
 		tower_name.text = "[center]" + tower.name
@@ -30,4 +32,3 @@ func _on_sell_button_pressed() -> void:
 	Global.placed_turrets.erase(Global.selected_tower)
 	Global.selected_tower.queue_free()
 	hide()
-	

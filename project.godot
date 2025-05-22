@@ -26,7 +26,8 @@ project/assembly_name="BSGD Tower Defence"
 [file_customization]
 
 folder_colors={
-"res://Scenes/": "red",
+"res://Resources/": "red",
+"res://Scenes/": "green",
 "res://Scripts/": "purple"
 }
 

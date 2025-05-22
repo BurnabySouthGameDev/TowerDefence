@@ -1,7 +1,10 @@
 extends PathFollow3D
 
 var path: Array[Vector3i]
-@export var speed = 0.5
+
+@export var speed: float = 0.5
+@export var health: int = 20
+
 func _ready() -> void:
 	#Enemy will move to each of these points from top to bottom
 	path.append(Vector3i(-4.35, 2, 0))

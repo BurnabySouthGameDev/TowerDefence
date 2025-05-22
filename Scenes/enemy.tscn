@@ -1,8 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://ddsf3d0xoy5g6"]
+[gd_scene load_steps=6 format=3 uid="uid://ddsf3d0xoy5g6"]
 
 [ext_resource type="Script" uid="uid://bd7vktalilei2" path="res://Scripts/enemy.gd" id="1_bbien"]
+[ext_resource type="Script" uid="uid://co8kbyh5strok" path="res://Scripts/UI/Enemy/health_bar.gd" id="2_1f0kj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hghv2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1f0kj"]
+bg_color = Color(0.839216, 0.278431, 0.329412, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_afpow"]
+bg_color = Color(0.322353, 0.692161, 0.402664, 1)
 
 [node name="PathFollow3D" type="PathFollow3D"]
 loop = false
@@ -19,3 +26,17 @@ collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="enemy"]
 shape = SubResource("BoxShape3D_hghv2")
+
+[node name="Node3D" type="Node3D" parent="enemy"]
+
+[node name="ProgressBar" type="ProgressBar" parent="enemy/Node3D"]
+anchors_preset = -1
+anchor_top = -0.00617284
+anchor_right = 0.0555556
+theme_override_styles/background = SubResource("StyleBoxFlat_1f0kj")
+theme_override_styles/fill = SubResource("StyleBoxFlat_afpow")
+max_value = 20.0
+step = 1.0
+show_percentage = false
+script = ExtResource("2_1f0kj")
+metadata/_edit_use_anchors_ = true

@@ -28,6 +28,57 @@ bbcode_enabled = true
 text = "[center]TowerName"
 fit_content = true
 
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="StatsLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+bbcode_enabled = true
+text = "Stats"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Damage" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+bbcode_enabled = true
+text = "Damage: 0"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="AttackSpeed" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+bbcode_enabled = true
+text = "Attack Speed: 0"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Range" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+bbcode_enabled = true
+text = "Range: 0"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="UpgradesLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+bbcode_enabled = true
+text = "Upgrades"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
 [node name="Upgrade1" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 

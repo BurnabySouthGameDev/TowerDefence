@@ -88,21 +88,26 @@ visible = false
 [node name="GameUI" type="CanvasLayer" parent="."]
 
 [node name="SpawnButton" type="Button" parent="GameUI" node_paths=PackedStringArray("path_node")]
-offset_left = 960.0
-offset_top = 448.0
-offset_right = 1058.0
-offset_bottom = 497.0
+anchors_preset = -1
+anchor_left = 0.833333
+anchor_top = 0.691358
+anchor_right = 0.918403
+anchor_bottom = 0.766975
+offset_bottom = 3.05176e-05
 text = "Spawn"
 script = ExtResource("4_jjvhh")
 min_distance_path = 3.0
 path_node = NodePath("../../Path/Path3D")
+metadata/_edit_use_anchors_ = true
 
 [node name="CancelButton" type="Button" parent="GameUI"]
-offset_left = 960.0
-offset_top = 512.0
-offset_right = 1058.0
-offset_bottom = 556.0
+anchors_preset = -1
+anchor_left = 0.833333
+anchor_top = 0.790123
+anchor_right = 0.918403
+anchor_bottom = 0.858025
 text = "Cancel"
+metadata/_edit_use_anchors_ = true
 
 [node name="CurrencyDisplay" type="PanelContainer" parent="GameUI"]
 offset_right = 192.0
@@ -117,6 +122,10 @@ script = ExtResource("3_8gbba")
 anchor_left = 0.0277778
 anchor_right = 0.25
 anchor_bottom = 0.950617
+offset_left = 832.0
+offset_top = -193.0
+offset_right = 832.0
+offset_bottom = -193.0
 
 [node name="TowerManager" parent="." instance=ExtResource("5_kry3j")]
 unique_name_in_owner = true
