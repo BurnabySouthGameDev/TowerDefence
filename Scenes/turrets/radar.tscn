@@ -1,11 +1,11 @@
 [gd_scene load_steps=2 format=3 uid="uid://cw7yg6e0jmot0"]
 
-[ext_resource type="Script" uid="uid://sn2r2w50av3n" path="res://Scripts/turrets/radar.gd" id="1_oxg80"]
+[ext_resource type="Script" uid="uid://sn2r2w50av3n" path="res://Scripts/turrets/radar.gd" id="1_s7d7d"]
 
 [node name="Radar" type="Area3D"]
 collision_layer = 2
 collision_mask = 2
-script = ExtResource("1_oxg80")
+script = ExtResource("1_s7d7d")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.1

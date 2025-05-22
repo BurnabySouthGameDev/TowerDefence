@@ -1,9 +1,9 @@
 extends Node
 
-var selected_turret: Node3D:
+var selected_tower: Node3D = null:
 	set(value):
-		if value == selected_turret:
+		if value == selected_tower:
 			return
-		if selected_turret != null:
-			selected_turret.selected = false
-		selected_turret = value
+		if selected_tower != null:
+			selected_tower.selected = false
+		selected_tower = value

@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://ld73oby6g67"]
 
-[ext_resource type="PackedScene" uid="uid://cw7yg6e0jmot0" path="res://Scenes/turrets/radar.tscn" id="1_mduyx"]
-[ext_resource type="Script" uid="uid://ghb85u66ywux" path="res://Scripts/turrets/basic_turret.gd" id="1_ulw1s"]
-[ext_resource type="Script" uid="uid://c05b2u3qourdf" path="res://Scripts/turrets/select.gd" id="4_jrgm0"]
+[ext_resource type="Script" uid="uid://ghb85u66ywux" path="res://Scripts/turrets/basic_turret.gd" id="1_mpsi8"]
+[ext_resource type="PackedScene" uid="uid://cw7yg6e0jmot0" path="res://Scenes/Turrets/radar.tscn" id="2_syr1r"]
+[ext_resource type="Script" uid="uid://c05b2u3qourdf" path="res://Scripts/turrets/select.gd" id="3_2qt4d"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_slgpk"]
 
@@ -17,7 +17,7 @@ radius = 10.0
 radius = 1.0
 
 [node name="BasicTurret" type="Node3D"]
-script = ExtResource("1_ulw1s")
+script = ExtResource("1_mpsi8")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 unique_name_in_owner = true
@@ -29,7 +29,7 @@ transform = Transform3D(0.52, 0, 0, 0, 0.52, 0, 0, 0, 0.52, 0, 0.0773596, -0.767
 size = Vector3(1, 0.505981, 1)
 material = SubResource("StandardMaterial3D_txjsu")
 
-[node name="Radar" parent="." instance=ExtResource("1_mduyx")]
+[node name="Radar" parent="." instance=ExtResource("2_syr1r")]
 input_ray_pickable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Radar"]
@@ -40,7 +40,7 @@ debug_color = Color(0.564706, 0.552941, 0.0705882, 1)
 wait_time = 0.45
 
 [node name="Select" type="Area3D" parent="."]
-script = ExtResource("4_jrgm0")
+script = ExtResource("3_2qt4d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Select"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0225831, 0.573584, 0)
