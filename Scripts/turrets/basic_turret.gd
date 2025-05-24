@@ -2,8 +2,10 @@ extends Node3D
 
 const OUTLINE = preload("res://Shaders/outline.gdshader")
 signal request_tower_menu(tower)
+signal placing
 
 @export var sell_value: int = 5
+@export var resource: TowerResource
 var selectable: bool = false
 var selected: bool = false:
 	set(value):
@@ -22,7 +24,6 @@ var selected: bool = false:
 		else:
 			csg_box_3d.material.next_pass.shader = null
 			Global.selected_tower = null
-@export var resource: TowerResource
 
 @onready var radar: Radar = $"Radar"
 @onready var reload_timer: Timer = $"ReloadTimer"
@@ -31,6 +32,7 @@ var selected: bool = false:
 func _ready() -> void:
 	radar.monitoring = false
 	csg_box_3d.material = csg_box_3d.material.duplicate(true)
+	resource.radius_changed.connect(update_radius)
 
 
 func _on_radar_new_target(target: Node3D) -> void:
@@ -50,21 +52,27 @@ func fire() -> void:
 	if radar.current_target != null:
 		_fire_at(radar.current_target)
 
+	reload_timer.wait_time = resource.attack_speed
+
 func _fire_at(target: Node3D) -> void:
 	var target_pos = target.global_position
 	target_pos.y = global_position.y  # Flatten Y to prevent pitch/roll
 	look_at(target_pos, Vector3.UP)
 
-	#if randf() < (1.0 / 5.0):
-		#var currency_label = get_tree().root.get_node("Main/GameUI/CurrencyDisplay/CurrencyLabel")
-		#currency_label.add(5)
-		#target.queue_free()
-	
-	target.get_parent().take_damage(resource.base_damage) #temp solution
+	target.get_parent().take_damage(resource.damage)
 
-func change_color(color:Color) -> void:
+	if target.get_parent().health <= 0:
+		var currency_label = get_tree().root.get_node("Main/GameUI/CurrencyDisplay/CurrencyLabel")
+		currency_label.add(5)
+		target.get_parent().queue_free()
+
+func change_color(color: Color) -> void:
 	if csg_box_3d.material == null:
 		return
 
 	csg_box_3d.material = csg_box_3d.material.duplicate()
 	csg_box_3d.material.albedo_color = color
+
+func update_radius(value: int) -> void:
+	print("Tes")
+	$Radar/CollisionShape3D.shape.radius = value

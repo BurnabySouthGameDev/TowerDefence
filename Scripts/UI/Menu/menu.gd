@@ -1,12 +1,7 @@
 extends PanelContainer
 
-var menu_sell_value: int:
-	set(value):
-		if menu_sell_value == value:
-			return
+var tower_resource:TowerResource
 
-		menu_sell_value = value
-		sell_button.text = "Sell for " + str(value)
 
 @onready var tower_name: RichTextLabel = %TowerName
 @onready var sell_button: Button = %SellButton
@@ -16,7 +11,6 @@ var menu_sell_value: int:
 @onready var radius: RichTextLabel = %Radius
 
 
-
 func _ready() -> void:
 	hide()
 
@@ -24,24 +18,48 @@ func _ready() -> void:
 func _on_tower_manager_tower_menu(tower: Node3D) -> void:
 	if Global.selected_tower == tower:
 		hide()
+		return
 
-	else:
-		show()
-		_load_values(tower.resource)
-		menu_sell_value = tower.sell_value
+	show()
+	_load_values(tower.resource)
 
 
 func _on_sell_button_pressed() -> void:
-	currency_label.add(menu_sell_value)
+	currency_label.add(tower_resource.sell_value)
 	Global.placed_turrets.erase(Global.selected_tower)
 	Global.selected_tower.queue_free()
 	hide()
 
-func _load_values(res:TowerResource) -> void: #not sure how to fit for upgrades
-	if res.number_of_upgrades == 0:
-		tower_name.text = "[center]" + res.tower_name
-		menu_sell_value = res.base_sell_value
-		damage.text = "Damage: " + str(res.base_damage)
-		attack_speed.text = "Attack Speed: " + str(res.base_attack_speed)
-		radius.text = "Radius: " + str(res.base_radius)
+
+func _load_values(res:TowerResource) -> void:
+	tower_resource = res
+	tower_name.text = "[center]" + res.tower_name
+	sell_button.text = str(res.sell_value)
+	damage.text = str(res.damage)
+	attack_speed.text = str(res.attack_speed)
+	radius.text = str(res.radius)
+	
+
+
+func _on_upgrade_1_mouse_entered() -> void:
+	if tower_resource.number_of_upgrades >= tower_resource.upgrades.size():
+		return
+
+
+func _on_u_1_button_pressed() -> void:
+	if tower_resource.number_of_upgrades >= tower_resource.upgrades.size():
+		return
+
+	for i in tower_resource.upgrades[tower_resource.number_of_upgrades].stats:
+		var stat_name = i[0]
+		var value = i[1]
+		var path = i[2]
 		
+		var node_path = path.slice(0, path.get_name_count())
+		var property_path = path.slice(path.get_name_count())
+		var node := self if node_path.is_empty() else get_node(node_path)
+
+		tower_resource.set(stat_name, value)
+		node.set_indexed(property_path, value)
+
+	tower_resource.number_of_upgrades += 1

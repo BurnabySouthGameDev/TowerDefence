@@ -40,32 +40,63 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="Damage" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="DamageText" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "Damage:"
+fit_content = true
+scroll_active = false
+
+[node name="Damage" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 2
+size_flags_horizontal = 10
 bbcode_enabled = true
-text = "Damage: 0"
+text = "0"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="AttackSpeed" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="AttackSpeedText" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "Attack Speed: "
+fit_content = true
+
+[node name="AttackSpeed" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 2
+size_flags_horizontal = 10
 bbcode_enabled = true
-text = "Attack Speed: 0"
+text = "0"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="Radius" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="RadiusText" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "Radius:"
+fit_content = true
+
+[node name="Radius" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 2
+size_flags_horizontal = 10
 bbcode_enabled = true
-text = "Radius: 0"
+text = "0"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
@@ -99,40 +130,6 @@ layout_mode = 2
 size_flags_horizontal = 10
 text = "Upgrade"
 
-[node name="Upgrade2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="U2Label" type="RichTextLabel" parent="MarginContainer/VBoxContainer/Upgrade2"]
-layout_mode = 2
-size_flags_horizontal = 2
-bbcode_enabled = true
-text = "Upgrade 2"
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
-
-[node name="U2Button" type="Button" parent="MarginContainer/VBoxContainer/Upgrade2"]
-layout_mode = 2
-size_flags_horizontal = 10
-text = "Upgrade"
-
-[node name="Upgrade3" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="U3Label" type="RichTextLabel" parent="MarginContainer/VBoxContainer/Upgrade3"]
-layout_mode = 2
-size_flags_horizontal = 2
-bbcode_enabled = true
-text = "Upgrade 3"
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
-
-[node name="U3Button" type="Button" parent="MarginContainer/VBoxContainer/Upgrade3"]
-layout_mode = 2
-size_flags_horizontal = 10
-text = "Upgrade"
-
 [node name="Sell" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 10
@@ -140,6 +137,17 @@ size_flags_vertical = 10
 [node name="SellButton" type="Button" parent="MarginContainer/VBoxContainer/Sell"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Sell for $$$"
+theme_override_font_sizes/font_size = 16
+text = "0"
 
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/Sell"]
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+bbcode_enabled = true
+text = "Sell for:"
+fit_content = true
+
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Upgrade1" to="." method="_on_upgrade_1_mouse_entered"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Upgrade1/U1Button" to="." method="_on_u_1_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Sell/SellButton" to="." method="_on_sell_button_pressed"]

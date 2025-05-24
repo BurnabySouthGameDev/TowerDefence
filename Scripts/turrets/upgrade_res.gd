@@ -1,8 +1,9 @@
 extends Resource
 class_name UpgradeResource
 
-@export var damage: int
-@export var attack_speed: int
-@export var radius: int
-@export var sell_value: int
-@export var upgrade_cost: int
+@export var stats: Array[Array] = [
+	["damage", 0, ^"%Damage:text"],
+	["attack_speed", 0, ^"%AttackSpeed:text"],
+	["radius", 0, ^"%Radius:text"],
+	["sell_value", 0, ^"%SellButton:text"],
+]

@@ -5,10 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://cw7yg6e0jmot0" path="res://Scenes/Turrets/radar.tscn" id="2_syr1r"]
 [ext_resource type="Script" uid="uid://c05b2u3qourdf" path="res://Scripts/turrets/select.gd" id="3_2qt4d"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_slgpk"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_16ne6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_txjsu"]
-next_pass = SubResource("ShaderMaterial_slgpk")
+next_pass = SubResource("ShaderMaterial_16ne6")
 albedo_color = Color(0.0862745, 0.541176, 1, 1)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ulw1s"]
@@ -39,6 +39,7 @@ shape = SubResource("SphereShape3D_ulw1s")
 debug_color = Color(0.564706, 0.552941, 0.0705882, 1)
 
 [node name="ReloadTimer" type="Timer" parent="."]
+unique_name_in_owner = true
 wait_time = 0.45
 
 [node name="Select" type="Area3D" parent="."]
