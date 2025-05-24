@@ -5,22 +5,22 @@
 
 [sub_resource type="Resource" id="Resource_tkl0h"]
 script = ExtResource("2_f7vgk")
-stats = Array[Array]([["damage", 7, NodePath("%Damage:text")], ["attack_speed", 0.3, NodePath("%AttackSpeed:text")], ["radius", 15, NodePath("%Radius:text")], ["sell_value", 7, NodePath("%SellButton:text")]])
+stats = Array[Array]([["damage", 7.0, NodePath("%Damage:text")], ["attack_speed", 0.3, NodePath("%AttackSpeed:text")], ["radius", 12.0, NodePath("%Radius:text")], ["sell_value", 7.0, NodePath("%SellButton:text")]])
 metadata/_custom_type_script = "uid://dapii7i1tjwtr"
 
 [sub_resource type="Resource" id="Resource_f7vgk"]
 script = ExtResource("2_f7vgk")
-stats = Array[Array]([["damage", 10, NodePath("%Damage:text")], ["attack_speed", 0.3, NodePath("%AttackSpeed:text")], ["radius", 20, NodePath("%Radius:text")], ["sell_value", 10, NodePath("%SellButton:text")]])
+stats = Array[Array]([["damage", 10.0, NodePath("%Damage:text")], ["attack_speed", 0.3, NodePath("%AttackSpeed:text")], ["radius", 15.0, NodePath("%Radius:text")], ["sell_value", 10.0, NodePath("%SellButton:text")]])
 metadata/_custom_type_script = "uid://dapii7i1tjwtr"
 
 [resource]
 resource_local_to_scene = true
 script = ExtResource("1_ej7is")
 tower_name = "Basic Turret"
-damage = 5
+damage = 5.0
 attack_speed = 0.45
-radius = 10
-sell_value = 5
+radius = 10.0
+sell_value = 5.0
 number_of_upgrades = 0
 upgrades = Array[ExtResource("2_f7vgk")]([SubResource("Resource_tkl0h"), SubResource("Resource_f7vgk")])
 metadata/_custom_type_script = "uid://nf31t0owinb2"

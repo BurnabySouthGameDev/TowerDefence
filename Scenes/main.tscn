@@ -1,16 +1,13 @@
-
 [gd_scene load_steps=18 format=3 uid="uid://dxt1ttcllxx1g"]
 
 [ext_resource type="PackedScene" uid="uid://ld73oby6g67" path="res://Scenes/Turrets/List/basic_turret.tscn" id="2_bo1nx"]
 [ext_resource type="Script" uid="uid://ns7g5warqqu5" path="res://Scripts/enemy_spawn.gd" id="2_ibv0h"]
-
 [ext_resource type="Script" uid="uid://bh40hhbshvymn" path="res://Scripts/UI/currency_display.gd" id="3_8gbba"]
 [ext_resource type="Script" uid="uid://nf31t0owinb2" path="res://Scripts/turrets/tower_res.gd" id="3_344ge"]
 [ext_resource type="Script" uid="uid://dq8n1fjdqpre3" path="res://Scripts/UI/spawn_button.gd" id="4_jjvhh"]
 [ext_resource type="Script" uid="uid://dapii7i1tjwtr" path="res://Scripts/turrets/upgrade_res.gd" id="4_ynf5e"]
 [ext_resource type="PackedScene" uid="uid://dvdps78t4kco7" path="res://Scenes/UI/menu.tscn" id="5_21xkr"]
 [ext_resource type="PackedScene" uid="uid://gvaje4p786yv" path="res://Scenes/tower_manager.tscn" id="5_kry3j"]
-
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6m1b0"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -49,10 +46,10 @@ metadata/_custom_type_script = "uid://dapii7i1tjwtr"
 resource_local_to_scene = true
 script = ExtResource("3_344ge")
 tower_name = "Basic Turret"
-damage = 5
+damage = 0.0
 attack_speed = 0.45
-radius = 0
-sell_value = 5
+radius = 0.0
+sell_value = 0.0
 number_of_upgrades = 0
 upgrades = Array[ExtResource("4_ynf5e")]([SubResource("Resource_tkl0h"), SubResource("Resource_f7vgk")])
 metadata/_custom_type_script = "uid://nf31t0owinb2"
@@ -116,7 +113,6 @@ resource = SubResource("Resource_hptm8")
 [node name="GameUI" type="CanvasLayer" parent="."]
 
 [node name="SpawnButton" type="Button" parent="GameUI" node_paths=PackedStringArray("path_node")]
-
 anchors_preset = -1
 anchor_left = 0.833333
 anchor_top = 0.691358
@@ -124,7 +120,6 @@ anchor_right = 0.918403
 anchor_bottom = 0.766975
 offset_bottom = 3.05176e-05
 text = "Spawn"
-
 script = ExtResource("4_jjvhh")
 min_distance_path = 3.0
 path_node = NodePath("../../Path/Path3D")
@@ -153,10 +148,8 @@ script = ExtResource("3_8gbba")
 anchor_top = 0.0478395
 anchor_bottom = 0.652777
 
-[node name="TowerManager" parent="." instance=ExtResource("5_kry3j")]
-unique_name_in_owner = true
-
 [node name="TowerMenu" type="ColorRect" parent="GameUI"]
+visible = false
 anchors_preset = -1
 anchor_right = 0.008
 offset_left = 33.0
@@ -164,7 +157,6 @@ offset_top = 92.0
 offset_right = 289.784
 offset_bottom = 622.0
 color = Color(0.529067, 0.529067, 0.529067, 1)
-script = ExtResource("5_21xkr")
 
 [node name="SellButton" type="Button" parent="GameUI/TowerMenu"]
 z_index = 1
@@ -174,7 +166,6 @@ offset_top = 466.0
 offset_right = 249.0
 offset_bottom = 511.0
 text = "Sell"
-script = ExtResource("6_6bp64")
 
 [node name="UpgradeButton" type="Button" parent="GameUI/TowerMenu"]
 z_index = 1
@@ -183,9 +174,7 @@ offset_left = 151.0
 offset_top = 222.0
 offset_right = 249.0
 offset_bottom = 271.0
-text = "Upgrade
-"
-script = ExtResource("6_6bp64")
+text = "Upgrade"
 
 [node name="UpgradeButton2" type="Button" parent="GameUI/TowerMenu"]
 z_index = 1
@@ -195,7 +184,6 @@ offset_top = 303.0
 offset_right = 249.0
 offset_bottom = 352.0
 text = "Upgrade"
-script = ExtResource("6_6bp64")
 
 [node name="UpgradeButton3" type="Button" parent="GameUI/TowerMenu"]
 z_index = 1
@@ -205,7 +193,6 @@ offset_top = 387.0
 offset_right = 249.0
 offset_bottom = 436.0
 text = "Upgrade"
-script = ExtResource("6_6bp64")
 
 [node name="Label" type="Label" parent="GameUI/TowerMenu"]
 z_index = 1
@@ -220,7 +207,6 @@ text = "Tower Name Here"
 [node name="Sprite2D" type="Sprite2D" parent="GameUI/TowerMenu"]
 z_index = 1
 position = Vector2(134, 136)
-texture = ExtResource("7_6bp64")
 
 [node name="ColorRect" type="ColorRect" parent="GameUI/TowerMenu"]
 layout_mode = 0
@@ -229,5 +215,8 @@ offset_top = 70.0
 offset_right = 227.0
 offset_bottom = 203.0
 color = Color(0.303233, 0.303233, 0.303233, 1)
+
+[node name="TowerManager" parent="." instance=ExtResource("5_kry3j")]
+unique_name_in_owner = true
 
 [connection signal="tower_menu" from="TowerManager" to="GameUI/Menu" method="_open_menu"]

@@ -45,7 +45,7 @@ func _update() -> void:
 
 	for i in tower_resource.upgrades[tower_resource.number_of_upgrades].stats:
 		var stat_name: String = i[0]
-		var value: int = i[1]
+		var value: float = i[1]
 		var path: NodePath = i[2]
 		
 		var node_path = path.slice(0, path.get_name_count())
