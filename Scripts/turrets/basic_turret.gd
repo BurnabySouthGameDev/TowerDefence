@@ -52,6 +52,7 @@ func fire() -> void:
 		_fire_at(radar.current_target)
 
 	reload_timer.wait_time = resource.attack_speed
+	print(resource.attack_speed)
 
 func _fire_at(target: Node3D) -> void:
 	var target_pos = target.global_position

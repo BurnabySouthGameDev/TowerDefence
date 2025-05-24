@@ -5,14 +5,14 @@ signal radius_changed(value)
 
 @export_group("General")
 @export var tower_name: String
-@export var damage: int
+@export var damage: float
 @export var attack_speed: float
-@export var radius: int:
+@export var radius: float:
 	set(value):
 		if radius != value:
 			radius = value
 			radius_changed.emit(value)
-@export var sell_value: int
+@export var sell_value: float
 
 @export_group("Upgrades")
 @export var number_of_upgrades: int
