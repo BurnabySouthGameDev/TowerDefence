@@ -48,7 +48,7 @@ script = ExtResource("3_344ge")
 tower_name = "Basic Turret"
 damage = 5
 attack_speed = 0.45
-radius = 10
+radius = 0
 sell_value = 5
 number_of_upgrades = 0
 upgrades = Array[ExtResource("4_ynf5e")]([SubResource("Resource_tkl0h"), SubResource("Resource_f7vgk")])
@@ -140,6 +140,7 @@ offset_bottom = 40.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_jjvhh")
 
 [node name="CurrencyLabel" type="Label" parent="GameUI/CurrencyDisplay"]
+unique_name_in_owner = true
 layout_mode = 2
 script = ExtResource("3_8gbba")
 
@@ -150,4 +151,4 @@ anchor_bottom = 0.652777
 [node name="TowerManager" parent="." instance=ExtResource("5_kry3j")]
 unique_name_in_owner = true
 
-[connection signal="tower_menu" from="TowerManager" to="GameUI/Menu" method="_on_tower_manager_tower_menu"]
+[connection signal="tower_menu" from="TowerManager" to="GameUI/Menu" method="_open_menu"]

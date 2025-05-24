@@ -148,6 +148,5 @@ bbcode_enabled = true
 text = "Sell for:"
 fit_content = true
 
-[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Upgrade1" to="." method="_on_upgrade_1_mouse_entered"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Upgrade1/U1Button" to="." method="_on_u_1_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Sell/SellButton" to="." method="_on_sell_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Upgrade1/U1Button" to="." method="_update"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Sell/SellButton" to="." method="_sell"]

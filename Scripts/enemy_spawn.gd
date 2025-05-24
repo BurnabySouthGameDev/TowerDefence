@@ -16,7 +16,7 @@ func _ready() -> void:
 	spawn_timer.connect("timeout", Callable(self, "spawn_enemy"))
 	start_spawn_timer()
 
-func spawn_enemy():
+func spawn_enemy() -> void:
 	var enemy_instance = enemy_scene.instantiate()
 	path.add_child(enemy_instance)
 	# enemy_instance.global_position = enemy_spawn.global_position
@@ -24,7 +24,7 @@ func spawn_enemy():
 	print("spawned enemy number: %d" % spawned_number)
 	start_spawn_timer()
 
-func start_spawn_timer():
+func start_spawn_timer() -> void:
 	# Spawne time between 0.5-2.0s.
 	var wait_time = randf_range(0.5, 2.0)
 	spawn_timer.start(wait_time)

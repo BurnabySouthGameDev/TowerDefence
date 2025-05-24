@@ -27,12 +27,12 @@ var can_place: bool = false: #temp
 
 @onready var cancel_button: Button = get_parent().get_node("CancelButton")
 
-func _ready():
+func _ready() -> void:
 	connect("pressed", Callable(self, "start_placing_turret"))
 	cancel_button.hide()
 	cancel_button.connect("pressed", Callable(self, "cancel_placing_turret"))
 
-func start_placing_turret():
+func start_placing_turret() -> void:
 	if placing_turret == null:
 		placing_turret = turret_scene.instantiate()
 		tower_manager.add_child(placing_turret)
@@ -40,7 +40,7 @@ func start_placing_turret():
 		cancel_button.show()
 		disabled = true
 
-func cancel_placing_turret():
+func cancel_placing_turret() -> void:
 	if placing_turret:
 		placing_turret.queue_free()
 		placing_turret = null
