@@ -11,7 +11,7 @@ var currency: int = start_currency:
 
 signal currency_changed(amount: int)
 
-func _ready():
+func _ready() -> void:
 	text = "Currency: %d" % currency
 
 func can_afford(amount: int) -> bool:

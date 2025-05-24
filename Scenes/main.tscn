@@ -1,12 +1,16 @@
-[gd_scene load_steps=13 format=3 uid="uid://dxt1ttcllxx1g"]
 
-[ext_resource type="PackedScene" uid="uid://ld73oby6g67" path="res://Scenes/turrets/list/basic_turret.tscn" id="2_bo1nx"]
+[gd_scene load_steps=18 format=3 uid="uid://dxt1ttcllxx1g"]
+
+[ext_resource type="PackedScene" uid="uid://ld73oby6g67" path="res://Scenes/Turrets/List/basic_turret.tscn" id="2_bo1nx"]
 [ext_resource type="Script" uid="uid://ns7g5warqqu5" path="res://Scripts/enemy_spawn.gd" id="2_ibv0h"]
-[ext_resource type="Script" uid="uid://bh40hhbshvymn" path="res://Scripts/ui/currency_display.gd" id="3_8gbba"]
-[ext_resource type="Script" uid="uid://dq8n1fjdqpre3" path="res://Scripts/ui/spawn_button.gd" id="4_jjvhh"]
-[ext_resource type="Script" uid="uid://hasm6kxsvi5p" path="res://Scenes/debug_script.gd" id="5_21xkr"]
-[ext_resource type="Script" uid="uid://bmlrsuj7qc6el" path="res://Scripts/ui/menuButton.gd" id="6_6bp64"]
-[ext_resource type="Texture2D" uid="uid://cgi4grqqu50lx" path="res://190142936.png" id="7_6bp64"]
+
+[ext_resource type="Script" uid="uid://bh40hhbshvymn" path="res://Scripts/UI/currency_display.gd" id="3_8gbba"]
+[ext_resource type="Script" uid="uid://nf31t0owinb2" path="res://Scripts/turrets/tower_res.gd" id="3_344ge"]
+[ext_resource type="Script" uid="uid://dq8n1fjdqpre3" path="res://Scripts/UI/spawn_button.gd" id="4_jjvhh"]
+[ext_resource type="Script" uid="uid://dapii7i1tjwtr" path="res://Scripts/turrets/upgrade_res.gd" id="4_ynf5e"]
+[ext_resource type="PackedScene" uid="uid://dvdps78t4kco7" path="res://Scenes/UI/menu.tscn" id="5_21xkr"]
+[ext_resource type="PackedScene" uid="uid://gvaje4p786yv" path="res://Scenes/tower_manager.tscn" id="5_kry3j"]
+
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6m1b0"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -30,6 +34,30 @@ _data = {
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0)
 }
 point_count = 6
+
+[sub_resource type="Resource" id="Resource_tkl0h"]
+script = ExtResource("4_ynf5e")
+stats = Array[Array]([["damage", 7, NodePath("%Damage:text")], ["attack_speed", 0.3, NodePath("%AttackSpeed:text")], ["radius", 15, NodePath("%Radius:text")], ["sell_value", 7, NodePath("%SellButton:text")]])
+metadata/_custom_type_script = "uid://dapii7i1tjwtr"
+
+[sub_resource type="Resource" id="Resource_f7vgk"]
+script = ExtResource("4_ynf5e")
+stats = Array[Array]([["damage", 10, NodePath("%Damage:text")], ["attack_speed", 0.3, NodePath("%AttackSpeed:text")], ["radius", 20, NodePath("%Radius:text")], ["sell_value", 10, NodePath("%SellButton:text")]])
+metadata/_custom_type_script = "uid://dapii7i1tjwtr"
+
+[sub_resource type="Resource" id="Resource_hptm8"]
+resource_local_to_scene = true
+script = ExtResource("3_344ge")
+tower_name = "Basic Turret"
+damage = 5
+attack_speed = 0.45
+radius = 0
+sell_value = 5
+number_of_upgrades = 0
+upgrades = Array[ExtResource("4_ynf5e")]([SubResource("Resource_tkl0h"), SubResource("Resource_f7vgk")])
+metadata/_custom_type_script = "uid://nf31t0owinb2"
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jjvhh"]
 
 [node name="Main" type="Node3D"]
 
@@ -83,37 +111,50 @@ path = NodePath("../Path/Path3D")
 [node name="BasicTurret" parent="." instance=ExtResource("2_bo1nx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.737682, 1.64068, 5.59339)
 visible = false
+resource = SubResource("Resource_hptm8")
 
 [node name="GameUI" type="CanvasLayer" parent="."]
 
-[node name="CurrencyDisplay" type="Control" parent="GameUI"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="CurrencyLabel" type="Label" parent="GameUI/CurrencyDisplay"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-script = ExtResource("3_8gbba")
-
 [node name="SpawnButton" type="Button" parent="GameUI" node_paths=PackedStringArray("path_node")]
-offset_left = 484.0
-offset_top = 562.0
-offset_right = 582.0
-offset_bottom = 611.0
-text = "Spawn T1"
+
+anchors_preset = -1
+anchor_left = 0.833333
+anchor_top = 0.691358
+anchor_right = 0.918403
+anchor_bottom = 0.766975
+offset_bottom = 3.05176e-05
+text = "Spawn"
+
 script = ExtResource("4_jjvhh")
 min_distance_path = 3.0
 path_node = NodePath("../../Path/Path3D")
+metadata/_edit_use_anchors_ = true
 
 [node name="CancelButton" type="Button" parent="GameUI"]
-offset_left = 623.0
-offset_top = 567.0
-offset_right = 721.0
-offset_bottom = 611.0
-text = "Cancal"
+anchors_preset = -1
+anchor_left = 0.833333
+anchor_top = 0.790123
+anchor_right = 0.918403
+anchor_bottom = 0.858025
+text = "Cancel"
+metadata/_edit_use_anchors_ = true
+
+[node name="CurrencyDisplay" type="PanelContainer" parent="GameUI"]
+offset_right = 192.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_jjvhh")
+
+[node name="CurrencyLabel" type="Label" parent="GameUI/CurrencyDisplay"]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("3_8gbba")
+
+[node name="Menu" parent="GameUI" instance=ExtResource("5_21xkr")]
+anchor_top = 0.0478395
+anchor_bottom = 0.652777
+
+[node name="TowerManager" parent="." instance=ExtResource("5_kry3j")]
+unique_name_in_owner = true
 
 [node name="TowerMenu" type="ColorRect" parent="GameUI"]
 anchors_preset = -1
@@ -188,3 +229,5 @@ offset_top = 70.0
 offset_right = 227.0
 offset_bottom = 203.0
 color = Color(0.303233, 0.303233, 0.303233, 1)
+
+[connection signal="tower_menu" from="TowerManager" to="GameUI/Menu" method="_open_menu"]

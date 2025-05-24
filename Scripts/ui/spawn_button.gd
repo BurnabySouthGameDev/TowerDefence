@@ -3,29 +3,44 @@ extends Button
 # Config
 @export var min_distance: float = 2.5
 @export var min_distance_path: float = 2.5
+@onready var tower_manager: Node3D = %TowerManager
 
 var turret_scene: PackedScene = preload("res://Scenes/turrets/list/basic_turret.tscn")
 var placing_turret: Node3D = null
-var placed_turrets: Array[Node3D] = []
+
+var can_place: bool = false: #temp
+	set(value):
+		if placing_turret == null:
+			return
+
+		if can_place == value:
+			return
+
+		can_place = value
+
+		if can_place:
+			placing_turret.change_color(Color(0.0863, 0.5411, 1.0))
+		else:
+			placing_turret.change_color(Color(0.7176, 0.2117, 0.1686))
 
 @export var path_node: Path3D
 
 @onready var cancel_button: Button = get_parent().get_node("CancelButton")
 
-func _ready():
+func _ready() -> void:
 	connect("pressed", Callable(self, "start_placing_turret"))
 	cancel_button.hide()
 	cancel_button.connect("pressed", Callable(self, "cancel_placing_turret"))
 
-func start_placing_turret():
+func start_placing_turret() -> void:
 	if placing_turret == null:
 		placing_turret = turret_scene.instantiate()
-		get_tree().root.get_node("Main").add_child(placing_turret)
+		tower_manager.add_child(placing_turret)
 		placing_turret.visible = false
 		cancel_button.show()
 		disabled = true
 
-func cancel_placing_turret():
+func cancel_placing_turret() -> void:
 	if placing_turret:
 		placing_turret.queue_free()
 		placing_turret = null
@@ -56,6 +71,8 @@ func _process(_delta):
 		placing_turret.visible = true
 	else:
 		placing_turret.visible = false
+
+	can_place = _can_place_turret_at(placing_turret.global_position)
 
 func _unhandled_input(event):
 	if placing_turret == null:
@@ -89,8 +106,9 @@ func _unhandled_input(event):
 				var radar = placing_turret.get_node("Radar") as Radar
 				radar.monitoring = true
 
-				placed_turrets.append(placing_turret)
+				Global.placed_turrets.append(placing_turret)
 
+				placing_turret.selectable = true
 				placing_turret = null
 				cancel_button.hide()
 				disabled = false
@@ -98,7 +116,7 @@ func _unhandled_input(event):
 				print("No currency...")
 
 func _can_place_turret_at(pos: Vector3) -> bool:
-	for turret in placed_turrets:
+	for turret in Global.placed_turrets:
 		if turret.global_position.distance_to(pos) < min_distance:
 			print("Too close to another turret")
 			return false

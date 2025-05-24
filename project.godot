@@ -15,9 +15,21 @@ run/main_scene="res://Scenes/main.tscn"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Global="*res://Scripts/global.gd"
+
 [dotnet]
 
 project/assembly_name="BSGD Tower Defence"
+
+[file_customization]
+
+folder_colors={
+"res://Resources/": "red",
+"res://Scenes/": "green",
+"res://Scripts/": "purple"
+}
 
 [layer_names]
 
