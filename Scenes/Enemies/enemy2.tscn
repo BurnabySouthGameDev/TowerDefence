@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://ddsf3d0xoy5g6"]
+[gd_scene load_steps=6 format=3 uid="uid://byksw8b5osjrg"]
 
-[ext_resource type="Script" uid="uid://bd7vktalilei2" path="res://Scripts/enemy.gd" id="1_bbien"]
-[ext_resource type="Script" uid="uid://co8kbyh5strok" path="res://Scripts/UI/Enemy/health_bar.gd" id="2_1f0kj"]
+[ext_resource type="Script" uid="uid://bd7vktalilei2" path="res://Scripts/enemy.gd" id="1_g6ed3"]
+[ext_resource type="Script" uid="uid://co8kbyh5strok" path="res://Scripts/ui/Enemy/health_bar.gd" id="2_k6nad"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_hghv2"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_wts82"]
+radius = 1.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1f0kj"]
 bg_color = Color(0.839216, 0.278431, 0.329412, 1)
@@ -13,19 +14,18 @@ bg_color = Color(0.322353, 0.692161, 0.402664, 1)
 
 [node name="PathFollow3D" type="PathFollow3D"]
 loop = false
-script = ExtResource("1_bbien")
+script = ExtResource("1_g6ed3")
 speed = 5.0
 
 [node name="enemy" type="CharacterBody3D" parent="."]
 collision_layer = 2
 collision_mask = 0
 
-[node name="CSGBox3D" type="CSGBox3D" parent="enemy"]
-collision_layer = 2
-collision_mask = 2
+[node name="CSGSphere3D" type="CSGSphere3D" parent="enemy"]
+radius = 1.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="enemy"]
-shape = SubResource("BoxShape3D_hghv2")
+shape = SubResource("SphereShape3D_wts82")
 
 [node name="HealthBar" type="Node3D" parent="enemy"]
 
@@ -39,5 +39,5 @@ max_value = 20.0
 step = 1.0
 value = 20.0
 show_percentage = false
-script = ExtResource("2_1f0kj")
+script = ExtResource("2_k6nad")
 metadata/_edit_use_anchors_ = true

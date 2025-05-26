@@ -1,11 +1,11 @@
 [gd_scene load_steps=18 format=3 uid="uid://dxt1ttcllxx1g"]
 
-[ext_resource type="PackedScene" uid="uid://ld73oby6g67" path="res://Scenes/Turrets/List/basic_turret.tscn" id="2_bo1nx"]
+[ext_resource type="PackedScene" uid="uid://ld73oby6g67" path="res://Scenes/turrets/list/basic_turret.tscn" id="2_bo1nx"]
 [ext_resource type="Script" uid="uid://ns7g5warqqu5" path="res://Scripts/enemy_spawn.gd" id="2_ibv0h"]
-[ext_resource type="Script" uid="uid://bh40hhbshvymn" path="res://Scripts/UI/currency_display.gd" id="3_8gbba"]
-[ext_resource type="Script" uid="uid://nf31t0owinb2" path="res://Scripts/turrets/tower_res.gd" id="3_344ge"]
-[ext_resource type="Script" uid="uid://dq8n1fjdqpre3" path="res://Scripts/UI/spawn_button.gd" id="4_jjvhh"]
-[ext_resource type="Script" uid="uid://dapii7i1tjwtr" path="res://Scripts/turrets/upgrade_res.gd" id="4_ynf5e"]
+[ext_resource type="Script" uid="uid://bh40hhbshvymn" path="res://Scripts/ui/currency_display.gd" id="3_8gbba"]
+[ext_resource type="Script" path="res://Scripts/turrets/tower_res.gd" id="3_344ge"]
+[ext_resource type="Script" uid="uid://dq8n1fjdqpre3" path="res://Scripts/ui/spawn_button.gd" id="4_jjvhh"]
+[ext_resource type="Script" path="res://Scripts/turrets/upgrade_res.gd" id="4_ynf5e"]
 [ext_resource type="PackedScene" uid="uid://dvdps78t4kco7" path="res://Scenes/UI/menu.tscn" id="5_21xkr"]
 [ext_resource type="PackedScene" uid="uid://gvaje4p786yv" path="res://Scenes/tower_manager.tscn" id="5_kry3j"]
 
@@ -42,7 +42,7 @@ script = ExtResource("4_ynf5e")
 stats = Array[Array]([["damage", 10, NodePath("%Damage:text")], ["attack_speed", 0.3, NodePath("%AttackSpeed:text")], ["radius", 20, NodePath("%Radius:text")], ["sell_value", 10, NodePath("%SellButton:text")]])
 metadata/_custom_type_script = "uid://dapii7i1tjwtr"
 
-[sub_resource type="Resource" id="Resource_hptm8"]
+[sub_resource type="Resource" id="Resource_344ge"]
 resource_local_to_scene = true
 script = ExtResource("3_344ge")
 tower_name = "Basic Turret"
@@ -100,15 +100,18 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -14.67
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, -0.183032, 14.2846, 12.0385)
 
-[node name="enemy spawn" type="Marker3D" parent="." node_paths=PackedStringArray("path")]
+[node name="enemy spawn" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.5, 2, 0)
 script = ExtResource("2_ibv0h")
-path = NodePath("../Path/Path3D")
+
+[node name="SpawnTimer" type="Timer" parent="enemy spawn"]
+wait_time = 0.75
+one_shot = true
 
 [node name="BasicTurret" parent="." instance=ExtResource("2_bo1nx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.737682, 1.64068, 5.59339)
 visible = false
-resource = SubResource("Resource_hptm8")
+resource = SubResource("Resource_344ge")
 
 [node name="GameUI" type="CanvasLayer" parent="."]
 
@@ -216,7 +219,18 @@ offset_right = 227.0
 offset_bottom = 203.0
 color = Color(0.303233, 0.303233, 0.303233, 1)
 
+[node name="WaveCounter" type="Label" parent="GameUI"]
+offset_left = 450.0
+offset_top = 5.0
+offset_right = 626.0
+offset_bottom = 64.0
+theme_override_font_sizes/font_size = 35
+text = "Wave 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="TowerManager" parent="." instance=ExtResource("5_kry3j")]
 unique_name_in_owner = true
 
+[connection signal="timeout" from="enemy spawn/SpawnTimer" to="enemy spawn" method="_on_timer_timeout"]
 [connection signal="tower_menu" from="TowerManager" to="GameUI/Menu" method="_open_menu"]
