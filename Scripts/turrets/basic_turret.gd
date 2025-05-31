@@ -47,6 +47,8 @@ func _ready() -> void:
 	radar.monitoring = false
 	csg_box_3d.material = csg_box_3d.material.duplicate(true)
 	resource.radius_changed.connect(update_radius)
+	reload_timer.start()
+	reload_timer.paused = true
 
 
 func _on_radar_new_target(target: PathFollow3D) -> void:
@@ -55,15 +57,16 @@ func _on_radar_new_target(target: PathFollow3D) -> void:
 
 	print("basic_turret - target: ", target)
 	if target == null:
-		reload_timer.stop()
 		return
 
-	if reload_timer.is_stopped():
+	if reload_timer.paused:
 		fire()
-		reload_timer.start()
+		reload_timer.paused = false
 
 func fire() -> void:
-	if radar.current_target != null:
+	if radar.current_target == null:
+		reload_timer.paused = true
+	else:
 		_fire_at(radar.current_target)
 
 	reload_timer.wait_time = resource.attack_speed
