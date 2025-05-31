@@ -53,3 +53,5 @@ debug_color = Color(0.576045, 0.397559, 0.974967, 0.42)
 
 [connection signal="new_target" from="Radar" to="." method="_on_radar_new_target"]
 [connection signal="timeout" from="ReloadTimer" to="." method="fire"]
+[connection signal="mouse_entered" from="Select" to="Select" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Select" to="Select" method="_on_mouse_exited"]

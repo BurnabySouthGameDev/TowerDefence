@@ -9,5 +9,11 @@ var selected_tower: Node3D = null:
 			selected_tower.selected = false
 
 		selected_tower = value
+var selectable_tower: Node3D = null:
+	set(value):
+		if selectable_tower == value:
+			return
+
+		selectable_tower = value
 
 var placed_turrets: Array[Node3D] = []

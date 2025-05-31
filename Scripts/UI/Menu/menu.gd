@@ -14,12 +14,14 @@ func _ready() -> void:
 	hide()
 
 
-func _open_menu(tower: Node3D) -> void:
-	if Global.selected_tower == tower:
-		hide()
-	else:
+func _open_menu(tower) -> void:
+	if tower == Global.selected_tower:
+		print_rich("[color=red]Open")
 		show()
 		_load_values(tower.resource)
+	else:
+		print_rich("[color=red]Close")
+		hide()
 
 
 func _sell() -> void:

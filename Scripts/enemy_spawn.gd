@@ -31,7 +31,7 @@ func _ready() -> void:
 		"Difficulty": 2},
 	}
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if difficulty_total >= difficulty_cap: 
 		cap_reached = true
 	#Checks if a wave has been cleared and starts a new one if so

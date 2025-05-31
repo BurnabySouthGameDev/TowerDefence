@@ -108,7 +108,7 @@ func _unhandled_input(event):
 
 				Global.placed_turrets.append(placing_turret)
 
-				placing_turret.selectable = true
+				#placing_turret.selectable = true
 				placing_turret = null
 				cancel_button.hide()
 				disabled = false
