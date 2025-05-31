@@ -6,6 +6,20 @@ signal request_tower_menu(tower)
 @export var sell_value: int = 5
 @export var resource: TowerResource
 
+@export_subgroup("bullet")
+@export_range(0.01, 10, 0.01, "or_greater", "hide_slider")
+var bullet_speed := 10.0
+
+@export_range(0.01, 10, 0.01, "or_greater", "hide_slider")
+var bullet_range := 5.0
+
+@export
+var bullet_scene : PackedScene = null
+
+@export_range(0, 10, 1, "or_greater")
+var bullet_pierce := 0
+
+
 var selectable: bool = false
 var selected: bool = false:
 	set(value):
@@ -56,14 +70,21 @@ func fire() -> void:
 
 func _fire_at(target: PathFollow3D) -> void:
 	var target_pos := target.global_position
-#	target_pos.y = global_position.y  # Flatten Y to prevent pitch/roll
 	look_at(target_pos, Vector3.UP)
 
-	var remaining : float = target.take_damage(resource.damage)
+	var bullet : Node3D = bullet_scene.instantiate()
+	bullet.position = position
+	bullet.velocity = (target_pos - global_position).normalized() * bullet_speed
+	bullet.lifetime = bullet_range / bullet_speed
+	bullet.pierce = bullet_pierce
+	bullet.damage = resource.damage
+	bullet.hit_enemy.connect(func (remaining):
+		if remaining <= 0:
+			get_node("/root/Main/GameUI/CurrencyDisplay/CurrencyLabel").add(5)
+	)
 
-	if remaining <= 0:
-		var currency_label: Label = get_node("/root/Main/GameUI/CurrencyDisplay/CurrencyLabel")
-		currency_label.add(5)
+	add_sibling(bullet)
+
 
 func change_color(color: Color) -> void:
 	if csg_box_3d.material == null:

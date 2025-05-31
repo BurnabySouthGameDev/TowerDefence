@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://ld73oby6g67"]
+[gd_scene load_steps=10 format=3 uid="uid://ld73oby6g67"]
 
-[ext_resource type="Script" uid="uid://ghb85u66ywux" path="res://Scripts/turrets/basic_turret.gd" id="1_mpsi8"]
-[ext_resource type="Resource" uid="uid://c0c22g0dy87a1" path="res://Resources/Towers/basic_turret.tres" id="2_2qt4d"]
-[ext_resource type="PackedScene" uid="uid://cw7yg6e0jmot0" path="res://Scenes/turrets/radar.tscn" id="2_syr1r"]
-[ext_resource type="Script" uid="uid://c05b2u3qourdf" path="res://Scripts/turrets/select.gd" id="3_2qt4d"]
+[ext_resource type="Script" uid="uid://ghb85u66ywux" path="res://Scripts/turrets/basic_turret.gd" id="1_orhfn"]
+[ext_resource type="Resource" uid="uid://c0c22g0dy87a1" path="res://Resources/Towers/basic_turret.tres" id="2_7llsl"]
+[ext_resource type="PackedScene" uid="uid://c2xxq7dd1p7rk" path="res://Scenes/turrets/basic_turret/basic_bullet.tscn" id="3_7llsl"]
+[ext_resource type="PackedScene" uid="uid://cw7yg6e0jmot0" path="res://Scenes/turrets/radar.tscn" id="3_8c8dr"]
+[ext_resource type="Script" uid="uid://c05b2u3qourdf" path="res://Scripts/turrets/select.gd" id="4_mmqk2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_16ne6"]
 
@@ -19,8 +20,11 @@ radius = 10.0
 radius = 1.0
 
 [node name="BasicTurret" type="Node3D"]
-script = ExtResource("1_mpsi8")
-resource = ExtResource("2_2qt4d")
+script = ExtResource("1_orhfn")
+resource = ExtResource("2_7llsl")
+bullet_speed = 15.0
+bullet_range = 10.0
+bullet_scene = ExtResource("3_7llsl")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 unique_name_in_owner = true
@@ -32,7 +36,7 @@ transform = Transform3D(0.52, 0, 0, 0, 0.52, 0, 0, 0, 0.52, 0, 0.0773596, -0.767
 size = Vector3(1, 0.505981, 1)
 material = SubResource("StandardMaterial3D_txjsu")
 
-[node name="Radar" parent="." instance=ExtResource("2_syr1r")]
+[node name="Radar" parent="." instance=ExtResource("3_8c8dr")]
 collision_layer = 0
 input_ray_pickable = false
 monitorable = false
@@ -48,7 +52,7 @@ wait_time = 0.45
 [node name="Select" type="Area3D" parent="."]
 collision_mask = 0
 monitoring = false
-script = ExtResource("3_2qt4d")
+script = ExtResource("4_mmqk2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Select"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0225831, 0.573584, 0)
