@@ -55,16 +55,15 @@ func fire() -> void:
 	print(resource.attack_speed)
 
 func _fire_at(target: PathFollow3D) -> void:
-	var target_pos = target.global_position
-	target_pos.y = global_position.y  # Flatten Y to prevent pitch/roll
+	var target_pos := target.global_position
+#	target_pos.y = global_position.y  # Flatten Y to prevent pitch/roll
 	look_at(target_pos, Vector3.UP)
 
-	target.take_damage(resource.damage)
+	var remaining : float = target.take_damage(resource.damage)
 
-	if target.health <= 0:
-		var currency_label: Label = get_tree().root.get_node("Main/GameUI/CurrencyDisplay/CurrencyLabel")
+	if remaining <= 0:
+		var currency_label: Label = get_node("/root/Main/GameUI/CurrencyDisplay/CurrencyLabel")
 		currency_label.add(5)
-		target.queue_free()
 
 func change_color(color: Color) -> void:
 	if csg_box_3d.material == null:
