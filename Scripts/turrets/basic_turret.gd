@@ -41,6 +41,7 @@ var selected: bool = false:
 @onready var radar: Radar = $"Radar"
 @onready var reload_timer: Timer = $"ReloadTimer"
 @onready var csg_box_3d: CSGBox3D = %CSGBox3D
+@onready var turret_cap : Node3D = $"TurretCap"
 
 func _ready() -> void:
 	radar.monitoring = false
@@ -70,11 +71,11 @@ func fire() -> void:
 
 func _fire_at(target: PathFollow3D) -> void:
 	var target_pos := target.global_position
-	look_at(target_pos, Vector3.UP)
+	turret_cap.look_at(target_pos, Vector3.UP)
 
 	var bullet : Node3D = bullet_scene.instantiate()
-	bullet.position = position
-	bullet.velocity = (target_pos - global_position).normalized() * bullet_speed
+	bullet.position = turret_cap.position
+	bullet.velocity = (target_pos - turret_cap.global_position).normalized() * bullet_speed
 	bullet.lifetime = bullet_range / bullet_speed
 	bullet.pierce = bullet_pierce
 	bullet.damage = resource.damage
@@ -83,8 +84,7 @@ func _fire_at(target: PathFollow3D) -> void:
 			get_node("/root/Main/GameUI/CurrencyDisplay/CurrencyLabel").add(5)
 	)
 
-	add_sibling(bullet)
-
+	add_child(bullet)
 
 func change_color(color: Color) -> void:
 	if csg_box_3d.material == null:
