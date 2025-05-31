@@ -34,7 +34,7 @@ func _ready() -> void:
 	resource.radius_changed.connect(update_radius)
 
 
-func _on_radar_new_target(target: Node3D) -> void:
+func _on_radar_new_target(target: PathFollow3D) -> void:
 	if not radar.monitoring:
 		return
 
@@ -54,17 +54,17 @@ func fire() -> void:
 	reload_timer.wait_time = resource.attack_speed
 	print(resource.attack_speed)
 
-func _fire_at(target: Node3D) -> void:
+func _fire_at(target: PathFollow3D) -> void:
 	var target_pos = target.global_position
 	target_pos.y = global_position.y  # Flatten Y to prevent pitch/roll
 	look_at(target_pos, Vector3.UP)
 
-	target.get_parent().take_damage(resource.damage)
+	target.take_damage(resource.damage)
 
-	if target.get_parent().health <= 0:
+	if target.health <= 0:
 		var currency_label: Label = get_tree().root.get_node("Main/GameUI/CurrencyDisplay/CurrencyLabel")
 		currency_label.add(5)
-		target.get_parent().queue_free()
+		target.queue_free()
 
 func change_color(color: Color) -> void:
 	if csg_box_3d.material == null:

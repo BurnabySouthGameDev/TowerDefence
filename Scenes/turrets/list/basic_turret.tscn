@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ghb85u66ywux" path="res://Scripts/turrets/basic_turret.gd" id="1_mpsi8"]
 [ext_resource type="Resource" uid="uid://c0c22g0dy87a1" path="res://Resources/Towers/basic_turret.tres" id="2_2qt4d"]
-[ext_resource type="PackedScene" uid="uid://cw7yg6e0jmot0" path="res://Scenes/Turrets/radar.tscn" id="2_syr1r"]
+[ext_resource type="PackedScene" uid="uid://cw7yg6e0jmot0" path="res://Scenes/turrets/radar.tscn" id="2_syr1r"]
 [ext_resource type="Script" uid="uid://c05b2u3qourdf" path="res://Scripts/turrets/select.gd" id="3_2qt4d"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_16ne6"]
@@ -33,7 +33,9 @@ size = Vector3(1, 0.505981, 1)
 material = SubResource("StandardMaterial3D_txjsu")
 
 [node name="Radar" parent="." instance=ExtResource("2_syr1r")]
+collision_layer = 0
 input_ray_pickable = false
+monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Radar"]
 shape = SubResource("SphereShape3D_ulw1s")
@@ -44,6 +46,8 @@ unique_name_in_owner = true
 wait_time = 0.45
 
 [node name="Select" type="Area3D" parent="."]
+collision_mask = 0
+monitoring = false
 script = ExtResource("3_2qt4d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Select"]

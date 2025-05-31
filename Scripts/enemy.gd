@@ -19,13 +19,6 @@ var path: Array[Vector3i]
 		progress_bar.value = health
 
 func _ready() -> void:
-	#Enemy will move to each of these points from top to bottom
-	path.append(Vector3i(-4.35, 2, 0))
-	path.append(Vector3i(-4.35, 2, -6.5))
-	path.append(Vector3i(5.32, 2, -6.5))
-	path.append(Vector3i(5.32, 2, 0))
-	path.append(Vector3i(14.35, 2, 0))
-	print(path)
 	assert(get_parent() is Path3D)
 
 func _process(delta: float) -> void:
