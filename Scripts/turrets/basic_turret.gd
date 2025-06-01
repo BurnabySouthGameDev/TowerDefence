@@ -71,7 +71,7 @@ func _fire_at(target: Node3D) -> void:
 	target.get_parent().take_damage(resource.damage)
 
 	if target.get_parent().health <= 0:
-		var currency_label: Label = get_tree().root.get_node("Main/GameUI/CurrencyDisplay/CurrencyLabel")
+		var currency_label: Label = get_tree().root.get_node("Main/GameUI/CurrencyDisplay/MarginContainer/CurrencyLabel")
 		currency_label.add(5)
 		target.get_parent().queue_free()
 

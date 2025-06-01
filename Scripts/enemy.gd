@@ -32,8 +32,9 @@ func _process(delta: float) -> void:
 	progress += speed * delta
 	if progress_ratio >= 1.0:
 		# Later can add some thing like - 10 HP
-		var currency_label = get_tree().root.get_node("Main/GameUI/CurrencyDisplay/CurrencyLabel")
+		var currency_label = get_tree().root.get_node("Main/GameUI/CurrencyDisplay/MarginContainer/CurrencyLabel")
 		currency_label.subtract(50)
+		Global.emit_signal("set_lives", -1)
 		print("ememy reach the end of the path")
 		queue_free()
 

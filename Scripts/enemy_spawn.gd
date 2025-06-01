@@ -44,7 +44,7 @@ func start_new_wave():
 	wave_number += 1
 	difficulty_cap = 3 + wave_number*2
 	start_spawn_timer()
-	wave_counter.text=str("Wave " + str(wave_number))
+	wave_counter.text = str("Wave " + str(wave_number))
 
 func spawn_enemy() -> void:
 	if cap_reached == false: 
