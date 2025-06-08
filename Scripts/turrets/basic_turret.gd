@@ -3,6 +3,8 @@ extends Node3D
 const OUTLINE = preload("res://Shaders/outline.gdshader")
 signal request_tower_menu(tower)
 
+@onready var rad_indicator = $RadiusIndicator
+
 @export var sell_value: int = 5
 @export var resource: TowerResource
 
@@ -102,9 +104,16 @@ func _fire_at(target: PathFollow3D) -> void:
 func change_color(color: Color) -> void:
 	if csg_box_3d.material == null:
 		return
-
 	csg_box_3d.material = csg_box_3d.material.duplicate()
 	csg_box_3d.material.albedo_color = color
 
+func change_indicator(color: Color) -> void:
+	if rad_indicator.get_surface_override_material(0) == null:
+		return
+		
+	rad_indicator.get_surface_override_material(0).set_shader_parameter("outer_color", color)
+func indicator_visibility(is_vis: bool) -> void:
+	rad_indicator.visible = is_vis
+	
 func update_radius(value: int) -> void:
 	$Radar/CollisionShape3D.shape.radius = value
