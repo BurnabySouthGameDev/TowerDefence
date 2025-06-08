@@ -31,7 +31,7 @@ func _ready() -> void:
 		"Difficulty": 2},
 	}
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if difficulty_total >= difficulty_cap: 
 		cap_reached = true
 	#Checks if a wave has been cleared and starts a new one if so
@@ -44,7 +44,7 @@ func start_new_wave():
 	wave_number += 1
 	difficulty_cap = 3 + wave_number*2
 	start_spawn_timer()
-	wave_counter.text=str("Wave " + str(wave_number))
+	wave_counter.text = str("Wave " + str(wave_number))
 
 func spawn_enemy() -> void:
 	if cap_reached == false: 

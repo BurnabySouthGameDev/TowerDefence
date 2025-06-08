@@ -99,7 +99,7 @@ func _unhandled_input(event):
 				print("Invalid turret placement")
 				return
 
-			var currency_label = get_tree().root.get_node("Main/GameUI/CurrencyDisplay/CurrencyLabel")
+			var currency_label = get_tree().root.get_node("Main/GameUI/CurrencyDisplay/MarginContainer/CurrencyLabel")
 			if currency_label and currency_label.subtract(10):
 				placing_turret.global_position = result.position
 
@@ -108,7 +108,7 @@ func _unhandled_input(event):
 
 				Global.placed_turrets.append(placing_turret)
 
-				placing_turret.selectable = true
+				#placing_turret.selectable = true
 				placing_turret = null
 				cancel_button.hide()
 				disabled = false

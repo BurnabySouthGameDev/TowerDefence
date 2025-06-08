@@ -1,5 +1,6 @@
 extends Node
 
+##VARIABLES
 var selected_tower: Node3D = null:
 	set(value):
 		if selected_tower == value:
@@ -10,4 +11,14 @@ var selected_tower: Node3D = null:
 
 		selected_tower = value
 
+var selectable_tower: Node3D = null:
+	set(value):
+		if selectable_tower == value:
+			return
+
+		selectable_tower = value
+
 var placed_turrets: Array[Node3D] = []
+
+##SIGNALS
+signal set_lives(value: int) #not actually set cant find a name

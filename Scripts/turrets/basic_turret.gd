@@ -20,12 +20,20 @@ var bullet_scene : PackedScene = null
 var bullet_pierce := 0
 
 
-var selectable: bool = false
-var selected: bool = false:
+var selectable: bool = false:
 	set(value):
-		if selectable == false:
+		if selectable == value:
 			return
 
+		selectable = value
+
+		if selectable:
+			Global.selectable_tower = self
+		else:
+			Global.selectable_tower = null
+
+var selected: bool = false:
+	set(value):
 		if selected == value:
 			return
 
@@ -37,6 +45,8 @@ var selected: bool = false:
 		else:
 			csg_box_3d.material.next_pass.shader = null
 			Global.selected_tower = null
+
+		emit_signal("request_tower_menu", self)
 
 @onready var radar: Radar = $"Radar"
 @onready var reload_timer: Timer = $"ReloadTimer"
@@ -84,7 +94,7 @@ func _fire_at(target: PathFollow3D) -> void:
 	bullet.damage = resource.damage
 	bullet.hit_enemy.connect(func (remaining):
 		if remaining <= 0:
-			get_node("/root/Main/GameUI/CurrencyDisplay/CurrencyLabel").add(5)
+			get_node("/root/Main/GameUI/CurrencyDisplay/MarginContainer/CurrencyLabel").add(5)
 	)
 
 	add_child(bullet)

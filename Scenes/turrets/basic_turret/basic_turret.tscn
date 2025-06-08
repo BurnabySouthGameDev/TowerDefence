@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://ghb85u66ywux" path="res://Scripts/turrets/basic_turret.gd" id="1_orhfn"]
 [ext_resource type="Resource" uid="uid://c0c22g0dy87a1" path="res://Resources/Towers/basic_turret.tres" id="2_7llsl"]
-[ext_resource type="PackedScene" uid="uid://c2xxq7dd1p7rk" path="res://Scenes/turrets/basic_turret/basic_bullet.tscn" id="3_7llsl"]
-[ext_resource type="PackedScene" uid="uid://cw7yg6e0jmot0" path="res://Scenes/turrets/radar.tscn" id="3_8c8dr"]
+[ext_resource type="PackedScene" uid="uid://c2xxq7dd1p7rk" path="res://Scenes/Turrets/basic_turret/basic_bullet.tscn" id="3_7llsl"]
+[ext_resource type="PackedScene" uid="uid://cw7yg6e0jmot0" path="res://Scenes/Turrets/radar.tscn" id="3_8c8dr"]
 [ext_resource type="Script" uid="uid://c05b2u3qourdf" path="res://Scripts/turrets/select.gd" id="4_mmqk2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7llsl"]
@@ -72,3 +72,5 @@ debug_color = Color(0.576045, 0.397559, 0.974967, 0.42)
 
 [connection signal="new_target" from="Radar" to="." method="_on_radar_new_target"]
 [connection signal="timeout" from="ReloadTimer" to="." method="fire"]
+[connection signal="mouse_entered" from="Select" to="Select" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Select" to="Select" method="_on_mouse_exited"]
