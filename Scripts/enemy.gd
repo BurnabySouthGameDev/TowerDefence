@@ -5,11 +5,8 @@ var path: Array[Vector3i]
 
 
 @export var speed: float = 0.5
-@export var health: int = 20:
+@export var health: float = 20:
 	set(value):
-		if health == value:
-			return
-
 		health = value
 
 		if health <= 0:
@@ -19,13 +16,6 @@ var path: Array[Vector3i]
 		progress_bar.value = health
 
 func _ready() -> void:
-	#Enemy will move to each of these points from top to bottom
-	path.append(Vector3i(-4.35, 2, 0))
-	path.append(Vector3i(-4.35, 2, -6.5))
-	path.append(Vector3i(5.32, 2, -6.5))
-	path.append(Vector3i(5.32, 2, 0))
-	path.append(Vector3i(14.35, 2, 0))
-	print(path)
 	assert(get_parent() is Path3D)
 
 func _process(delta: float) -> void:
@@ -37,5 +27,6 @@ func _process(delta: float) -> void:
 		print("ememy reach the end of the path")
 		queue_free()
 
-func take_damage(amount: int) -> void:
+func take_damage(amount: float) -> float:
 	health -= amount
+	return health

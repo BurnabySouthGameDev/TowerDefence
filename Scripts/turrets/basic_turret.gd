@@ -6,6 +6,20 @@ signal request_tower_menu(tower)
 @export var sell_value: int = 5
 @export var resource: TowerResource
 
+@export_subgroup("bullet")
+@export_range(0.01, 10, 0.01, "or_greater", "hide_slider")
+var bullet_speed := 10.0
+
+@export_range(0.01, 10, 0.01, "or_greater", "hide_slider")
+var bullet_range := 5.0
+
+@export
+var bullet_scene : PackedScene = null
+
+@export_range(0, 10, 1, "or_greater")
+var bullet_pierce := 0
+
+
 var selectable: bool = false
 var selected: bool = false:
 	set(value):
@@ -27,44 +41,53 @@ var selected: bool = false:
 @onready var radar: Radar = $"Radar"
 @onready var reload_timer: Timer = $"ReloadTimer"
 @onready var csg_box_3d: CSGBox3D = %CSGBox3D
+@onready var turret_cap : Node3D = $"TurretCap"
 
 func _ready() -> void:
 	radar.monitoring = false
 	csg_box_3d.material = csg_box_3d.material.duplicate(true)
 	resource.radius_changed.connect(update_radius)
+	reload_timer.start()
+	reload_timer.paused = true
 
 
-func _on_radar_new_target(target: Node3D) -> void:
+func _on_radar_new_target(target: PathFollow3D) -> void:
 	if not radar.monitoring:
 		return
 
 	print("basic_turret - target: ", target)
 	if target == null:
-		reload_timer.stop()
 		return
 
-	if reload_timer.is_stopped():
+	if reload_timer.paused:
 		fire()
-		reload_timer.start()
+		reload_timer.paused = false
 
 func fire() -> void:
-	if radar.current_target != null:
+	if radar.current_target == null:
+		reload_timer.paused = true
+	else:
 		_fire_at(radar.current_target)
 
 	reload_timer.wait_time = resource.attack_speed
 	print(resource.attack_speed)
 
-func _fire_at(target: Node3D) -> void:
-	var target_pos = target.global_position
-	target_pos.y = global_position.y  # Flatten Y to prevent pitch/roll
-	look_at(target_pos, Vector3.UP)
+func _fire_at(target: PathFollow3D) -> void:
+	var target_pos := target.global_position
+	turret_cap.look_at(target_pos, Vector3.UP)
 
-	target.get_parent().take_damage(resource.damage)
+	var bullet : Node3D = bullet_scene.instantiate()
+	bullet.position = turret_cap.position
+	bullet.velocity = (target_pos - turret_cap.global_position).normalized() * bullet_speed
+	bullet.lifetime = bullet_range / bullet_speed
+	bullet.pierce = bullet_pierce
+	bullet.damage = resource.damage
+	bullet.hit_enemy.connect(func (remaining):
+		if remaining <= 0:
+			get_node("/root/Main/GameUI/CurrencyDisplay/CurrencyLabel").add(5)
+	)
 
-	if target.get_parent().health <= 0:
-		var currency_label: Label = get_tree().root.get_node("Main/GameUI/CurrencyDisplay/CurrencyLabel")
-		currency_label.add(5)
-		target.get_parent().queue_free()
+	add_child(bullet)
 
 func change_color(color: Color) -> void:
 	if csg_box_3d.material == null:

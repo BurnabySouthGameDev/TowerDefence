@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2xxq7dd1p7rk"]
+
+[ext_resource type="Script" uid="uid://bnw16m7nxinro" path="res://Scripts/turrets/basic_bullet.gd" id="1_12plu"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_5oqpu"]
+radius = 0.2
+
+[node name="BasicBullet" type="Area3D"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("1_12plu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_5oqpu")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+radius = 0.206307
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
