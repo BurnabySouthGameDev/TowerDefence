@@ -20,8 +20,11 @@ var can_place: bool = false: #temp
 
 		if can_place:
 			placing_turret.change_color(Color(0.0863, 0.5411, 1.0))
+			placing_turret.change_indicator(Color(0.0, 0.886, 0.173, 0.0))
 		else:
 			placing_turret.change_color(Color(0.7176, 0.2117, 0.1686))
+			placing_turret.change_indicator(Color(1.0, 0.161, 0.173, 0.0))
+			
 
 @export var path_node: Path3D
 
@@ -105,6 +108,7 @@ func _unhandled_input(event):
 
 				var radar = placing_turret.get_node("Radar") as Radar
 				radar.monitoring = true
+				placing_turret.indicator_visibility(false)
 
 				Global.placed_turrets.append(placing_turret)
 

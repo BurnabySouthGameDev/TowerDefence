@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://ld73oby6g67"]
+[gd_scene load_steps=14 format=3 uid="uid://ld73oby6g67"]
 
 [ext_resource type="Script" uid="uid://ghb85u66ywux" path="res://Scripts/turrets/basic_turret.gd" id="1_orhfn"]
 [ext_resource type="Resource" uid="uid://c0c22g0dy87a1" path="res://Resources/Towers/basic_turret.tres" id="2_7llsl"]
-[ext_resource type="PackedScene" uid="uid://c2xxq7dd1p7rk" path="res://Scenes/Turrets/basic_turret/basic_bullet.tscn" id="3_7llsl"]
-[ext_resource type="PackedScene" uid="uid://cw7yg6e0jmot0" path="res://Scenes/Turrets/radar.tscn" id="3_8c8dr"]
+[ext_resource type="PackedScene" uid="uid://c2xxq7dd1p7rk" path="res://Scenes/turrets/basic_turret/basic_bullet.tscn" id="3_7llsl"]
+[ext_resource type="PackedScene" uid="uid://cw7yg6e0jmot0" path="res://Scenes/turrets/radar.tscn" id="3_8c8dr"]
 [ext_resource type="Script" uid="uid://c05b2u3qourdf" path="res://Scripts/turrets/select.gd" id="4_mmqk2"]
+[ext_resource type="Shader" uid="uid://djj7r8u508e1b" path="res://Shaders/placementindicator.gdshader" id="6_8c8dr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7llsl"]
 albedo_color = Color(0.52549, 0.568627, 0.607843, 1)
@@ -21,6 +22,16 @@ radius = 10.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_slgpk"]
 radius = 1.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_mmqk2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b8771"]
+render_priority = 0
+shader = ExtResource("6_8c8dr")
+shader_parameter/size = 1.0
+shader_parameter/width = 1.0
+shader_parameter/inner_color = Color(0, 0, 0, 1)
+shader_parameter/outer_color = Color(1, 0.160784, 0.172549, 0.0470588)
 
 [node name="BasicTurret" type="Node3D"]
 script = ExtResource("1_orhfn")
@@ -69,6 +80,11 @@ script = ExtResource("4_mmqk2")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0225831, 0.573584, 0)
 shape = SubResource("SphereShape3D_slgpk")
 debug_color = Color(0.576045, 0.397559, 0.974967, 0.42)
+
+[node name="RadiusIndicator" type="MeshInstance3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0.104717, 0)
+mesh = SubResource("PlaneMesh_mmqk2")
+surface_material_override/0 = SubResource("ShaderMaterial_b8771")
 
 [connection signal="new_target" from="Radar" to="." method="_on_radar_new_target"]
 [connection signal="timeout" from="ReloadTimer" to="." method="fire"]
