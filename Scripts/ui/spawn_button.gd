@@ -5,7 +5,7 @@ extends Button
 @export var min_distance_path: float = 2.5
 @onready var tower_manager: Node3D = %TowerManager
 
-var turret_scene: PackedScene = preload("res://Scenes/turrets/list/basic_turret.tscn")
+var turret_scene: PackedScene = preload("res://Scenes/turrets/basic_turret/basic_turret.tscn")
 var placing_turret: Node3D = null
 
 var can_place: bool = false: #temp
