@@ -4,8 +4,9 @@ extends Button
 @export var min_distance: float = 2.5
 @export var min_distance_path: float = 2.5
 @onready var tower_manager: Node3D = %TowerManager
+@onready var turret_selector: ItemList = %TurretSelector
 
-var turret_scene: PackedScene = preload("res://Scenes/turrets/basic_turret/basic_turret.tscn")
+#var turret_scene: PackedScene = preload("res://Scenes/turrets/basic_turret/basic_turret.tscn")
 var placing_turret: Node3D = null
 
 var can_place: bool = false: #temp
@@ -31,26 +32,40 @@ var can_place: bool = false: #temp
 @onready var cancel_button: Button = get_parent().get_node("CancelButton")
 
 func _ready() -> void:
-	connect("pressed", Callable(self, "start_placing_turret"))
 	cancel_button.hide()
-	cancel_button.connect("pressed", Callable(self, "cancel_placing_turret"))
+	turret_selector.hide()
 
-func start_placing_turret() -> void:
+func _on_pressed() -> void:
+	hide()
+	cancel_button.show()
+	turret_selector.show()
+
+func _on_turret_selected(listing: TowerResource) -> void:
+	prints(listing, visible)
+	if visible:
+		return
+
+	turret_selector.hide()
+	start_placing_turret(listing.instantiate())
+
+
+func start_placing_turret(turret: Node3D) -> void:
 	if placing_turret == null:
-		placing_turret = turret_scene.instantiate()
+		placing_turret = turret
 		tower_manager.add_child(placing_turret)
 		placing_turret.visible = false
-		cancel_button.show()
-		disabled = true
 
-func cancel_placing_turret() -> void:
-	if placing_turret:
+func stop_placing_turret(cancel_turret_placing : bool) -> void:
+	if cancel_turret_placing and placing_turret:
 		placing_turret.queue_free()
-		placing_turret = null
-	cancel_button.hide()
-	disabled = false
 
-func _process(_delta):
+	placing_turret = null
+	cancel_button.hide()
+	turret_selector.hide()
+	turret_selector.deselect_all()
+	show()
+
+func _process(_delta) -> void:
 	if placing_turret == null:
 		return
 
@@ -58,16 +73,16 @@ func _process(_delta):
 	if camera == null:
 		return
 
-	var mouse_pos = get_viewport().get_mouse_position()
-	var from = camera.project_ray_origin(mouse_pos)
-	var to = from + camera.project_ray_normal(mouse_pos) * 1000
+	var mouse_pos := get_viewport().get_mouse_position()
+	var from := camera.project_ray_origin(mouse_pos)
+	var to := from + camera.project_ray_normal(mouse_pos) * 1000
 
-	var space_state = camera.get_world_3d().direct_space_state
+	var space_state := camera.get_world_3d().direct_space_state
 	var query := PhysicsRayQueryParameters3D.new()
 	query.from = from
 	query.to = to
 
-	var result = space_state.intersect_ray(query)
+	var result := space_state.intersect_ray(query)
 
 	if result and result.collider and result.collider.name == "Ground":
 		placing_turret.global_position = result.position
@@ -86,15 +101,15 @@ func _unhandled_input(event):
 		if camera == null:
 			return
 
-		var from = camera.project_ray_origin(event.position)
-		var to = from + camera.project_ray_normal(event.position) * 1000
+		var from := camera.project_ray_origin(event.position)
+		var to := from + camera.project_ray_normal(event.position) * 1000
 
-		var space_state = camera.get_world_3d().direct_space_state
+		var space_state := camera.get_world_3d().direct_space_state
 		var query := PhysicsRayQueryParameters3D.new()
 		query.from = from
 		query.to = to
 
-		var result = space_state.intersect_ray(query)
+		var result := space_state.intersect_ray(query)
 
 		if result and result.collider and result.collider.name == "Ground":
 			# Distance check between other turrets
@@ -102,20 +117,17 @@ func _unhandled_input(event):
 				print("Invalid turret placement")
 				return
 
-			var currency_label = get_tree().root.get_node("Main/GameUI/CurrencyDisplay/MarginContainer/CurrencyLabel")
+			var currency_label := get_tree().root.get_node("Main/GameUI/CurrencyDisplay/MarginContainer/CurrencyLabel")
 			if currency_label and currency_label.subtract(10):
 				placing_turret.global_position = result.position
 
-				var radar = placing_turret.get_node("Radar") as Radar
+				var radar := placing_turret.get_node("Radar") as Radar
 				radar.monitoring = true
 				placing_turret.indicator_visibility(false)
 
 				Global.placed_turrets.append(placing_turret)
 
-				#placing_turret.selectable = true
-				placing_turret = null
-				cancel_button.hide()
-				disabled = false
+				stop_placing_turret(false)
 			else:
 				print("No currency...")
 

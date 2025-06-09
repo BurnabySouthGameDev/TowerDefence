@@ -18,7 +18,7 @@ func _open_menu(tower) -> void:
 	if tower == Global.selected_tower:
 		#print_rich("[color=red]Open")
 		show()
-		_load_values(tower.resource)
+		_load_values(tower.listing)
 	else:
 		#print_rich("[color=red]Close")
 		hide()

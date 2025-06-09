@@ -1,0 +1,9 @@
+[gd_scene load_steps=4 format=3 uid="uid://dy1yf4ukdv2ye"]
+
+[ext_resource type="Script" uid="uid://vy88uie5i84d" path="res://Scripts/turrets/turret_list.gd" id="1_gc2bo"]
+[ext_resource type="Script" uid="uid://nf31t0owinb2" path="res://Scripts/turrets/tower_res.gd" id="2_j1n8q"]
+[ext_resource type="Resource" uid="uid://c0c22g0dy87a1" path="res://Resources/Towers/basic_turret.tres" id="3_pteia"]
+
+[node name="TurretList" type="Node"]
+script = ExtResource("1_gc2bo")
+turrets = Array[ExtResource("2_j1n8q")]([ExtResource("3_pteia")])

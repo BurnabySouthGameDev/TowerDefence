@@ -3,7 +3,7 @@ class_name TowerResource
 
 signal radius_changed(value)
 
-@export_group("General")
+@export var scene : PackedScene
 @export var tower_name: String
 @export var damage: float
 @export var attack_speed: float
@@ -17,3 +17,8 @@ signal radius_changed(value)
 @export_group("Upgrades")
 @export var number_of_upgrades: int
 @export var upgrades: Array[UpgradeResource] = []
+
+func instantiate() -> Node3D:
+	var node: Node3D = scene.instantiate()
+	node.listing = self
+	return node
