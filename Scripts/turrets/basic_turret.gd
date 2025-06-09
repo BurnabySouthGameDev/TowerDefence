@@ -56,7 +56,6 @@ var selected: bool = false:
 @onready var turret_cap : Node3D = $"TurretCap"
 
 func _ready() -> void:
-	radar.monitoring = false
 	csg_box_3d.material = csg_box_3d.material.duplicate(true)
 	listing.radius_changed.connect(update_radius)
 	reload_timer.start()

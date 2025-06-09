@@ -6,7 +6,6 @@ extends Button
 @onready var tower_manager: Node3D = %TowerManager
 @onready var turret_selector: ItemList = %TurretSelector
 
-#var turret_scene: PackedScene = preload("res://Scenes/turrets/basic_turret/basic_turret.tscn")
 var placing_turret: Node3D = null
 
 var can_place: bool = false: #temp
@@ -52,6 +51,7 @@ func _on_turret_selected(listing: TowerResource) -> void:
 func start_placing_turret(turret: Node3D) -> void:
 	if placing_turret == null:
 		placing_turret = turret
+		placing_turret.process_mode = PROCESS_MODE_DISABLED
 		tower_manager.add_child(placing_turret)
 		placing_turret.visible = false
 
@@ -121,9 +121,8 @@ func _unhandled_input(event):
 			if currency_label and currency_label.subtract(10):
 				placing_turret.global_position = result.position
 
-				var radar := placing_turret.get_node("Radar") as Radar
-				radar.monitoring = true
 				placing_turret.indicator_visibility(false)
+				placing_turret.process_mode = PROCESS_MODE_INHERIT
 
 				Global.placed_turrets.append(placing_turret)
 
