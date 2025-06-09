@@ -67,7 +67,7 @@ func _on_radar_new_target(target: PathFollow3D) -> void:
 	if not radar.monitoring:
 		return
 
-	print("basic_turret - target: ", target)
+	#print("basic_turret - target: ", target)
 	if target == null:
 		return
 
@@ -82,7 +82,7 @@ func fire() -> void:
 		_fire_at(radar.current_target)
 
 	reload_timer.wait_time = resource.attack_speed
-	print(resource.attack_speed)
+	#print(resource.attack_speed)
 
 func _fire_at(target: PathFollow3D) -> void:
 	var target_pos := target.global_position

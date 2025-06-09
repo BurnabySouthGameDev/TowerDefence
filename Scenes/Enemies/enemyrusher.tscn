@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://byksw8b5osjrg"]
+[gd_scene load_steps=6 format=3 uid="uid://dopgistq62tih"]
 
-[ext_resource type="Script" uid="uid://cdqxalekiorgf" path="res://Scripts/enemies/enemy2.gd" id="1_wts82"]
-[ext_resource type="Script" uid="uid://co8kbyh5strok" path="res://Scripts/ui/Enemy/health_bar.gd" id="2_k6nad"]
+[ext_resource type="Script" uid="uid://dqphkjdjq7e8p" path="res://Scripts/enemies/enemyrusher.gd" id="1_f8mc3"]
+[ext_resource type="Script" uid="uid://co8kbyh5strok" path="res://Scripts/ui/Enemy/health_bar.gd" id="2_1ywbq"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_wts82"]
-radius = 1.0
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_f8mc3"]
+height = 1.0
+radius = 0.7
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1f0kj"]
 bg_color = Color(0.839216, 0.278431, 0.329412, 1)
@@ -14,17 +15,18 @@ bg_color = Color(0.322353, 0.692161, 0.402664, 1)
 
 [node name="PathFollow3D" type="PathFollow3D"]
 loop = false
-script = ExtResource("1_wts82")
+script = ExtResource("1_f8mc3")
 
 [node name="enemy" type="Area3D" parent="."]
 collision_layer = 2
 collision_mask = 0
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="enemy"]
-radius = 1.0
+[node name="CSGBox3D" type="CSGCylinder3D" parent="enemy"]
+radius = 0.75
+height = 1.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="enemy"]
-shape = SubResource("SphereShape3D_wts82")
+shape = SubResource("CylinderShape3D_f8mc3")
 
 [node name="HealthBar" type="Node3D" parent="enemy"]
 
@@ -34,9 +36,9 @@ anchor_top = -0.00617284
 anchor_right = 0.0555556
 theme_override_styles/background = SubResource("StyleBoxFlat_1f0kj")
 theme_override_styles/fill = SubResource("StyleBoxFlat_afpow")
-max_value = 40.0
+max_value = 15.0
 step = 1.0
-value = 40.0
+value = 15.0
 show_percentage = false
-script = ExtResource("2_k6nad")
+script = ExtResource("2_1ywbq")
 metadata/_edit_use_anchors_ = true

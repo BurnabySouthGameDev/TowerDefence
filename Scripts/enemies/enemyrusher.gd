@@ -4,8 +4,8 @@ var path: Array[Vector3i]
 @onready var progress_bar: ProgressBar = $enemy/HealthBar/ProgressBar
 
 
-@export var speed: float = 5
-@export var health: float = 20:
+@export var speed: float = 9
+@export var health: float = 10:
 	set(value):
 		health = value
 

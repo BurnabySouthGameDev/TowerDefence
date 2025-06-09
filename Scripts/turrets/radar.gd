@@ -16,7 +16,7 @@ signal new_target(target: PathFollow3D)
 
 func _on_area_entered(body: Area3D) -> void:
 	var enemy : PathFollow3D = body.get_parent()
-	print("enter range: ", enemy)
+	#print("enter range: ", enemy)
 	body_count += 1
 	if body_count == 1:
 		cooldown_timer.start()
@@ -24,7 +24,7 @@ func _on_area_entered(body: Area3D) -> void:
 
 func _on_area_exited(body: Area3D) -> void:
 	var enemy : PathFollow3D = body.get_parent()
-	print("exit range: ", enemy)
+	#print("exit range: ", enemy)
 	body_count -= 1
 	if body_count == 0:
 		cooldown_timer.stop()

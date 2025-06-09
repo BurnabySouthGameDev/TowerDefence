@@ -5,7 +5,7 @@ var path: Array[Vector3i]
 
 
 @export var speed: float = 5
-@export var health: float = 20:
+@export var health: float = 40:
 	set(value):
 		health = value
 
