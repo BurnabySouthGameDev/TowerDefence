@@ -20,5 +20,5 @@ signal radius_changed(value)
 
 func instantiate() -> Node3D:
 	var node: Node3D = scene.instantiate()
-	node.listing = self
+	node.listing = self.duplicate()
 	return node
