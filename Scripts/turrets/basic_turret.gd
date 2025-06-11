@@ -6,7 +6,6 @@ signal request_tower_menu(tower)
 @onready var rad_indicator = $RadiusIndicator
 
 @export var sell_value: int = 5
-@export var resource: TowerResource
 
 @export_subgroup("bullet")
 @export_range(0.01, 10, 0.01, "or_greater", "hide_slider")
@@ -21,6 +20,7 @@ var bullet_scene : PackedScene = null
 @export_range(0, 10, 1, "or_greater")
 var bullet_pierce := 0
 
+var listing: TowerResource = null
 
 var selectable: bool = false:
 	set(value):
@@ -56,9 +56,8 @@ var selected: bool = false:
 @onready var turret_cap : Node3D = $"TurretCap"
 
 func _ready() -> void:
-	radar.monitoring = false
 	csg_box_3d.material = csg_box_3d.material.duplicate(true)
-	resource.radius_changed.connect(update_radius)
+	listing.radius_changed.connect(update_radius)
 	reload_timer.start()
 	reload_timer.paused = true
 
@@ -81,8 +80,8 @@ func fire() -> void:
 	else:
 		_fire_at(radar.current_target)
 
-	reload_timer.wait_time = resource.attack_speed
-	print(resource.attack_speed)
+	reload_timer.wait_time = listing.attack_speed
+	print(listing.attack_speed)
 
 func _fire_at(target: PathFollow3D) -> void:
 	var target_pos := target.global_position
@@ -93,13 +92,18 @@ func _fire_at(target: PathFollow3D) -> void:
 	bullet.velocity = (target_pos - turret_cap.global_position).normalized() * bullet_speed
 	bullet.lifetime = bullet_range / bullet_speed
 	bullet.pierce = bullet_pierce
-	bullet.damage = resource.damage
-	bullet.hit_enemy.connect(func (remaining):
-		if remaining <= 0:
-			get_node("/root/Main/GameUI/CurrencyDisplay/MarginContainer/CurrencyLabel").add(5)
-	)
+	bullet.damage = listing.damage
+	bullet.hit_enemy.connect(_on_hit_enemy)
 
 	add_child(bullet)
+
+func _on_hit_enemy(enemy: PathFollow3D ) -> void:
+	if enemy.health <= 0:
+		get_node("/root/Main/GameUI/CurrencyDisplay/MarginContainer/CurrencyLabel").add(5)
+		enemy.queue_free()
+
+func get_color() -> Color:
+	return Color.WHITE if csg_box_3d.material == null else csg_box_3d.material.albedo_color
 
 func change_color(color: Color) -> void:
 	if csg_box_3d.material == null:

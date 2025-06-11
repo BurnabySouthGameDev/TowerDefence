@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="TowerResource" load_steps=5 format=3 uid="uid://c0c22g0dy87a1"]
+[gd_resource type="Resource" script_class="TowerResource" load_steps=6 format=3 uid="uid://c0c22g0dy87a1"]
 
-[ext_resource type="Script" uid="uid://nf31t0owinb2" path="res://Scripts/turrets/tower_res.gd" id="1_ej7is"]
-[ext_resource type="Script" path="res://Scripts/turrets/upgrade_res.gd" id="2_f7vgk"]
+[ext_resource type="Script" uid="uid://nf31t0owinb2" path="res://Scripts/turrets/tower_resource.gd" id="1_ej7is"]
+[ext_resource type="PackedScene" uid="uid://ld73oby6g67" path="res://Scenes/turrets/basic_turret/basic_turret.tscn" id="1_unvg5"]
+[ext_resource type="Script" uid="uid://dapii7i1tjwtr" path="res://Scripts/turrets/upgrade_resource.gd" id="2_f7vgk"]
 
 [sub_resource type="Resource" id="Resource_tkl0h"]
 script = ExtResource("2_f7vgk")
@@ -16,6 +17,7 @@ metadata/_custom_type_script = "uid://dapii7i1tjwtr"
 [resource]
 resource_local_to_scene = true
 script = ExtResource("1_ej7is")
+scene = ExtResource("1_unvg5")
 tower_name = "Basic Turret"
 damage = 5.0
 attack_speed = 0.45

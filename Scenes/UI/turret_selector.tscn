@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxbh8cdknojb4"]
+
+[ext_resource type="Script" uid="uid://c82sr7dprlrgj" path="res://Scripts/ui/turret_selector.gd" id="1_3lngg"]
+
+[node name="TurretSelector" type="ItemList"]
+allow_reselect = true
+max_columns = 0
+same_column_width = true
+icon_mode = 0
+script = ExtResource("1_3lngg")
+
+[connection signal="item_activated" from="." to="." method="_on_item_activated"]
