@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://dkh0ksgp531w8"]
+
+[ext_resource type="PackedScene" uid="uid://ld73oby6g67" path="res://Scenes/turrets/basic_turret/basic_turret.tscn" id="1_nn65i"]
+[ext_resource type="Script" uid="uid://dwkabwp36xpyq" path="res://Scripts/turrets/necromancer_turret/necromancer_turret.gd" id="2_tk4pe"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nn65i"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cjr87"]
+next_pass = SubResource("ShaderMaterial_nn65i")
+albedo_color = Color(0.432369, 0.0633716, 0.630789, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ibhvx"]
+resource_local_to_scene = true
+radius = 10.0
+
+[node name="Necromancer" instance=ExtResource("1_nn65i")]
+script = ExtResource("2_tk4pe")
+max_zombie_count = 3
+zombie_damage = 7
+bullet_speed = 100.0
+
+[node name="CSGBox3D" parent="TurretCap" index="0"]
+material = SubResource("StandardMaterial3D_cjr87")
+
+[node name="CollisionShape3D" parent="Radar" index="1"]
+shape = SubResource("SphereShape3D_ibhvx")

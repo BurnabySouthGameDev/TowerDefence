@@ -8,11 +8,6 @@ var path: Array[Vector3i]
 @export var health: float = 20:
 	set(value):
 		health = value
-
-		if health <= 0:
-			queue_free()
-			return
-
 		progress_bar.value = health
 
 func _ready() -> void:

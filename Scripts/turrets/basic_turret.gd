@@ -93,12 +93,14 @@ func _fire_at(target: PathFollow3D) -> void:
 	bullet.lifetime = bullet_range / bullet_speed
 	bullet.pierce = bullet_pierce
 	bullet.damage = listing.damage
-	bullet.hit_enemy.connect(func (remaining):
-		if remaining <= 0:
-			get_node("/root/Main/GameUI/CurrencyDisplay/MarginContainer/CurrencyLabel").add(5)
-	)
+	bullet.hit_enemy.connect(_on_hit_enemy)
 
 	add_child(bullet)
+
+func _on_hit_enemy(enemy: PathFollow3D ) -> void:
+	if enemy.health <= 0:
+		get_node("/root/Main/GameUI/CurrencyDisplay/MarginContainer/CurrencyLabel").add(5)
+		enemy.queue_free()
 
 func change_color(color: Color) -> void:
 	if csg_box_3d.material == null:
