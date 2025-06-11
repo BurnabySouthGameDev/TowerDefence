@@ -7,6 +7,7 @@ extends Button
 @onready var turret_selector: ItemList = %TurretSelector
 
 var placing_turret: Node3D = null
+var original_color: Color = Color.WHITE
 
 var can_place: bool = false: #temp
 	set(value):
@@ -19,7 +20,7 @@ var can_place: bool = false: #temp
 		can_place = value
 
 		if can_place:
-			placing_turret.change_color(Color(0.0863, 0.5411, 1.0))
+			placing_turret.change_color(original_color)
 			placing_turret.change_indicator(Color(0.0, 0.886, 0.173, 0.0))
 		else:
 			placing_turret.change_color(Color(0.7176, 0.2117, 0.1686))
@@ -54,6 +55,7 @@ func start_placing_turret(turret: Node3D) -> void:
 		placing_turret.process_mode = PROCESS_MODE_DISABLED
 		tower_manager.add_child(placing_turret)
 		placing_turret.visible = false
+		original_color = placing_turret.get_color()
 
 func stop_placing_turret(cancel_turret_placing : bool) -> void:
 	if cancel_turret_placing and placing_turret:

@@ -10,8 +10,8 @@
 script = ExtResource("2_j1n8q")
 scene = ExtResource("4_23res")
 tower_name = "Necromancer"
-damage = 0.5
-attack_speed = 0.3
+damage = 7.0
+attack_speed = 2.5
 radius = 10.0
 sell_value = 5.0
 number_of_upgrades = 0

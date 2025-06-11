@@ -17,6 +17,7 @@ func _ready() -> void:
 
 func _on_area_entered(area: Area3D) -> void:
 	var enemy : PathFollow3D = area.get_parent()
+	assert(enemy != null)
 	if enemy.health <= 0:
 		return
 

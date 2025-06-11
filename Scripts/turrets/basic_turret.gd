@@ -102,6 +102,9 @@ func _on_hit_enemy(enemy: PathFollow3D ) -> void:
 		get_node("/root/Main/GameUI/CurrencyDisplay/MarginContainer/CurrencyLabel").add(5)
 		enemy.queue_free()
 
+func get_color() -> Color:
+	return Color.WHITE if csg_box_3d.material == null else csg_box_3d.material.albedo_color
+
 func change_color(color: Color) -> void:
 	if csg_box_3d.material == null:
 		return
