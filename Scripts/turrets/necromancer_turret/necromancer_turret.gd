@@ -59,3 +59,8 @@ func _process(delta: float) -> void:
 		assert(is_instance_valid(zombie))
 
 		zombie.rotate(Vector3.UP, 2 * delta)
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_PREDELETE:
+		for zombie in zombies:
+			zombie.queue_free()
