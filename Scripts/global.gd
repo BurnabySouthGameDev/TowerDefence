@@ -21,4 +21,5 @@ var selectable_tower: Node3D = null:
 var placed_turrets: Array[Node3D] = []
 
 ##SIGNALS
-signal set_lives(value: int) #not actually set cant find a name
+signal set_lives(value: int)
+signal change_map(map: PackedScene)

@@ -1,8 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://dxt1ttcllxx1g"]
+[gd_scene load_steps=15 format=3 uid="uid://dxt1ttcllxx1g"]
 
+[ext_resource type="PackedScene" uid="uid://ccg1k5hx33sea" path="res://Scenes/Maps/Map2.tscn" id="1_344ge"]
+[ext_resource type="Script" uid="uid://c15b2764xmhc7" path="res://Scripts/map_holder.gd" id="1_hptm8"]
 [ext_resource type="Script" uid="uid://ns7g5warqqu5" path="res://Scripts/enemy_spawn.gd" id="2_ibv0h"]
-[ext_resource type="Script" uid="uid://bh40hhbshvymn" path="res://Scripts/ui/currency_display.gd" id="3_8gbba"]
-[ext_resource type="Script" uid="uid://dq8n1fjdqpre3" path="res://Scripts/ui/spawn_button.gd" id="4_jjvhh"]
+[ext_resource type="Script" uid="uid://bh40hhbshvymn" path="res://Scripts/UI/currency_display.gd" id="3_8gbba"]
+[ext_resource type="PackedScene" uid="uid://du0h078r57pka" path="res://Scenes/UI/main_menu.tscn" id="3_ynf5e"]
+[ext_resource type="Script" uid="uid://dq8n1fjdqpre3" path="res://Scripts/UI/spawn_button.gd" id="4_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://dvdps78t4kco7" path="res://Scenes/UI/menu.tscn" id="5_21xkr"]
 [ext_resource type="PackedScene" uid="uid://gvaje4p786yv" path="res://Scenes/tower_manager.tscn" id="5_kry3j"]
 [ext_resource type="PackedScene" uid="uid://dxbh8cdknojb4" path="res://Scenes/UI/turret_selector.tscn" id="6_6bp64"]
@@ -21,16 +24,6 @@ sky = SubResource("Sky_uky64")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_it7di"]
-albedo_color = Color(0.169938, 0.367082, 0.424608, 1)
-
-[sub_resource type="Curve3D" id="Curve3D_bo1nx"]
-_data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -14.672, 1.7, 0, 0, 0, 0, 0, 0, 0, -4.117, 1.7, 0, 0, 0, 0, 0, 0, 0, -4.117, 1.7, -6.24, 0, 0, 0, 0, 0, 0, 5.438, 1.7, -6.24, 0, 0, 0, 0, 0, 0, 5.43752, 1.7, 0, 0, 0, 0, 0, 0, 0, 14, 1.7, 0.04),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0)
-}
-point_count = 6
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jjvhh"]
 
 [node name="Main" type="Node3D"]
@@ -42,37 +35,11 @@ environment = SubResource("Environment_ivsp5")
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, -0.0329628, 14.4684, 0.0471611)
 shadow_enabled = true
 
-[node name="Ground" type="CSGBox3D" parent="."]
-transform = Transform3D(30, 0, 0, 0, 1, 0, 0, 0, 30, 0.00119424, -0.133499, -0.000859916)
-use_collision = true
+[node name="MapHolder" type="Node3D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_hptm8")
 
-[node name="Path" type="Node" parent="."]
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="Path"]
-transform = Transform3D(10.1717, 0, 0, 0, 1, 0, 0, 0, 2.5, -10, 0.635, -0.001)
-material = SubResource("StandardMaterial3D_it7di")
-
-[node name="CSGBox3D3" type="CSGBox3D" parent="Path"]
-transform = Transform3D(-3.93403e-07, 0, 2.5, 0, 1, 0, -9, 0, -1.09278e-07, -4.21496, 0.635, -3.19712)
-material = SubResource("StandardMaterial3D_it7di")
-
-[node name="CSGBox3D5" type="CSGBox3D" parent="Path"]
-transform = Transform3D(-3.93403e-07, 0, 2.5, 0, 1, 0, -9, 0, -1.09278e-07, 5.28162, 0.635, -3.2369)
-material = SubResource("StandardMaterial3D_it7di")
-
-[node name="CSGBox3D4" type="CSGBox3D" parent="Path"]
-transform = Transform3D(7.26723, 0, 0, 0, 1, 0, 0, 0, 2.5, 0.424539, 0.676668, -6.4472)
-material = SubResource("StandardMaterial3D_it7di")
-
-[node name="CSGBox3D6" type="CSGBox3D" parent="Path"]
-transform = Transform3D(9.69521, 0, 0, 0, 1, 0, 0, 0, 2.5, 10.0574, 0.676668, 0.051487)
-material = SubResource("StandardMaterial3D_it7di")
-
-[node name="Path3D" type="Path3D" parent="Path"]
-curve = SubResource("Curve3D_bo1nx")
-
-[node name="PathFollow3D" type="PathFollow3D" parent="Path/Path3D"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -14.672, 1.7, 0)
+[node name="Map2" parent="MapHolder" instance=ExtResource("1_344ge")]
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, -0.183032, 14.2846, 12.0385)
@@ -87,7 +54,9 @@ one_shot = true
 
 [node name="GameUI" type="CanvasLayer" parent="."]
 
-[node name="SpawnButton" type="Button" parent="GameUI" node_paths=PackedStringArray("path_node")]
+[node name="MainMenu" parent="GameUI" instance=ExtResource("3_ynf5e")]
+
+[node name="SpawnButton" type="Button" parent="GameUI"]
 anchors_preset = -1
 anchor_left = 0.833333
 anchor_top = 0.691358
@@ -97,7 +66,6 @@ offset_bottom = 3.05176e-05
 text = "Spawn"
 script = ExtResource("4_jjvhh")
 min_distance_path = 3.0
-path_node = NodePath("../../Path/Path3D")
 metadata/_edit_use_anchors_ = true
 
 [node name="CancelButton" type="Button" parent="GameUI"]

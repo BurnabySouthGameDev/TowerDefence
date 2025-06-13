@@ -11,7 +11,8 @@ var enemy_to_spawn
 var difficulty_cap = 3
 
 # Config
-@onready var path: Path3D = $"../Path/Path3D"
+@onready var map: Node
+@onready var path: Path3D
 @onready var wave_counter: Label = $"../GameUI/WaveCounter"
 @onready var enemy_spawn: Marker3D = self
 #@onready var spawn_timer: Timer = Timer.new()
@@ -22,6 +23,8 @@ func _ready() -> void:
 	#spawn_timer.one_shot = true
 	#add_child(spawn_timer)
 	#spawn_timer.connect("timeout", Callable(self, "spawn_enemy"))
+	map = get_parent().find_child("MapHolder").get_child(0)
+	path = map.find_child("Path3D")
 	start_new_wave()
 	
 	enemies = {#Make sure enemies are ordered lowest to highest difficulty
