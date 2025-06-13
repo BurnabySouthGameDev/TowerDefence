@@ -47,12 +47,16 @@ use_collision = true
 [node name="Path" type="Node" parent="."]
 
 [node name="Path3D" type="Path3D" parent="Path"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, -1.06316, 0)
 curve = SubResource("Curve3D_bo1nx")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path/Path3D"]
 transform = Transform3D(-4.37113e-08, 0, -0.999999, 0, 1, 0, 0.999999, 0, -4.37113e-08, -14.672, 1.7, -0.752032)
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="CameraDefault" type="Marker3D" parent="." groups=["CameraDefault"]]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, -0.183032, 14.2846, 12.0385)
+
+[node name="Camera3D" type="Camera3D" parent="." groups=["Camera"]]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, -0.183032, 14.2846, 12.0385)
 
 [node name="enemy spawn" type="Marker3D" parent="."]
@@ -205,7 +209,7 @@ offset_left = 30.0
 unique_name_in_owner = true
 
 [node name="grass_plains" parent="." instance=ExtResource("8_344ge")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.373813, -2)
+transform = Transform3D(-6.55671e-08, 0, -1.5, 0, 1.5, 0, 1.5, 0, -6.55671e-08, 0, 0.373813, -2)
 
 [connection signal="timeout" from="enemy spawn/SpawnTimer" to="enemy spawn" method="_on_timer_timeout"]
 [connection signal="pressed" from="GameUI/SpawnButton" to="GameUI/SpawnButton" method="_on_pressed"]

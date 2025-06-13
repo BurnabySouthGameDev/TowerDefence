@@ -8,6 +8,7 @@ var tower_resource: TowerResource
 @onready var damage: RichTextLabel = %Damage
 @onready var attack_speed: RichTextLabel = %AttackSpeed
 @onready var radius: RichTextLabel = %Radius
+@onready var upgrade_sound = preload("res://Audio/Upgrade_Turret.wav")
 
 
 func _ready() -> void:
@@ -19,9 +20,15 @@ func _open_menu(tower) -> void:
 		#print_rich("[color=red]Open")
 		show()
 		_load_values(tower.listing)
+		var tween = get_tree().create_tween()
+		tween.set_trans(Tween.TRANS_SINE)
+		tween.tween_property(get_tree().get_nodes_in_group("Camera")[0], "position", Vector3(tower.position.x, tower.position.y + 5, tower.position.z + 5), 0.5)
 	else:
 		#print_rich("[color=red]Close")
 		hide()
+		var tween = get_tree().create_tween()
+		tween.set_trans(Tween.TRANS_SINE)
+		tween.tween_property(get_tree().get_nodes_in_group("Camera")[0], "position", get_tree().get_nodes_in_group("CameraDefault")[0].position, 0.5)
 
 
 func _sell() -> void:
@@ -29,6 +36,9 @@ func _sell() -> void:
 	currency_label.add(tower_resource.sell_value)
 	Global.placed_turrets.erase(Global.selected_tower)
 	Global.selected_tower.queue_free()
+	var tween = get_tree().create_tween()
+	tween.set_trans(Tween.TRANS_SINE)
+	tween.tween_property(get_tree().get_nodes_in_group("Camera")[0], "position", get_tree().get_nodes_in_group("CameraDefault")[0].position, 0.5)
 
 
 func _load_values(res:TowerResource) -> void: #loaded every selection

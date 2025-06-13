@@ -5,6 +5,7 @@ extends Button
 @export var min_distance_path: float = 2.5
 @onready var tower_manager: Node3D = %TowerManager
 @onready var turret_selector: ItemList = %TurretSelector
+@onready var spawn_sound = preload("res://Audio/Spawn_Turret.wav")
 
 var placing_turret: Node3D = null
 var original_color: Color = Color.WHITE
@@ -127,7 +128,7 @@ func _unhandled_input(event):
 				placing_turret.process_mode = PROCESS_MODE_INHERIT
 
 				Global.placed_turrets.append(placing_turret)
-
+				placing_turret.get_node("AudioPlayer").play_sound(spawn_sound)
 				stop_placing_turret(false)
 			else:
 				print("No currency...")
