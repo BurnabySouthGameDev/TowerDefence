@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://du0h078r57pka"]
+[gd_scene load_steps=4 format=3 uid="uid://dwyxggrlgohcl"]
 
 [ext_resource type="Texture2D" uid="uid://cvpj5iqig5fcl" path="res://icon.svg" id="1_5wsvm"]
-[ext_resource type="Script" uid="uid://cpqmkgw44pm4e" path="res://Scripts/UI/main_menu_button.gd" id="2_i2xx2"]
-[ext_resource type="PackedScene" uid="uid://bufgysnhtgpks" path="res://Scenes/Maps/Map1.tscn" id="3_o14dv"]
+[ext_resource type="Script" path="res://Scripts/UI/main_menu_button.gd" id="2_i2xx2"]
+[ext_resource type="PackedScene" path="res://Scenes/Maps/Map1.tscn" id="3_o14dv"]
 
 [node name="MainMenu" type="PanelContainer"]
 anchors_preset = -1

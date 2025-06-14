@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cw7yg6e0jmot0" path="res://Scenes/Turrets/radar.tscn" id="3_8c8dr"]
 [ext_resource type="Script" uid="uid://c05b2u3qourdf" path="res://Scripts/turrets/select.gd" id="4_mmqk2"]
 [ext_resource type="Shader" uid="uid://djj7r8u508e1b" path="res://Shaders/placementindicator.gdshader" id="6_8c8dr"]
-[ext_resource type="Script" uid="uid://ckkfryi2dd4us" path="res://Scenes/turrets/basic_turret/audio_streamers.gd" id="6_mmqk2"]
+[ext_resource type="Script" uid="uid://ckkfryi2dd4us" path="res://Scenes/Turrets/basic_turret/audio_streamers.gd" id="6_mmqk2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_16ne6"]
 

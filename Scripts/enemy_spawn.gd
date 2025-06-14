@@ -22,8 +22,6 @@ func _ready() -> void:
 	#spawn_timer.one_shot = true
 	#add_child(spawn_timer)
 	#spawn_timer.connect("timeout", Callable(self, "spawn_enemy"))
-	map = get_parent().find_child("MapHolder").get_child(0)
-	path = map.find_child("Path3D")
 	start_new_wave()
 	
 	enemies = {#Make sure enemies are ordered lowest to highest difficulty

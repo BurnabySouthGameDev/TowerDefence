@@ -1,6 +1,6 @@
 [gd_scene load_steps=20 format=4 uid="uid://dkh0ksgp531w8"]
 
-[ext_resource type="PackedScene" uid="uid://ld73oby6g67" path="res://Scenes/Turrets/basic_turret/basic_turret.tscn" id="1_nn65i"]
+[ext_resource type="PackedScene" uid="uid://ld73oby6g67" path="res://Scenes/turrets/basic_turret/basic_turret.tscn" id="1_nn65i"]
 [ext_resource type="Script" uid="uid://dwkabwp36xpyq" path="res://Scripts/turrets/necromancer_turret/necromancer_turret.gd" id="2_tk4pe"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ryv5r"]
