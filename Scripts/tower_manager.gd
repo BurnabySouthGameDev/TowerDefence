@@ -18,4 +18,5 @@ func _unhandled_input(event) -> void:
 
 
 func _deselect_tower() -> void:
-	Global.selected_tower.selected = false
+	if Global.selected_tower != null:
+		Global.selected_tower.selected = false

@@ -1,28 +1,25 @@
-[gd_scene load_steps=15 format=3 uid="uid://dxt1ttcllxx1g"]
+[gd_scene load_steps=12 format=3 uid="uid://dxt1ttcllxx1g"]
 
-[ext_resource type="PackedScene" uid="uid://ccg1k5hx33sea" path="res://Scenes/Maps/Map2.tscn" id="1_344ge"]
-[ext_resource type="Script" uid="uid://c15b2764xmhc7" path="res://Scripts/map_holder.gd" id="1_hptm8"]
-[ext_resource type="Script" uid="uid://ns7g5warqqu5" path="res://Scripts/enemy_spawn.gd" id="2_ibv0h"]
-[ext_resource type="Script" uid="uid://bh40hhbshvymn" path="res://Scripts/UI/currency_display.gd" id="3_8gbba"]
-[ext_resource type="PackedScene" uid="uid://du0h078r57pka" path="res://Scenes/UI/main_menu.tscn" id="3_ynf5e"]
-[ext_resource type="Script" uid="uid://dq8n1fjdqpre3" path="res://Scripts/UI/spawn_button.gd" id="4_jjvhh"]
+[ext_resource type="Script" uid="uid://bh40hhbshvymn" path="res://Scripts/ui/currency_display.gd" id="3_8gbba"]
+[ext_resource type="Script" uid="uid://dq8n1fjdqpre3" path="res://Scripts/ui/spawn_button.gd" id="4_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://dvdps78t4kco7" path="res://Scenes/UI/menu.tscn" id="5_21xkr"]
 [ext_resource type="PackedScene" uid="uid://gvaje4p786yv" path="res://Scenes/tower_manager.tscn" id="5_kry3j"]
 [ext_resource type="PackedScene" uid="uid://dxbh8cdknojb4" path="res://Scenes/UI/turret_selector.tscn" id="6_6bp64"]
 [ext_resource type="PackedScene" uid="uid://bug3yv3yrxb8j" path="res://Scenes/UI/lives.tscn" id="8_ynf5e"]
+[ext_resource type="PackedScene" uid="uid://wt4u7axih6op" path="res://Scenes/Levels/hills/hills.tscn" id="9_ynf5e"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6m1b0"]
-sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6bp64"]
 
-[sub_resource type="Sky" id="Sky_uky64"]
-sky_material = SubResource("ProceduralSkyMaterial_6m1b0")
+[sub_resource type="Sky" id="Sky_344ge"]
+sky_material = SubResource("ProceduralSkyMaterial_6bp64")
 
 [sub_resource type="Environment" id="Environment_ivsp5"]
 background_mode = 2
-sky = SubResource("Sky_uky64")
+sky = SubResource("Sky_344ge")
 tonemap_mode = 2
 glow_enabled = true
+fog_enabled = true
+fog_light_color = Color(0.250517, 0.411394, 0.589847, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jjvhh"]
 
@@ -35,26 +32,7 @@ environment = SubResource("Environment_ivsp5")
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, -0.0329628, 14.4684, 0.0471611)
 shadow_enabled = true
 
-[node name="MapHolder" type="Node3D" parent="."]
-unique_name_in_owner = true
-script = ExtResource("1_hptm8")
-
-[node name="Map2" parent="MapHolder" instance=ExtResource("1_344ge")]
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, -0.183032, 14.2846, 12.0385)
-
-[node name="enemy spawn" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.5, 2, 0)
-script = ExtResource("2_ibv0h")
-
-[node name="SpawnTimer" type="Timer" parent="enemy spawn"]
-wait_time = 0.75
-one_shot = true
-
 [node name="GameUI" type="CanvasLayer" parent="."]
-
-[node name="MainMenu" parent="GameUI" instance=ExtResource("3_ynf5e")]
 
 [node name="SpawnButton" type="Button" parent="GameUI"]
 anchors_preset = -1
@@ -194,7 +172,10 @@ offset_left = 30.0
 [node name="TowerManager" parent="." instance=ExtResource("5_kry3j")]
 unique_name_in_owner = true
 
-[connection signal="timeout" from="enemy spawn/SpawnTimer" to="enemy spawn" method="_on_timer_timeout"]
+[node name="Level" type="Node3D" parent="."]
+
+[node name="hills_base" parent="Level" instance=ExtResource("9_ynf5e")]
+
 [connection signal="pressed" from="GameUI/SpawnButton" to="GameUI/SpawnButton" method="_on_pressed"]
 [connection signal="pressed" from="GameUI/CancelButton" to="GameUI/SpawnButton" method="stop_placing_turret" binds= [true]]
 [connection signal="turret_selected" from="GameUI/TurretSelector" to="GameUI/SpawnButton" method="_on_turret_selected"]

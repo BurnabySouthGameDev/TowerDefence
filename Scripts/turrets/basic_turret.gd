@@ -3,6 +3,10 @@ extends Node3D
 const OUTLINE = preload("res://Shaders/outline.gdshader")
 signal request_tower_menu(tower)
 
+@onready var destroy = preload("res://Audio/Break.wav")
+@onready var shoot = preload("res://Audio/Fire.wav")
+@onready var hit = preload("res://Audio/Enemy_Hit.wav") 
+
 @onready var rad_indicator = $RadiusIndicator
 
 @export var sell_value: int = 5
@@ -79,7 +83,7 @@ func fire() -> void:
 		reload_timer.paused = true
 	else:
 		_fire_at(radar.current_target)
-
+	$AudioPlayer.play_sound(hit)
 	reload_timer.wait_time = listing.attack_speed
 	print(listing.attack_speed)
 
@@ -101,6 +105,7 @@ func _on_hit_enemy(enemy: PathFollow3D ) -> void:
 	if enemy.health <= 0:
 		get_node("/root/Main/GameUI/CurrencyDisplay/MarginContainer/CurrencyLabel").add(5)
 		enemy.queue_free()
+		$AudioPlayer.play_sound(destroy)
 
 func get_color() -> Color:
 	return Color.WHITE if csg_box_3d.material == null else csg_box_3d.material.albedo_color

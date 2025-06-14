@@ -4,7 +4,7 @@ extends PanelContainer
 @onready var wave_counter: Label = %WaveCounter
 
 
-var lives: int = 3:
+var lives: int = 999999999:
 	set(value):
 		if lives == value:
 			return

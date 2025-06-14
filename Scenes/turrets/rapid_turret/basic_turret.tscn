@@ -1,11 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://ld73oby6g67"]
+[gd_scene load_steps=13 format=3 uid="uid://d4e10yah7bhl3"]
 
-[ext_resource type="Script" uid="uid://ghb85u66ywux" path="res://Scripts/turrets/basic_turret.gd" id="1_orhfn"]
-[ext_resource type="PackedScene" uid="uid://c2xxq7dd1p7rk" path="res://Scenes/Turrets/basic_turret/basic_bullet.tscn" id="3_7llsl"]
-[ext_resource type="PackedScene" uid="uid://cw7yg6e0jmot0" path="res://Scenes/Turrets/radar.tscn" id="3_8c8dr"]
-[ext_resource type="Script" uid="uid://c05b2u3qourdf" path="res://Scripts/turrets/select.gd" id="4_mmqk2"]
-[ext_resource type="Shader" uid="uid://djj7r8u508e1b" path="res://Shaders/placementindicator.gdshader" id="6_8c8dr"]
-[ext_resource type="Script" uid="uid://ckkfryi2dd4us" path="res://Scenes/turrets/basic_turret/audio_streamers.gd" id="6_mmqk2"]
+[ext_resource type="Script" uid="uid://ghb85u66ywux" path="res://Scripts/turrets/basic_turret.gd" id="1_imqu6"]
+[ext_resource type="PackedScene" uid="uid://c2xxq7dd1p7rk" path="res://Scenes/turrets/basic_turret/basic_bullet.tscn" id="2_iud1b"]
+[ext_resource type="PackedScene" uid="uid://cw7yg6e0jmot0" path="res://Scenes/turrets/radar.tscn" id="3_i2ckb"]
+[ext_resource type="Script" uid="uid://c05b2u3qourdf" path="res://Scripts/turrets/select.gd" id="4_d08on"]
+[ext_resource type="Shader" uid="uid://djj7r8u508e1b" path="res://Shaders/placementindicator.gdshader" id="5_qawcj"]
+[ext_resource type="Script" uid="uid://ckkfryi2dd4us" path="res://Scenes/turrets/basic_turret/audio_streamers.gd" id="6_iwk2a"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_16ne6"]
 
@@ -24,17 +24,17 @@ radius = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_b8771"]
 render_priority = 0
-shader = ExtResource("6_8c8dr")
+shader = ExtResource("5_qawcj")
 shader_parameter/size = 1.0
 shader_parameter/width = 1.0
 shader_parameter/inner_color = Color(0, 0, 0, 1)
 shader_parameter/outer_color = Color(1, 0.160784, 0.172549, 0.0470588)
 
 [node name="BasicTurret" type="Node3D"]
-script = ExtResource("1_orhfn")
+script = ExtResource("1_imqu6")
 bullet_speed = 20.0
 bullet_range = 15.0
-bullet_scene = ExtResource("3_7llsl")
+bullet_scene = ExtResource("2_iud1b")
 
 [node name="TurretCap" type="Node3D" parent="."]
 unique_name_in_owner = true
@@ -49,7 +49,7 @@ transform = Transform3D(0.52, 0, 0, 0, 0.52, 0, 0, 0, 0.52, 0, 0.0773596, -0.767
 size = Vector3(1, 0.505981, 1)
 material = SubResource("StandardMaterial3D_txjsu")
 
-[node name="Radar" parent="." instance=ExtResource("3_8c8dr")]
+[node name="Radar" parent="." instance=ExtResource("3_i2ckb")]
 collision_layer = 0
 input_ray_pickable = false
 monitorable = false
@@ -65,7 +65,7 @@ wait_time = 0.45
 [node name="Select" type="Area3D" parent="."]
 collision_mask = 0
 monitoring = false
-script = ExtResource("4_mmqk2")
+script = ExtResource("4_d08on")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Select"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0225831, 0.573584, 0)
@@ -78,7 +78,7 @@ mesh = SubResource("PlaneMesh_mmqk2")
 surface_material_override/0 = SubResource("ShaderMaterial_b8771")
 
 [node name="AudioPlayer" type="Node3D" parent="."]
-script = ExtResource("6_mmqk2")
+script = ExtResource("6_iwk2a")
 
 [node name="AudioStreamPlayers2" type="AudioStreamPlayer3D" parent="AudioPlayer"]
 

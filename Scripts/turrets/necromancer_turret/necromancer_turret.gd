@@ -8,6 +8,8 @@ var zombie_damage := 7
 
 var zombies : Array[PathFollow3D] = []
 
+@onready var convert = preload("res://Audio/Necromancer_Converted.wav")
+
 func _on_hit_enemy(enemy: PathFollow3D) -> void:
 	if enemy.health <= 0:
 		get_node("/root/Main/GameUI/CurrencyDisplay/MarginContainer/CurrencyLabel").add(5)
@@ -40,6 +42,8 @@ func _on_hit_enemy(enemy: PathFollow3D) -> void:
 		area.area_entered.connect(_on_zombie_hit_enemy.bind(enemy))
 
 		parent.add_child(enemy, false, INTERNAL_MODE_FRONT)
+		
+		$AudioPlayer.play_sound(convert)
 
 func _on_zombie_hit_enemy(area: Area3D, zombie: PathFollow3D) -> void:
 	var enemy : PathFollow3D = area.get_parent()
@@ -47,6 +51,7 @@ func _on_zombie_hit_enemy(area: Area3D, zombie: PathFollow3D) -> void:
 	if remaining_hp <= 0:
 		get_node("/root/Main/GameUI/CurrencyDisplay/MarginContainer/CurrencyLabel").add(5)
 		enemy.queue_free()
+		$AudioPlayer.play_sound(destroy)
 
 	remaining_hp = zombie.take_damage(zombie_damage / 2.0)
 	if remaining_hp <= 0:
@@ -59,3 +64,8 @@ func _process(delta: float) -> void:
 		assert(is_instance_valid(zombie))
 
 		zombie.rotate(Vector3.UP, 2 * delta)
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_PREDELETE:
+		for zombie in zombies:
+			zombie.queue_free()

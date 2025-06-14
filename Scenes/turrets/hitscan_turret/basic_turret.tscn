@@ -1,11 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://ld73oby6g67"]
+[gd_scene load_steps=13 format=3 uid="uid://c31bbb5yjwjkd"]
 
-[ext_resource type="Script" uid="uid://ghb85u66ywux" path="res://Scripts/turrets/basic_turret.gd" id="1_orhfn"]
-[ext_resource type="PackedScene" uid="uid://c2xxq7dd1p7rk" path="res://Scenes/Turrets/basic_turret/basic_bullet.tscn" id="3_7llsl"]
-[ext_resource type="PackedScene" uid="uid://cw7yg6e0jmot0" path="res://Scenes/Turrets/radar.tscn" id="3_8c8dr"]
-[ext_resource type="Script" uid="uid://c05b2u3qourdf" path="res://Scripts/turrets/select.gd" id="4_mmqk2"]
-[ext_resource type="Shader" uid="uid://djj7r8u508e1b" path="res://Shaders/placementindicator.gdshader" id="6_8c8dr"]
-[ext_resource type="Script" uid="uid://ckkfryi2dd4us" path="res://Scenes/turrets/basic_turret/audio_streamers.gd" id="6_mmqk2"]
+[ext_resource type="Script" uid="uid://ghb85u66ywux" path="res://Scripts/turrets/basic_turret.gd" id="1_7jd63"]
+[ext_resource type="PackedScene" uid="uid://c2xxq7dd1p7rk" path="res://Scenes/turrets/basic_turret/basic_bullet.tscn" id="2_nfj71"]
+[ext_resource type="PackedScene" uid="uid://cw7yg6e0jmot0" path="res://Scenes/turrets/radar.tscn" id="3_imx1d"]
+[ext_resource type="Script" uid="uid://c05b2u3qourdf" path="res://Scripts/turrets/select.gd" id="4_ng0p6"]
+[ext_resource type="Shader" uid="uid://djj7r8u508e1b" path="res://Shaders/placementindicator.gdshader" id="5_0kvw0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7llsl"]
+albedo_color = Color(0.52549, 0.568627, 0.607843, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_16ne6"]
 
@@ -24,17 +26,22 @@ radius = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_b8771"]
 render_priority = 0
-shader = ExtResource("6_8c8dr")
+shader = ExtResource("5_0kvw0")
 shader_parameter/size = 1.0
 shader_parameter/width = 1.0
 shader_parameter/inner_color = Color(0, 0, 0, 1)
 shader_parameter/outer_color = Color(1, 0.160784, 0.172549, 0.0470588)
 
 [node name="BasicTurret" type="Node3D"]
-script = ExtResource("1_orhfn")
+script = ExtResource("1_7jd63")
 bullet_speed = 20.0
 bullet_range = 15.0
-bullet_scene = ExtResource("3_7llsl")
+bullet_scene = ExtResource("2_nfj71")
+
+[node name="Base" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0449206, 0)
+size = Vector3(2, 0.206152, 2)
+material = SubResource("StandardMaterial3D_7llsl")
 
 [node name="TurretCap" type="Node3D" parent="."]
 unique_name_in_owner = true
@@ -49,7 +56,7 @@ transform = Transform3D(0.52, 0, 0, 0, 0.52, 0, 0, 0, 0.52, 0, 0.0773596, -0.767
 size = Vector3(1, 0.505981, 1)
 material = SubResource("StandardMaterial3D_txjsu")
 
-[node name="Radar" parent="." instance=ExtResource("3_8c8dr")]
+[node name="Radar" parent="." instance=ExtResource("3_imx1d")]
 collision_layer = 0
 input_ray_pickable = false
 monitorable = false
@@ -65,7 +72,7 @@ wait_time = 0.45
 [node name="Select" type="Area3D" parent="."]
 collision_mask = 0
 monitoring = false
-script = ExtResource("4_mmqk2")
+script = ExtResource("4_ng0p6")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Select"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0225831, 0.573584, 0)
@@ -76,21 +83,6 @@ debug_color = Color(0.576045, 0.397559, 0.974967, 0.42)
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0.104717, 0)
 mesh = SubResource("PlaneMesh_mmqk2")
 surface_material_override/0 = SubResource("ShaderMaterial_b8771")
-
-[node name="AudioPlayer" type="Node3D" parent="."]
-script = ExtResource("6_mmqk2")
-
-[node name="AudioStreamPlayers2" type="AudioStreamPlayer3D" parent="AudioPlayer"]
-
-[node name="AudioStreamPlayers3" type="AudioStreamPlayer3D" parent="AudioPlayer"]
-
-[node name="AudioStreamPlayers4" type="AudioStreamPlayer3D" parent="AudioPlayer"]
-
-[node name="AudioStreamPlayers5" type="AudioStreamPlayer3D" parent="AudioPlayer"]
-
-[node name="AudioStreamPlayers6" type="AudioStreamPlayer3D" parent="AudioPlayer"]
-
-[node name="AudioStreamPlayers7" type="AudioStreamPlayer3D" parent="AudioPlayer"]
 
 [connection signal="new_target" from="Radar" to="." method="_on_radar_new_target"]
 [connection signal="timeout" from="ReloadTimer" to="." method="fire"]

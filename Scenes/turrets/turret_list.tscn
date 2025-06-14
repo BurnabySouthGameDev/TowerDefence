@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://dy1yf4ukdv2ye"]
+[gd_scene load_steps=11 format=3 uid="uid://dy1yf4ukdv2ye"]
 
 [ext_resource type="Script" uid="uid://vy88uie5i84d" path="res://Scripts/turrets/turret_list.gd" id="1_gc2bo"]
 [ext_resource type="Script" uid="uid://nf31t0owinb2" path="res://Scripts/turrets/tower_resource.gd" id="2_j1n8q"]
 [ext_resource type="Resource" uid="uid://c0c22g0dy87a1" path="res://Resources/Towers/basic_turret.tres" id="3_pteia"]
 [ext_resource type="PackedScene" uid="uid://dkh0ksgp531w8" path="res://Scenes/turrets/necromancer_turret/necromancer_turret.tscn" id="4_23res"]
 [ext_resource type="Script" uid="uid://dapii7i1tjwtr" path="res://Scripts/turrets/upgrade_resource.gd" id="5_brlc6"]
+[ext_resource type="PackedScene" uid="uid://ld73oby6g67" path="res://Scenes/turrets/basic_turret/basic_turret.tscn" id="6_brlc6"]
 
 [sub_resource type="Resource" id="Resource_se8d3"]
 script = ExtResource("2_j1n8q")
@@ -18,6 +19,29 @@ number_of_upgrades = 0
 upgrades = Array[ExtResource("5_brlc6")]([])
 metadata/_custom_type_script = "uid://nf31t0owinb2"
 
+[sub_resource type="Resource" id="Resource_tkl0h"]
+script = ExtResource("5_brlc6")
+stats = Array[Array]([["damage", 0.0, NodePath("%Damage:text")], ["attack_speed", 0.3, NodePath("%AttackSpeed:text")], ["radius", 12.0, NodePath("%Radius:text")], ["sell_value", 7.0, NodePath("%SellButton:text")]])
+metadata/_custom_type_script = "uid://dapii7i1tjwtr"
+
+[sub_resource type="Resource" id="Resource_f7vgk"]
+script = ExtResource("5_brlc6")
+stats = Array[Array]([["damage", 10.0, NodePath("%Damage:text")], ["attack_speed", 0.05, NodePath("%AttackSpeed:text")], ["radius", 15.0, NodePath("%Radius:text")], ["sell_value", 10.0, NodePath("%SellButton:text")]])
+metadata/_custom_type_script = "uid://dapii7i1tjwtr"
+
+[sub_resource type="Resource" id="Resource_brlc6"]
+resource_local_to_scene = true
+script = ExtResource("2_j1n8q")
+scene = ExtResource("6_brlc6")
+tower_name = "Supercharged"
+damage = 0.01
+attack_speed = 0.45
+radius = 10.0
+sell_value = 5.0
+number_of_upgrades = 0
+upgrades = Array[ExtResource("5_brlc6")]([SubResource("Resource_tkl0h"), SubResource("Resource_f7vgk")])
+metadata/_custom_type_script = "uid://nf31t0owinb2"
+
 [node name="TurretList" type="Node"]
 script = ExtResource("1_gc2bo")
-turrets = Array[ExtResource("2_j1n8q")]([ExtResource("3_pteia"), SubResource("Resource_se8d3")])
+turrets = Array[ExtResource("2_j1n8q")]([ExtResource("3_pteia"), SubResource("Resource_se8d3"), SubResource("Resource_brlc6")])
