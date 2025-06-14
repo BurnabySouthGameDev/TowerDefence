@@ -5,6 +5,7 @@ extends Button
 @export var min_distance_path: float = 2.5
 @onready var tower_manager: Node3D = %TowerManager
 @onready var turret_selector: ItemList = %TurretSelector
+@onready var spawn_sound = preload("res://Audio/Spawn_Turret.wav")
 
 var placing_turret: Node3D = null
 var original_color: Color = Color.WHITE
@@ -27,7 +28,7 @@ var can_place: bool = false: #temp
 			placing_turret.change_indicator(Color(1.0, 0.161, 0.173, 0.0))
 			
 
-@export var path_node: Path3D
+
 
 @onready var cancel_button: Button = get_parent().get_node("CancelButton")
 
@@ -127,12 +128,13 @@ func _unhandled_input(event):
 				placing_turret.process_mode = PROCESS_MODE_INHERIT
 
 				Global.placed_turrets.append(placing_turret)
-
+				placing_turret.get_node("AudioPlayer").play_sound(spawn_sound)
 				stop_placing_turret(false)
 			else:
 				print("No currency...")
 
 func _can_place_turret_at(pos: Vector3) -> bool:
+	var path_node: Path3D = get_tree().current_scene.get_node("Level").get_children()[0].get_node("Path").get_node("Path3D")
 	for turret in Global.placed_turrets:
 		if turret.global_position.distance_to(pos) < min_distance:
 			print("Too close to another turret")

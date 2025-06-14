@@ -32,6 +32,14 @@ folder_colors={
 "res://Scripts/": "purple"
 }
 
+[global_group]
+
+CameraDefault=""
+Camera=""
+GroundCollider=""
+Path=""
+EnemySpawn=""
+
 [layer_names]
 
 3d_physics/layer_1="Environment"

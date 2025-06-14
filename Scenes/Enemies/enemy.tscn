@@ -14,7 +14,7 @@ bg_color = Color(0.322353, 0.692161, 0.402664, 1)
 [node name="PathFollow3D" type="PathFollow3D"]
 loop = false
 script = ExtResource("1_jcvw6")
-speed = 5.0
+speed = 10.0
 
 [node name="enemy" type="Area3D" parent="."]
 collision_layer = 2
