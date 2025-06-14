@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7vxki4hdna2d"]
+
+[ext_resource type="PackedScene" uid="uid://c4la2nsxiur4e" path="res://Scenes/Levels/grass_plains/grass_plains.glb" id="1_rjj52"]
+[ext_resource type="PackedScene" uid="uid://baw2ai5p5j1t1" path="res://Scenes/Levels/grass_plains/grass_plains_tree.glb" id="2_44163"]
+
+[node name="grass_plains" instance=ExtResource("1_rjj52")]
+
+[node name="grass_plains_tree" parent="." index="1" instance=ExtResource("2_44163")]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -4.55581, 0, 4.875)
+
+[node name="grass_plains_tree2" parent="." index="2" instance=ExtResource("2_44163")]
+transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, -0.709032, 0, -6.125)
+
+[node name="grass_plains_tree3" parent="." index="3" instance=ExtResource("2_44163")]
+transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, -13.4092, 5.26366, -0.0332236)
+
+[node name="grass_plains_tree4" parent="." index="4" instance=ExtResource("2_44163")]
+transform = Transform3D(-0.988861, 0, 0.148845, 0, 1, 0, -0.148845, 0, -0.988861, -13.4092, 6.1666, 10.3363)
+
+[node name="grass_plains_tree5" parent="." index="5" instance=ExtResource("2_44163")]
+transform = Transform3D(-0.193378, 0, 0.981124, 0, 1, 0, -0.981124, 0, -0.193378, -7.08518, 4.98468, -10.5162)
+
+[node name="grass_plains_tree7" parent="." index="6" instance=ExtResource("2_44163")]
+transform = Transform3D(-0.193378, 0, 0.981124, 0, 1, 0, -0.981124, 0, -0.193378, 7.58283, 4.98468, -11.4505)
+
+[node name="grass_plains_tree8" parent="." index="7" instance=ExtResource("2_44163")]
+transform = Transform3D(-0.841237, 0, 0.540666, 0, 1, 0, -0.540666, 0, -0.841237, 7.58283, 0.457217, -5.33999)
+
+[node name="grass_plains_tree9" parent="." index="8" instance=ExtResource("2_44163")]
+transform = Transform3D(0.439218, 0, 0.89838, 0, 1, 0, -0.89838, 0, 0.439218, -6.27474, 0.457217, -1.19487)
+
+[node name="grass_plains_tree6" parent="." index="9" instance=ExtResource("2_44163")]
+transform = Transform3D(-0.17272, 0, -0.984971, 0, 1, 0, 0.984971, 0, -0.17272, -2.15897, -0.417599, 9.33838)

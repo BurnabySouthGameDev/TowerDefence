@@ -1,34 +1,26 @@
-[gd_scene load_steps=13 format=3 uid="uid://dxt1ttcllxx1g"]
+[gd_scene load_steps=12 format=3 uid="uid://dxt1ttcllxx1g"]
 
-[ext_resource type="Script" uid="uid://ns7g5warqqu5" path="res://Scripts/enemy_spawn.gd" id="2_ibv0h"]
 [ext_resource type="Script" uid="uid://bh40hhbshvymn" path="res://Scripts/ui/currency_display.gd" id="3_8gbba"]
 [ext_resource type="Script" uid="uid://dq8n1fjdqpre3" path="res://Scripts/ui/spawn_button.gd" id="4_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://dvdps78t4kco7" path="res://Scenes/UI/menu.tscn" id="5_21xkr"]
 [ext_resource type="PackedScene" uid="uid://gvaje4p786yv" path="res://Scenes/tower_manager.tscn" id="5_kry3j"]
-[ext_resource type="PackedScene" path="res://Scenes/UI/lives.tscn" id="8_ynf5e"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6m1b0"]
-sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+[ext_resource type="PackedScene" uid="uid://dxbh8cdknojb4" path="res://Scenes/UI/turret_selector.tscn" id="6_6bp64"]
+[ext_resource type="PackedScene" uid="uid://bug3yv3yrxb8j" path="res://Scenes/UI/lives.tscn" id="8_ynf5e"]
+[ext_resource type="PackedScene" uid="uid://wt4u7axih6op" path="res://Scenes/Levels/hills/hills.tscn" id="9_ynf5e"]
 
-[sub_resource type="Sky" id="Sky_uky64"]
-sky_material = SubResource("ProceduralSkyMaterial_6m1b0")
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6bp64"]
+
+[sub_resource type="Sky" id="Sky_344ge"]
+sky_material = SubResource("ProceduralSkyMaterial_6bp64")
 
 [sub_resource type="Environment" id="Environment_ivsp5"]
 background_mode = 2
-sky = SubResource("Sky_uky64")
+sky = SubResource("Sky_344ge")
 tonemap_mode = 2
 glow_enabled = true
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_it7di"]
-albedo_color = Color(0.169938, 0.367082, 0.424608, 1)
-
-[sub_resource type="Curve3D" id="Curve3D_bo1nx"]
-_data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -14.672, 1.7, 0, 0, 0, 0, 0, 0, 0, -4.117, 1.7, 0, 0, 0, 0, 0, 0, 0, -4.117, 1.7, -6.24, 0, 0, 0, 0, 0, 0, 5.438, 1.7, -6.24, 0, 0, 0, 0, 0, 0, 5.43752, 1.7, 0, 0, 0, 0, 0, 0, 0, 14, 1.7, 0.04),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0)
-}
-point_count = 6
+fog_enabled = true
+fog_light_color = Color(0.250517, 0.411394, 0.589847, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jjvhh"]
 
@@ -41,45 +33,6 @@ environment = SubResource("Environment_ivsp5")
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, -0.0329628, 14.4684, 0.0471611)
 shadow_enabled = true
 
-[node name="Ground" type="CSGBox3D" parent="."]
-transform = Transform3D(30, 0, 0, 0, 1, 0, 0, 0, 30, 0.00119424, -0.133499, -0.000859916)
-use_collision = true
-
-[node name="Path" type="Node" parent="."]
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="Path"]
-transform = Transform3D(10.1717, 0, 0, 0, 1, 0, 0, 0, 2.5, -10, 0.635, -0.001)
-material = SubResource("StandardMaterial3D_it7di")
-
-[node name="CSGBox3D3" type="CSGBox3D" parent="Path"]
-transform = Transform3D(-3.93403e-07, 0, 2.5, 0, 1, 0, -9, 0, -1.09278e-07, -4.21496, 0.635, -3.19712)
-material = SubResource("StandardMaterial3D_it7di")
-
-[node name="CSGBox3D5" type="CSGBox3D" parent="Path"]
-transform = Transform3D(-3.93403e-07, 0, 2.5, 0, 1, 0, -9, 0, -1.09278e-07, 5.28162, 0.635, -3.2369)
-material = SubResource("StandardMaterial3D_it7di")
-
-[node name="CSGBox3D4" type="CSGBox3D" parent="Path"]
-transform = Transform3D(7.26723, 0, 0, 0, 1, 0, 0, 0, 2.5, 0.424539, 0.676668, -6.4472)
-material = SubResource("StandardMaterial3D_it7di")
-
-[node name="CSGBox3D6" type="CSGBox3D" parent="Path"]
-transform = Transform3D(9.69521, 0, 0, 0, 1, 0, 0, 0, 2.5, 10.0574, 0.676668, 0.051487)
-material = SubResource("StandardMaterial3D_it7di")
-
-[node name="Path3D" type="Path3D" parent="Path"]
-curve = SubResource("Curve3D_bo1nx")
-
-[node name="PathFollow3D" type="PathFollow3D" parent="Path/Path3D"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -14.672, 1.7, 0)
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, -0.183032, 14.2846, 12.0385)
-
-[node name="enemy spawn" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.5, 2, 0)
-script = ExtResource("2_ibv0h")
-
 [node name="SpawnTimer" type="Timer" parent="enemy spawn"]
 wait_time = 0.75
 one_shot = true
@@ -90,7 +43,7 @@ one_shot = true
 
 [node name="GameUI" type="CanvasLayer" parent="."]
 
-[node name="SpawnButton" type="Button" parent="GameUI" node_paths=PackedStringArray("path_node")]
+[node name="SpawnButton" type="Button" parent="GameUI"]
 anchors_preset = -1
 anchor_left = 0.833333
 anchor_top = 0.691358
@@ -100,7 +53,6 @@ offset_bottom = 3.05176e-05
 text = "Spawn"
 script = ExtResource("4_jjvhh")
 min_distance_path = 3.0
-path_node = NodePath("../../Path/Path3D")
 metadata/_edit_use_anchors_ = true
 
 [node name="CancelButton" type="Button" parent="GameUI"]
@@ -218,8 +170,20 @@ metadata/_edit_use_anchors_ = true
 anchor_top = 0.0617284
 anchor_bottom = 0.0987654
 
+[node name="TurretSelector" parent="GameUI" instance=ExtResource("6_6bp64")]
+unique_name_in_owner = true
+anchors_preset = -1
+anchor_top = 0.7
+anchor_right = 0.755
+anchor_bottom = 0.892
+offset_left = 30.0
+
 [node name="TowerManager" parent="." instance=ExtResource("5_kry3j")]
 unique_name_in_owner = true
+
+[node name="Level" type="Node3D" parent="."]
+
+[node name="hills_base" parent="Level" instance=ExtResource("9_ynf5e")]
 
 [node name="WaveStartButton" type="Button" parent="."]
 offset_left = 433.0
@@ -231,5 +195,10 @@ text = "Start Next Wave "
 
 [connection signal="timeout" from="enemy spawn/SpawnTimer" to="enemy spawn" method="_on_timer_timeout"]
 [connection signal="timeout" from="enemy spawn/HordeTimer" to="enemy spawn" method="_on_horde_timer_timeout"]
+
+[connection signal="pressed" from="GameUI/SpawnButton" to="GameUI/SpawnButton" method="_on_pressed"]
+[connection signal="pressed" from="GameUI/CancelButton" to="GameUI/SpawnButton" method="stop_placing_turret" binds=[true]]
+[connection signal="turret_selected" from="GameUI/TurretSelector" to="GameUI/SpawnButton" method="_on_turret_selected"]
+
 [connection signal="tower_menu" from="TowerManager" to="GameUI/Menu" method="_open_menu"]
 [connection signal="pressed" from="WaveStartButton" to="enemy spawn" method="_on_wave_start_button_pressed"]

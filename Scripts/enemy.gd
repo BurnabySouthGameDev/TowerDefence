@@ -8,11 +8,6 @@ var path: Array[Vector3i]
 @export var health: float = 20:
 	set(value):
 		health = value
-
-		if health <= 0:
-			queue_free()
-			return
-
 		progress_bar.value = health
 
 func _ready() -> void:
@@ -25,7 +20,7 @@ func _process(delta: float) -> void:
 		var currency_label = get_tree().root.get_node("Main/GameUI/CurrencyDisplay/MarginContainer/CurrencyLabel")
 		currency_label.subtract(50)
 		Global.emit_signal("set_lives", -1)
-		print("ememy reach the end of the path")
+		print("ememy reached the end of the path")
 		queue_free()
 
 func take_damage(amount: float) -> float:

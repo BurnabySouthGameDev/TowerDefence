@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxc3pip4w32qc"]
+
+[ext_resource type="PackedScene" uid="uid://7k2vbmq0cgi" path="res://Scenes/Enemies/Lamplighter/lamplighter_bike.glb" id="1_iciuc"]
+
+[node name="lamplighter_bike" instance=ExtResource("1_iciuc")]
+
+[node name="Empty" parent="." index="0"]
+transform = Transform3D(0.999839, -0.0179104, -0.0005892, 0.01792, 0.999299, 0.0328741, -1.16415e-10, -0.0328794, 0.999459, 0, -0.0177151, 0)
+
+[node name="Circle" parent="Empty" index="0"]
+transform = Transform3D(1, 9.28272e-10, -1.07016e-10, -9.34373e-10, 0.994522, -0.104528, 9.39912e-12, 0.104528, 0.994522, 0, -0.944211, -0.827696)
+
+[node name="Circle_001" parent="Empty" index="1"]
+transform = Transform3D(1, 9.28272e-10, -1.07016e-10, -9.34373e-10, 0.994522, -0.104528, 9.39912e-12, 0.104528, 0.994522, 0, -1.38218, 1.15446)
+
+[node name="Circle_002" parent="Empty" index="2"]
+transform = Transform3D(-0.999773, -0.00457362, -0.0208091, 0.00731171, 0.84372, -0.536733, 0.0200118, -0.536763, -0.843495, 0, 0.884205, 1.31785)
+
+[node name="AnimationPlayer" parent="." index="1"]
+autoplay = "Scene"

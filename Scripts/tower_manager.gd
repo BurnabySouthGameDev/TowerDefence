@@ -16,4 +16,5 @@ func _unhandled_input(event) -> void:
 		call_deferred("_deselect_tower")
 
 func _deselect_tower() -> void:
-	Global.selected_tower.selected = false
+	if Global.selected_tower != null:
+		Global.selected_tower.selected = false

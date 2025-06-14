@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://fsmpt7q3eaaa"]
+
+[ext_resource type="PackedScene" uid="uid://bwyo6lcdoy8h7" path="res://Scenes/turrets/necromancer_turret/necromancer.glb" id="1_1gn2k"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mt04y"]
+resource_name = "Material"
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(0.972549, 0.913725, 0.898039, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bofyg"]
+resource_name = "Gold"
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(0.682353, 0.560784, 0.603922, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fdys0"]
+resource_name = "lightbrown"
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(0.858824, 0.717647, 0.760784, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1t83j"]
+resource_name = "Crystal"
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(0.831373, 0.662745, 0.772549, 1)
+
+[node name="necromancer" instance=ExtResource("1_1gn2k")]
+
+[node name="Cylinder" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_mt04y")
+surface_material_override/1 = SubResource("StandardMaterial3D_bofyg")
+surface_material_override/2 = SubResource("StandardMaterial3D_fdys0")
+
+[node name="Cube" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_1t83j")

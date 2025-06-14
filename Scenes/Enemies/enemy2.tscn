@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://byksw8b5osjrg"]
+[gd_scene load_steps=7 format=3 uid="uid://byksw8b5osjrg"]
 
 [ext_resource type="Script" uid="uid://cdqxalekiorgf" path="res://Scripts/enemies/enemy2.gd" id="1_wts82"]
 [ext_resource type="Script" uid="uid://co8kbyh5strok" path="res://Scripts/ui/Enemy/health_bar.gd" id="2_k6nad"]
+[ext_resource type="PackedScene" uid="uid://cxc3pip4w32qc" path="res://Scenes/Enemies/Lamplighter/lamplighter_bike.tscn" id="3_fu7du"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_wts82"]
 radius = 1.0
@@ -20,9 +21,6 @@ script = ExtResource("1_wts82")
 collision_layer = 2
 collision_mask = 0
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="enemy"]
-radius = 1.0
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="enemy"]
 shape = SubResource("SphereShape3D_wts82")
 
@@ -40,3 +38,6 @@ value = 40.0
 show_percentage = false
 script = ExtResource("2_k6nad")
 metadata/_edit_use_anchors_ = true
+
+[node name="lamplighter_bike" parent="enemy" instance=ExtResource("3_fu7du")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1.39573, 0)
