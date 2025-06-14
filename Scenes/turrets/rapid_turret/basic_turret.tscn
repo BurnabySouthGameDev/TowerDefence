@@ -1,0 +1,98 @@
+[gd_scene load_steps=13 format=3 uid="uid://d4e10yah7bhl3"]
+
+[ext_resource type="Script" uid="uid://ghb85u66ywux" path="res://Scripts/turrets/basic_turret.gd" id="1_imqu6"]
+[ext_resource type="PackedScene" uid="uid://c2xxq7dd1p7rk" path="res://Scenes/turrets/basic_turret/basic_bullet.tscn" id="2_iud1b"]
+[ext_resource type="PackedScene" uid="uid://cw7yg6e0jmot0" path="res://Scenes/turrets/radar.tscn" id="3_i2ckb"]
+[ext_resource type="Script" uid="uid://c05b2u3qourdf" path="res://Scripts/turrets/select.gd" id="4_d08on"]
+[ext_resource type="Shader" uid="uid://djj7r8u508e1b" path="res://Shaders/placementindicator.gdshader" id="5_qawcj"]
+[ext_resource type="Script" uid="uid://ckkfryi2dd4us" path="res://Scenes/turrets/basic_turret/audio_streamers.gd" id="6_iwk2a"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_16ne6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_txjsu"]
+next_pass = SubResource("ShaderMaterial_16ne6")
+albedo_color = Color(0.0862745, 0.541176, 1, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ulw1s"]
+resource_local_to_scene = true
+radius = 10.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_slgpk"]
+radius = 1.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_mmqk2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b8771"]
+render_priority = 0
+shader = ExtResource("5_qawcj")
+shader_parameter/size = 1.0
+shader_parameter/width = 1.0
+shader_parameter/inner_color = Color(0, 0, 0, 1)
+shader_parameter/outer_color = Color(1, 0.160784, 0.172549, 0.0470588)
+
+[node name="BasicTurret" type="Node3D"]
+script = ExtResource("1_imqu6")
+bullet_speed = 20.0
+bullet_range = 15.0
+bullet_scene = ExtResource("2_iud1b")
+
+[node name="TurretCap" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="TurretCap"]
+unique_name_in_owner = true
+material = SubResource("StandardMaterial3D_txjsu")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="TurretCap/CSGBox3D"]
+transform = Transform3D(0.52, 0, 0, 0, 0.52, 0, 0, 0, 0.52, 0, 0.0773596, -0.767816)
+size = Vector3(1, 0.505981, 1)
+material = SubResource("StandardMaterial3D_txjsu")
+
+[node name="Radar" parent="." instance=ExtResource("3_i2ckb")]
+collision_layer = 0
+input_ray_pickable = false
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Radar"]
+shape = SubResource("SphereShape3D_ulw1s")
+debug_color = Color(0.564706, 0.552941, 0.0705882, 1)
+
+[node name="ReloadTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.45
+
+[node name="Select" type="Area3D" parent="."]
+collision_mask = 0
+monitoring = false
+script = ExtResource("4_d08on")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Select"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0225831, 0.573584, 0)
+shape = SubResource("SphereShape3D_slgpk")
+debug_color = Color(0.576045, 0.397559, 0.974967, 0.42)
+
+[node name="RadiusIndicator" type="MeshInstance3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0.104717, 0)
+mesh = SubResource("PlaneMesh_mmqk2")
+surface_material_override/0 = SubResource("ShaderMaterial_b8771")
+
+[node name="AudioPlayer" type="Node3D" parent="."]
+script = ExtResource("6_iwk2a")
+
+[node name="AudioStreamPlayers2" type="AudioStreamPlayer3D" parent="AudioPlayer"]
+
+[node name="AudioStreamPlayers3" type="AudioStreamPlayer3D" parent="AudioPlayer"]
+
+[node name="AudioStreamPlayers4" type="AudioStreamPlayer3D" parent="AudioPlayer"]
+
+[node name="AudioStreamPlayers5" type="AudioStreamPlayer3D" parent="AudioPlayer"]
+
+[node name="AudioStreamPlayers6" type="AudioStreamPlayer3D" parent="AudioPlayer"]
+
+[node name="AudioStreamPlayers7" type="AudioStreamPlayer3D" parent="AudioPlayer"]
+
+[connection signal="new_target" from="Radar" to="." method="_on_radar_new_target"]
+[connection signal="timeout" from="ReloadTimer" to="." method="fire"]
+[connection signal="mouse_entered" from="Select" to="Select" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Select" to="Select" method="_on_mouse_exited"]

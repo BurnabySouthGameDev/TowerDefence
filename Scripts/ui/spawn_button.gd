@@ -28,7 +28,7 @@ var can_place: bool = false: #temp
 			placing_turret.change_indicator(Color(1.0, 0.161, 0.173, 0.0))
 			
 
-@export var path_node: Path3D
+
 
 @onready var cancel_button: Button = get_parent().get_node("CancelButton")
 
@@ -134,6 +134,7 @@ func _unhandled_input(event):
 				print("No currency...")
 
 func _can_place_turret_at(pos: Vector3) -> bool:
+	var path_node: Path3D = get_tree().current_scene.get_node("Level").get_children()[0].get_node("Path").get_node("Path3D")
 	for turret in Global.placed_turrets:
 		if turret.global_position.distance_to(pos) < min_distance:
 			print("Too close to another turret")

@@ -36,6 +36,9 @@ folder_colors={
 
 CameraDefault=""
 Camera=""
+GroundCollider=""
+Path=""
+EnemySpawn=""
 
 [layer_names]
 
