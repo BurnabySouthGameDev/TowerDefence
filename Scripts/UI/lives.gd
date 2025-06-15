@@ -14,10 +14,10 @@ var lives: int = 999999999:
 			wave_counter.text = "Game over"
 			get_tree().current_scene.process_mode = Node.PROCESS_MODE_DISABLED
 
-		lives = max(0, value)
-		rich_text_label.text = "Lives: %d" % lives
+		lives = max(0, value)	
+		rich_text_label.text = "❤: %d" % lives
 
 
 func _ready() -> void:
 	Global.connect("set_lives", func set_lives(value :int) -> void: lives += value)
-	rich_text_label.text = "Lives: %d" % lives
+	rich_text_label.text = "❤: %d" % lives

@@ -103,7 +103,7 @@ func _fire_at(target: PathFollow3D) -> void:
 
 func _on_hit_enemy(enemy: PathFollow3D ) -> void:
 	if enemy.health <= 0:
-		get_node("/root/Main/GameUI/CurrencyDisplay/MarginContainer/CurrencyLabel").add(5)
+		get_node("/root/Main/GameUI/TopBar/HBoxContainer/CurrencyDisplay/MarginContainer/CurrencyLabel").add(5)
 		enemy.queue_free()
 		$AudioPlayer.play_sound(destroy)
 

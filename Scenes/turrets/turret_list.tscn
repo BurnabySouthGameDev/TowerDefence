@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://vy88uie5i84d" path="res://Scripts/turrets/turret_list.gd" id="1_gc2bo"]
 [ext_resource type="Script" uid="uid://nf31t0owinb2" path="res://Scripts/turrets/tower_resource.gd" id="2_j1n8q"]
-[ext_resource type="Resource" uid="uid://c0c22g0dy87a1" path="res://Resources/Towers/basic_turret.tres" id="3_pteia"]
-[ext_resource type="PackedScene" uid="uid://dkh0ksgp531w8" path="res://Scenes/turrets/necromancer_turret/necromancer_turret.tscn" id="4_23res"]
+[ext_resource type="PackedScene" uid="uid://dkh0ksgp531w8" path="res://Scenes/Turrets/necromancer_turret/necromancer_turret.tscn" id="4_23res"]
 [ext_resource type="Script" uid="uid://dapii7i1tjwtr" path="res://Scripts/turrets/upgrade_resource.gd" id="5_brlc6"]
-[ext_resource type="PackedScene" uid="uid://ld73oby6g67" path="res://Scenes/turrets/basic_turret/basic_turret.tscn" id="6_brlc6"]
+[ext_resource type="PackedScene" uid="uid://ld73oby6g67" path="res://Scenes/Turrets/basic_turret/basic_turret.tscn" id="6_brlc6"]
+[ext_resource type="Resource" uid="uid://c0c22g0dy87a1" path="res://Resources/Towers/basic_turret.tres" id="6_hjc04"]
 
 [sub_resource type="Resource" id="Resource_se8d3"]
 script = ExtResource("2_j1n8q")
@@ -44,4 +44,4 @@ metadata/_custom_type_script = "uid://nf31t0owinb2"
 
 [node name="TurretList" type="Node"]
 script = ExtResource("1_gc2bo")
-turrets = Array[ExtResource("2_j1n8q")]([ExtResource("3_pteia"), SubResource("Resource_se8d3"), SubResource("Resource_brlc6")])
+turrets = Array[ExtResource("2_j1n8q")]([SubResource("Resource_se8d3"), SubResource("Resource_brlc6"), ExtResource("6_hjc04")])
