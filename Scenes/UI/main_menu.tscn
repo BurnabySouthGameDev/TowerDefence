@@ -1,0 +1,60 @@
+[gd_scene load_steps=4 format=3 uid="uid://dwyxggrlgohcl"]
+
+[ext_resource type="Texture2D" uid="uid://cvpj5iqig5fcl" path="res://icon.svg" id="1_5wsvm"]
+[ext_resource type="Script" path="res://Scripts/UI/main_menu_button.gd" id="2_i2xx2"]
+[ext_resource type="PackedScene" path="res://Scenes/Maps/Map1.tscn" id="3_o14dv"]
+
+[node name="MainMenu" type="PanelContainer"]
+anchors_preset = -1
+anchor_left = 0.0555556
+anchor_top = 0.0987654
+anchor_right = 0.944444
+anchor_bottom = 0.888889
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 100
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 60
+bbcode_enabled = true
+text = "[center]Map Selection"
+fit_content = true
+
+[node name="MapSelections" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Map1" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MapSelections"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/MapSelections/Map1"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[center]Map1"
+fit_content = true
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/MapSelections/Map1"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("1_5wsvm")
+stretch_mode = 2
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/MapSelections/Map1"]
+layout_mode = 2
+text = "Select"
+script = ExtResource("2_i2xx2")
+map_scene = ExtResource("3_o14dv")
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MapSelections/Map1/Button" to="MarginContainer/VBoxContainer/MapSelections/Map1/Button" method="_on_pressed"]
