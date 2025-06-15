@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://dxt1ttcllxx1g"]
 
-[ext_resource type="Script" uid="uid://bh40hhbshvymn" path="res://Scripts/ui/currency_display.gd" id="3_8gbba"]
-[ext_resource type="Script" uid="uid://dq8n1fjdqpre3" path="res://Scripts/ui/spawn_button.gd" id="4_jjvhh"]
+[ext_resource type="Script" uid="uid://bh40hhbshvymn" path="res://Scripts/UI/currency_display.gd" id="3_8gbba"]
+[ext_resource type="Script" uid="uid://dq8n1fjdqpre3" path="res://Scripts/UI/spawn_button.gd" id="4_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://dvdps78t4kco7" path="res://Scenes/UI/menu.tscn" id="5_21xkr"]
 [ext_resource type="PackedScene" uid="uid://gvaje4p786yv" path="res://Scenes/tower_manager.tscn" id="5_kry3j"]
 [ext_resource type="PackedScene" uid="uid://dxbh8cdknojb4" path="res://Scenes/UI/turret_selector.tscn" id="6_6bp64"]
@@ -34,13 +34,21 @@ shadow_enabled = true
 
 [node name="GameUI" type="CanvasLayer" parent="."]
 
+[node name="TurretSelector" parent="GameUI" instance=ExtResource("6_6bp64")]
+unique_name_in_owner = true
+anchors_preset = -1
+anchor_left = 0.0138889
+anchor_top = 0.111111
+anchor_right = 0.173611
+anchor_bottom = 0.975309
+metadata/_edit_use_anchors_ = true
+
 [node name="SpawnButton" type="Button" parent="GameUI"]
 anchors_preset = -1
-anchor_left = 0.833333
-anchor_top = 0.691358
-anchor_right = 0.918403
-anchor_bottom = 0.766975
-offset_bottom = 3.05176e-05
+anchor_left = 0.0208333
+anchor_top = 0.888889
+anchor_right = 0.166667
+anchor_bottom = 0.962963
 text = "Spawn"
 script = ExtResource("4_jjvhh")
 min_distance_path = 3.0
@@ -48,33 +56,76 @@ metadata/_edit_use_anchors_ = true
 
 [node name="CancelButton" type="Button" parent="GameUI"]
 anchors_preset = -1
-anchor_left = 0.833333
-anchor_top = 0.790123
-anchor_right = 0.918403
-anchor_bottom = 0.858025
+anchor_left = 0.0208333
+anchor_top = 0.888889
+anchor_right = 0.166667
+anchor_bottom = 0.962963
 text = "Cancel"
 metadata/_edit_use_anchors_ = true
 
-[node name="CurrencyDisplay" type="PanelContainer" parent="GameUI"]
+[node name="TopBar" type="PanelContainer" parent="GameUI"]
 anchors_preset = -1
-anchor_right = 0.166667
+anchor_right = 1.0
 anchor_bottom = 0.0617284
-theme_override_styles/panel = SubResource("StyleBoxEmpty_jjvhh")
 metadata/_edit_use_anchors_ = true
 
-[node name="MarginContainer" type="MarginContainer" parent="GameUI/CurrencyDisplay"]
+[node name="HBoxContainer" type="HBoxContainer" parent="GameUI/TopBar"]
 layout_mode = 2
-theme_override_constants/margin_left = 5
 
-[node name="CurrencyLabel" type="Label" parent="GameUI/CurrencyDisplay/MarginContainer"]
+[node name="lives" parent="GameUI/TopBar/HBoxContainer" instance=ExtResource("8_ynf5e")]
+layout_mode = 2
+
+[node name="CurrencyDisplay" type="PanelContainer" parent="GameUI/TopBar/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_jjvhh")
+
+[node name="MarginContainer" type="MarginContainer" parent="GameUI/TopBar/HBoxContainer/CurrencyDisplay"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="PanelContainer" type="PanelContainer" parent="GameUI/TopBar/HBoxContainer/CurrencyDisplay/MarginContainer"]
+layout_mode = 2
+
+[node name="CurrencyLabel" type="Label" parent="GameUI/TopBar/HBoxContainer/CurrencyDisplay/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Currency:"
+theme_override_font_sizes/font_size = 28
+text = "💰:"
 script = ExtResource("3_8gbba")
 
+[node name="MarginContainer" type="MarginContainer" parent="GameUI/TopBar/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="PanelContainer" type="PanelContainer" parent="GameUI/TopBar/HBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="WaveCounter" type="Label" parent="GameUI/TopBar/HBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 28
+text = "Wave 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Menu" parent="GameUI" instance=ExtResource("5_21xkr")]
-anchor_top = 0.0478395
-anchor_bottom = 0.652777
+anchor_left = 0.770833
+anchor_top = 0.0740741
+anchor_right = 0.993055
+anchor_bottom = 0.679012
+offset_left = -8.0
+offset_top = 24.0
+offset_right = -8.0
+offset_bottom = 24.0
 
 [node name="TowerMenu" type="ColorRect" parent="GameUI"]
 visible = false
@@ -144,39 +195,15 @@ offset_right = 227.0
 offset_bottom = 203.0
 color = Color(0.303233, 0.303233, 0.303233, 1)
 
-[node name="WaveCounter" type="Label" parent="GameUI"]
-unique_name_in_owner = true
-anchors_preset = -1
-anchor_left = 0.447483
-anchor_right = 0.552517
-anchor_bottom = 0.0756173
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 35
-text = "Wave 0"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="lives" parent="GameUI" instance=ExtResource("8_ynf5e")]
-anchor_top = 0.0617284
-anchor_bottom = 0.0987654
-
-[node name="TurretSelector" parent="GameUI" instance=ExtResource("6_6bp64")]
-unique_name_in_owner = true
-anchors_preset = -1
-anchor_top = 0.7
-anchor_right = 0.755
-anchor_bottom = 0.892
-offset_left = 30.0
-
 [node name="TowerManager" parent="." instance=ExtResource("5_kry3j")]
 unique_name_in_owner = true
 
 [node name="Level" type="Node3D" parent="."]
 
 [node name="hills_base" parent="Level" instance=ExtResource("9_ynf5e")]
+transform = Transform3D(1.5, 0, 0, 0, 1.49995, -0.0123568, 0, 0.0123568, 1.49995, 0, 0, 0)
 
+[connection signal="turret_selected" from="GameUI/TurretSelector" to="GameUI/SpawnButton" method="_on_turret_selected"]
 [connection signal="pressed" from="GameUI/SpawnButton" to="GameUI/SpawnButton" method="_on_pressed"]
 [connection signal="pressed" from="GameUI/CancelButton" to="GameUI/SpawnButton" method="stop_placing_turret" binds= [true]]
-[connection signal="turret_selected" from="GameUI/TurretSelector" to="GameUI/SpawnButton" method="_on_turret_selected"]
 [connection signal="tower_menu" from="TowerManager" to="GameUI/Menu" method="_open_menu"]

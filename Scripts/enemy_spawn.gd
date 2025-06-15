@@ -12,7 +12,7 @@ var difficulty_cap = 3
 
 # Config
 @onready var path: Path3D = $"../Path/Path3D"
-@onready var wave_counter: Label = get_tree().current_scene.get_node("GameUI").get_node("WaveCounter")
+@onready var wave_counter: Label = get_tree().current_scene.get_node("GameUI").get_node("TopBar").get_node("HBoxContainer").get_node("MarginContainer").get_node("WaveCounter")
 @onready var enemy_spawn: Marker3D = self
 #@onready var spawn_timer: Timer = Timer.new()
 @onready var spawn_timer: Timer = $SpawnTimer

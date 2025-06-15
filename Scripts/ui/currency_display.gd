@@ -6,13 +6,13 @@ extends Label
 var currency: int = start_currency:
 	set(value):
 		currency = max(0, value)
-		text = "Currency: %d" % currency
+		text = "💰: %d" % currency
 		currency_changed.emit(currency)
 
 signal currency_changed(amount: int)
 
 func _ready() -> void:
-	text = "Currency: %d" % currency
+	text = "💰: %d" % currency
 
 func can_afford(amount: int) -> bool:
 	return currency >= amount

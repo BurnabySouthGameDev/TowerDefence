@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="TowerResource" load_steps=6 format=3 uid="uid://c0c22g0dy87a1"]
+
+[ext_resource type="PackedScene" uid="uid://d4e10yah7bhl3" path="res://Scenes/Turrets/rapid_turret/rapid_turret.tscn" id="1_xbx8t"]
+[ext_resource type="Script" uid="uid://nf31t0owinb2" path="res://Scripts/turrets/tower_resource.gd" id="2_b7sbi"]
+[ext_resource type="Script" uid="uid://dapii7i1tjwtr" path="res://Scripts/turrets/upgrade_resource.gd" id="3_y85ap"]
+
+[sub_resource type="Resource" id="Resource_tkl0h"]
+script = ExtResource("3_y85ap")
+stats = Array[Array]([["damage", 0.1, NodePath("%Damage:text")], ["attack_speed", 0.05, NodePath("%AttackSpeed:text")], ["radius", 12.0, NodePath("%Radius:text")], ["sell_value", 7.0, NodePath("%SellButton:text")]])
+metadata/_custom_type_script = "uid://dapii7i1tjwtr"
+
+[sub_resource type="Resource" id="Resource_f7vgk"]
+script = ExtResource("3_y85ap")
+stats = Array[Array]([["damage", 10.0, NodePath("%Damage:text")], ["attack_speed", 0.01, NodePath("%AttackSpeed:text")], ["radius", 15.0, NodePath("%Radius:text")], ["sell_value", 10.0, NodePath("%SellButton:text")]])
+metadata/_custom_type_script = "uid://dapii7i1tjwtr"
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("2_b7sbi")
+scene = ExtResource("1_xbx8t")
+tower_name = "Rapid Turret"
+damage = 0.1
+attack_speed = 0.1
+radius = 10.0
+sell_value = 5.0
+number_of_upgrades = 0
+upgrades = Array[ExtResource("3_y85ap")]([SubResource("Resource_tkl0h"), SubResource("Resource_f7vgk")])
+metadata/_custom_type_script = "uid://nf31t0owinb2"

@@ -12,16 +12,22 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_kp501")
 script = ExtResource("1_kp501")
-theme_override_styles/panel = SubResource("StyleBoxEmpty_kp501")
 metadata/_edit_use_anchors_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
-theme_override_constants/margin_left = 5
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+layout_mode = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer"]
 layout_mode = 2
+theme_override_font_sizes/normal_font_size = 28
 bbcode_enabled = true
-text = "Lives: "
+text = "❤:"
 fit_content = true
 scroll_active = false
