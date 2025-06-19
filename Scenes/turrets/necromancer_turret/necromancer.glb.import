@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bwyo6lcdoy8h7"
-path="res://.godot/imported/necromancer.glb-9c8ef2e510cfd03a212d01a3610269d1.scn"
+path="res://.godot/imported/necromancer.glb-66b1acff351e45d04c742bdd7bb7c2ad.scn"
 
 [deps]
 
-source_file="res://Scenes/Turrets/necromancer_turret/necromancer.glb"
-dest_files=["res://.godot/imported/necromancer.glb-9c8ef2e510cfd03a212d01a3610269d1.scn"]
+source_file="res://Scenes/turrets/necromancer_turret/necromancer.glb"
+dest_files=["res://.godot/imported/necromancer.glb-66b1acff351e45d04c742bdd7bb7c2ad.scn"]
 
 [params]
 

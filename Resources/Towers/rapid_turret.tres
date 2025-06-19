@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="TowerResource" load_steps=6 format=3 uid="uid://c0c22g0dy87a1"]
 
-[ext_resource type="PackedScene" uid="uid://d4e10yah7bhl3" path="res://Scenes/Turrets/rapid_turret/rapid_turret.tscn" id="1_xbx8t"]
+[ext_resource type="PackedScene" uid="uid://d4e10yah7bhl3" path="res://Scenes/turrets/rapid_turret/rapid_turret.tscn" id="1_xbx8t"]
 [ext_resource type="Script" uid="uid://nf31t0owinb2" path="res://Scripts/turrets/tower_resource.gd" id="2_b7sbi"]
 [ext_resource type="Script" uid="uid://dapii7i1tjwtr" path="res://Scripts/turrets/upgrade_resource.gd" id="3_y85ap"]
 
