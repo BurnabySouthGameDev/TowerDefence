@@ -12,7 +12,7 @@ var zombies : Array[PathFollow3D] = []
 
 func _on_hit_enemy(enemy: PathFollow3D) -> void:
 	if enemy.health <= 0:
-		get_node("/root/Main/GameUI/CurrencyDisplay/MarginContainer/CurrencyLabel").add(5)
+		get_node("/root/Main/GameUI/TopBar/HBoxContainer/CurrencyDisplay/MarginContainer/CurrencyLabel").add(5)
 		if zombies.size() >= max_zombie_count:
 			enemy.queue_free()
 			return
@@ -49,7 +49,7 @@ func _on_zombie_hit_enemy(area: Area3D, zombie: PathFollow3D) -> void:
 	var enemy : PathFollow3D = area.get_parent()
 	var remaining_hp : float = enemy.take_damage(zombie_damage)
 	if remaining_hp <= 0:
-		get_node("/root/Main/GameUI/CurrencyDisplay/MarginContainer/CurrencyLabel").add(5)
+		get_node("/root/Main/GameUI/TopBar/HBoxContainer/CurrencyDisplay/MarginContainer/CurrencyLabel").add(5)
 		enemy.queue_free()
 		$AudioPlayer.play_sound(destroy)
 
