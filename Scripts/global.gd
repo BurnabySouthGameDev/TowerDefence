@@ -20,5 +20,7 @@ var selectable_tower: Node3D = null:
 
 var placed_turrets: Array[Node3D] = []
 
+var wave_number = 10
+
 ##SIGNALS
 signal set_lives(value: int) #not actually set cant find a name

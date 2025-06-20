@@ -5,8 +5,8 @@ var path: Array[Vector3i]
 
 var wave_number = Global.wave_number
 @export var speed: float = 5
-@export var health: float = 30:
-	
+@export var health: float = 50:
+
 	set(value):
 		health = value
 		progress_bar.value = health
@@ -14,12 +14,12 @@ var wave_number = Global.wave_number
 func _ready() -> void:
 	assert(get_parent() is Path3D)
 	#Health scaling based on waves
-	health = 30*((1.1)**(1.25*wave_number))
+	health = 50*((1.1)**(1.4*wave_number))
 	progress_bar.max_value = health
 	progress_bar.value = health
 
 func _process(delta: float) -> void:
-	progress += ((0.45*speed) * delta)
+	progress += speed * delta
 	if progress_ratio >= 1.0:
 		# Later can add some thing like - 10 HP
 		var currency_label = get_tree().root.get_node("Main/GameUI/TopBar/HBoxContainer/CurrencyDisplay/MarginContainer/CurrencyLabel")

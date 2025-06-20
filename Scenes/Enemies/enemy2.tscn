@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://byksw8b5osjrg"]
 
-[ext_resource type="Script" uid="uid://bd7vktalilei2" path="res://Scripts/enemy.gd" id="1_g6ed3"]
+[ext_resource type="Script" uid="uid://ccy7sskmjln6u" path="res://Scripts/enemy_2.gd" id="1_fu7du"]
 [ext_resource type="Script" uid="uid://co8kbyh5strok" path="res://Scripts/ui/Enemy/health_bar.gd" id="2_k6nad"]
 [ext_resource type="PackedScene" uid="uid://cxc3pip4w32qc" path="res://Scenes/Enemies/Lamplighter/lamplighter_bike.tscn" id="3_fu7du"]
 
@@ -15,8 +15,7 @@ bg_color = Color(0.322353, 0.692161, 0.402664, 1)
 
 [node name="PathFollow3D" type="PathFollow3D"]
 loop = false
-script = ExtResource("1_g6ed3")
-speed = 5.0
+script = ExtResource("1_fu7du")
 
 [node name="enemy" type="Area3D" parent="."]
 collision_layer = 2

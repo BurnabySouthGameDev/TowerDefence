@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://dxt1ttcllxx1g"]
 
-[ext_resource type="Script" uid="uid://bh40hhbshvymn" path="res://Scripts/UI/currency_display.gd" id="3_8gbba"]
-[ext_resource type="Script" uid="uid://dq8n1fjdqpre3" path="res://Scripts/UI/spawn_button.gd" id="4_jjvhh"]
+[ext_resource type="Script" uid="uid://bh40hhbshvymn" path="res://Scripts/ui/currency_display.gd" id="3_8gbba"]
+[ext_resource type="Script" uid="uid://dq8n1fjdqpre3" path="res://Scripts/ui/spawn_button.gd" id="4_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://dvdps78t4kco7" path="res://Scenes/UI/menu.tscn" id="5_21xkr"]
 [ext_resource type="PackedScene" uid="uid://gvaje4p786yv" path="res://Scenes/tower_manager.tscn" id="5_kry3j"]
 [ext_resource type="PackedScene" uid="uid://dxbh8cdknojb4" path="res://Scenes/UI/turret_selector.tscn" id="6_6bp64"]
@@ -109,13 +109,17 @@ theme_override_constants/margin_bottom = 8
 layout_mode = 2
 
 [node name="WaveCounter" type="Label" parent="GameUI/TopBar/HBoxContainer/MarginContainer"]
-unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 28
 text = "Wave 0"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="WaveStartButton" type="Button" parent="GameUI/TopBar/HBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Start New Wave"
 
 [node name="Menu" parent="GameUI" instance=ExtResource("5_21xkr")]
 anchor_left = 0.770833
