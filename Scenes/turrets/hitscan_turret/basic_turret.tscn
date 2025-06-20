@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://c2xxq7dd1p7rk" path="res://Scenes/turrets/basic_turret/basic_bullet.tscn" id="2_nfj71"]
 [ext_resource type="PackedScene" uid="uid://cw7yg6e0jmot0" path="res://Scenes/turrets/radar.tscn" id="3_imx1d"]
 [ext_resource type="Script" uid="uid://c05b2u3qourdf" path="res://Scripts/turrets/select.gd" id="4_ng0p6"]
-[ext_resource type="Shader" uid="uid://djj7r8u508e1b" path="res://Shaders/placementindicator.gdshader" id="5_0kvw0"]
+[ext_resource type="Shader" path="res://Shaders/placementindicator.gdshader" id="5_0kvw0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7llsl"]
 albedo_color = Color(0.52549, 0.568627, 0.607843, 1)

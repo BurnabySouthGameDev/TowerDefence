@@ -41,7 +41,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.23923, 2, 12.6667)
 script = ExtResource("2_8gqn5")
 
 [node name="SpawnTimer" type="Timer" parent="enemy spawn" index="0"]
-wait_time = 0.75
+wait_time = 0.65
+one_shot = true
+
+[node name="HordeTimer" type="Timer" parent="enemy spawn" index="1"]
+wait_time = 0.2
 one_shot = true
 
 [connection signal="timeout" from="enemy spawn/SpawnTimer" to="enemy spawn" method="_on_timer_timeout"]
+[connection signal="timeout" from="enemy spawn/HordeTimer" to="enemy spawn" method="_on_horde_timer_timeout"]

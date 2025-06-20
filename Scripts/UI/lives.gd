@@ -1,7 +1,7 @@
 extends PanelContainer
 
 @onready var rich_text_label: RichTextLabel = $MarginContainer/RichTextLabel
-@onready var wave_counter: Label = %WaveCounter
+@onready var wave_counter: Label = $"../MarginContainer/WaveCounter"
 
 
 var lives: int = 999999999:
